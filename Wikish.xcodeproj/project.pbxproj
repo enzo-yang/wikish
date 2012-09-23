@@ -1,0 +1,278 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C69DB261160EC07700B484FF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C69DB260160EC07700B484FF /* UIKit.framework */; };
+		C69DB263160EC07700B484FF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C69DB262160EC07700B484FF /* Foundation.framework */; };
+		C69DB265160EC07700B484FF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C69DB264160EC07700B484FF /* CoreGraphics.framework */; };
+		C69DB26B160EC07700B484FF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C69DB269160EC07700B484FF /* InfoPlist.strings */; };
+		C69DB26D160EC07700B484FF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C69DB26C160EC07700B484FF /* main.m */; };
+		C69DB271160EC07700B484FF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C69DB270160EC07700B484FF /* AppDelegate.m */; };
+		C69DB273160EC07700B484FF /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = C69DB272160EC07700B484FF /* Default.png */; };
+		C69DB275160EC07700B484FF /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C69DB274160EC07700B484FF /* Default@2x.png */; };
+		C69DB277160EC07700B484FF /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C69DB276160EC07700B484FF /* Default-568h@2x.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		C69DB25C160EC07700B484FF /* Wikish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wikish.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C69DB260160EC07700B484FF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		C69DB262160EC07700B484FF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		C69DB264160EC07700B484FF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		C69DB268160EC07700B484FF /* Wikish-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Wikish-Info.plist"; sourceTree = "<group>"; };
+		C69DB26A160EC07700B484FF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C69DB26C160EC07700B484FF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		C69DB26E160EC07700B484FF /* Wikish-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Wikish-Prefix.pch"; sourceTree = "<group>"; };
+		C69DB26F160EC07700B484FF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		C69DB270160EC07700B484FF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		C69DB272160EC07700B484FF /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		C69DB274160EC07700B484FF /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		C69DB276160EC07700B484FF /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C69DB259160EC07700B484FF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C69DB261160EC07700B484FF /* UIKit.framework in Frameworks */,
+				C69DB263160EC07700B484FF /* Foundation.framework in Frameworks */,
+				C69DB265160EC07700B484FF /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C69DB251160EC07700B484FF = {
+			isa = PBXGroup;
+			children = (
+				C69DB266160EC07700B484FF /* Wikish */,
+				C69DB25F160EC07700B484FF /* Frameworks */,
+				C69DB25D160EC07700B484FF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C69DB25D160EC07700B484FF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C69DB25C160EC07700B484FF /* Wikish.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C69DB25F160EC07700B484FF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C69DB260160EC07700B484FF /* UIKit.framework */,
+				C69DB262160EC07700B484FF /* Foundation.framework */,
+				C69DB264160EC07700B484FF /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C69DB266160EC07700B484FF /* Wikish */ = {
+			isa = PBXGroup;
+			children = (
+				C69DB26F160EC07700B484FF /* AppDelegate.h */,
+				C69DB270160EC07700B484FF /* AppDelegate.m */,
+				C69DB267160EC07700B484FF /* Supporting Files */,
+			);
+			path = Wikish;
+			sourceTree = "<group>";
+		};
+		C69DB267160EC07700B484FF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C69DB268160EC07700B484FF /* Wikish-Info.plist */,
+				C69DB269160EC07700B484FF /* InfoPlist.strings */,
+				C69DB26C160EC07700B484FF /* main.m */,
+				C69DB26E160EC07700B484FF /* Wikish-Prefix.pch */,
+				C69DB272160EC07700B484FF /* Default.png */,
+				C69DB274160EC07700B484FF /* Default@2x.png */,
+				C69DB276160EC07700B484FF /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C69DB25B160EC07700B484FF /* Wikish */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C69DB27A160EC07700B484FF /* Build configuration list for PBXNativeTarget "Wikish" */;
+			buildPhases = (
+				C69DB258160EC07700B484FF /* Sources */,
+				C69DB259160EC07700B484FF /* Frameworks */,
+				C69DB25A160EC07700B484FF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Wikish;
+			productName = Wikish;
+			productReference = C69DB25C160EC07700B484FF /* Wikish.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C69DB253160EC07700B484FF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = "Side Trip";
+			};
+			buildConfigurationList = C69DB256160EC07700B484FF /* Build configuration list for PBXProject "Wikish" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = C69DB251160EC07700B484FF;
+			productRefGroup = C69DB25D160EC07700B484FF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C69DB25B160EC07700B484FF /* Wikish */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C69DB25A160EC07700B484FF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C69DB26B160EC07700B484FF /* InfoPlist.strings in Resources */,
+				C69DB273160EC07700B484FF /* Default.png in Resources */,
+				C69DB275160EC07700B484FF /* Default@2x.png in Resources */,
+				C69DB277160EC07700B484FF /* Default-568h@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C69DB258160EC07700B484FF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C69DB26D160EC07700B484FF /* main.m in Sources */,
+				C69DB271160EC07700B484FF /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		C69DB269160EC07700B484FF /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C69DB26A160EC07700B484FF /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C69DB278160EC07700B484FF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		C69DB279160EC07700B484FF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C69DB27B160EC07700B484FF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Wikish/Wikish-Prefix.pch";
+				INFOPLIST_FILE = "Wikish/Wikish-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		C69DB27C160EC07700B484FF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Wikish/Wikish-Prefix.pch";
+				INFOPLIST_FILE = "Wikish/Wikish-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C69DB256160EC07700B484FF /* Build configuration list for PBXProject "Wikish" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C69DB278160EC07700B484FF /* Debug */,
+				C69DB279160EC07700B484FF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C69DB27A160EC07700B484FF /* Build configuration list for PBXNativeTarget "Wikish" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C69DB27B160EC07700B484FF /* Debug */,
+				C69DB27C160EC07700B484FF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C69DB253160EC07700B484FF /* Project object */;
+}
