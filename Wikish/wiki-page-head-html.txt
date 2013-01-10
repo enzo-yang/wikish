@@ -264,6 +264,9 @@ function getVerticalOffset(arg) {
         return h ? ""+h : "0"; 
 }
 
+
+
+
 function scrollToOffset(offset)
 {
     var currentOffset = getVerticalOffset(0);
