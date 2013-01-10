@@ -1,0 +1,92 @@
+//
+//  WikiSite.m
+//  Wikish
+//
+//  Created by YANG ENZO on 12-11-9.
+//  Copyright (c) 2012年 Side Trip. All rights reserved.
+//
+
+#import "WikiSite.h"
+
+static NSString *const kNameKey     = @"name";
+static NSString *const kLangKey     = @"lang";
+static NSString *const kSubLangKey   = @"sub-lang";
+
+@interface WikiSite()
+
+- (void)_clean;
+- (BOOL)_looksValid;
+
+@end
+
+@implementation WikiSite
+
+@synthesize name = _name;
+@synthesize lang = _lang;
+@synthesize sublang = _sublang;
+
+- (id)initWithName:(NSString *)name lang:(NSString *)lang sublang:(NSString *)sublang {
+    self = [super init];
+    if (self) {
+        _name = [name copy];
+        _lang = [lang copy];
+        _sublang = [sublang copy];
+        
+        if (![self _looksValid]) {
+            [self release];
+            self = nil;
+        }
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+    WikiSite *site = [[[self class] allocWithZone:zone] initWithName:_name lang:_lang sublang:_sublang];
+    return site;
+}
+
+- (id)initWithDictionary:(NSDictionary *)dict {
+    NSString *name = [dict objectForKey:kNameKey];
+    NSString *lang = [dict objectForKey:kLangKey];
+    NSString *sublang = [dict objectForKey:kSubLangKey];
+    return [self initWithName:name lang:lang sublang:sublang];
+}
+
+- (void)dealloc {
+    [self _clean];
+    [super dealloc];
+}
+
+- (BOOL)sameAs:(WikiSite *)site {
+    return ([_lang isEqualToString:site.lang] && [_sublang isEqualToString:site.sublang]);
+}
+
+- (void)copy:(WikiSite *)site {
+    [self _clean];
+    _name   = [site.name copy];
+    _lang   = [site.lang copy];
+    _sublang = [site.sublang copy];
+}
+
+- (NSDictionary *)toDictionary {
+    return [NSDictionary dictionaryWithObjectsAndKeys:
+            _name, kNameKey,
+            _lang, kLangKey,
+            _sublang, kSubLangKey,
+            nil];
+}
+
+- (void)_clean {
+    [_name release];    _name = nil;
+    [_lang release];    _lang = nil;
+    [_sublang release];  _sublang = nil;
+}
+
+- (BOOL)_looksValid {
+    Class stringClass = [NSString class];
+    return ([_name isKindOfClass:stringClass] &&
+            [_lang isKindOfClass:stringClass] &&
+            [_sublang isKindOfClass:stringClass]);
+}
+
+@end
