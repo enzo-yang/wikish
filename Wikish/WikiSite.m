@@ -15,7 +15,7 @@ static NSString *const kSubLangKey   = @"sub-lang";
 @interface WikiSite()
 
 - (void)_clean;
-- (BOOL)_looksValid;
+- (BOOL)_isSiteValid;
 
 @end
 
@@ -25,6 +25,24 @@ static NSString *const kSubLangKey   = @"sub-lang";
 @synthesize lang = _lang;
 @synthesize sublang = _sublang;
 
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    NSString *name = [aDecoder decodeObject];
+    NSString *lang = [aDecoder decodeObject];
+    NSString *sublang = [aDecoder decodeObject];
+    return [self initWithName:name lang:lang sublang:sublang];
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:_name];
+    [aCoder encodeObject:_lang];
+    [aCoder encodeObject:_sublang];
+}
+
+- (id)initWithLang:(NSString *)lang sublang:(NSString *)sublang {
+    NSString *name = [NSString stringWithFormat:@"%@[%@]", lang, sublang];
+    return [self initWithName:name lang:lang sublang:sublang];
+}
+
 - (id)initWithName:(NSString *)name lang:(NSString *)lang sublang:(NSString *)sublang {
     self = [super init];
     if (self) {
@@ -32,7 +50,7 @@ static NSString *const kSubLangKey   = @"sub-lang";
         _lang = [lang copy];
         _sublang = [sublang copy];
         
-        if (![self _looksValid]) {
+        if (![self _isSiteValid]) {
             [self release];
             self = nil;
         }
@@ -82,7 +100,7 @@ static NSString *const kSubLangKey   = @"sub-lang";
     [_sublang release];  _sublang = nil;
 }
 
-- (BOOL)_looksValid {
+- (BOOL)_isSiteValid {
     Class stringClass = [NSString class];
     return ([_name isKindOfClass:stringClass] &&
             [_lang isKindOfClass:stringClass] &&

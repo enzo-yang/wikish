@@ -73,6 +73,14 @@ static NSString *const kVersionToCompare = @"kVersionToCompare_Sites";
     return nil;
 }
 
+- (WikiSite *)siteOfName:(NSString *)name {
+    for (WikiSite *site in _sites) {
+        if ([site.name isEqualToString:name])
+            return site;
+    }
+    return nil;
+}
+
 - (NSString *)_sitesFilePath {
     return [[FileUtil documentPath] stringByAppendingPathComponent:kSitesFileName];
 }

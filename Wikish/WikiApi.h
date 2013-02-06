@@ -16,7 +16,7 @@
 //+ (NSString *)headerApiOfSite:(WikiSite *)site keyword:(NSString *)keyword;
 
 + (NSString *)infoApiOfSite:(WikiSite *)site title:(NSString *)title;
-
++ (NSString *)pageURLStringOfSite:(WikiSite *)site title:(NSString *)title;
 + (NSString *)openSearchApiOfSite:(WikiSite *)site keyword:(NSString *)incompleteKeyword;
 
 @end

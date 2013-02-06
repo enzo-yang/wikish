@@ -134,29 +134,29 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Wikish/WikiPage.m"
-         timestampString = "379430249.143917"
+         timestampString = "379871191.846847"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "198"
-         endingLineNumber = "198"
-         landmarkName = "-_loadContentFailed:"
+         startingLineNumber = "125"
+         endingLineNumber = "125"
+         landmarkName = "-_loadContentFromWebSuccess:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "Wikish/WikiPage.m"
-         timestampString = "379430249.143917"
+         filePath = "Wikish/Controller/MainViewController.m"
+         timestampString = "381559926.924251"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "132"
-         endingLineNumber = "132"
-         landmarkName = "-_loadContentFromWebSuccess:"
+         startingLineNumber = "153"
+         endingLineNumber = "153"
+         landmarkName = "-wikiPageInfoLoadSuccess:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

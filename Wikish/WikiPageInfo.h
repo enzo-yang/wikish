@@ -1,5 +1,5 @@
 //
-//  WikiPage.h
+//  WikiPageInfo.h
 //  Wikish
 //
 //  Created by YANG ENZO on 12-11-9.
@@ -8,20 +8,19 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol WikiPageDelegate;
+@protocol WikiPageInfoDelegate;
 @class WikiSite;
 @class MobileView;
 
-@interface WikiPage : NSObject {
+@interface WikiPageInfo : NSObject {
     WikiSite        *_site;
     NSString        *_title;
     NSMutableArray  *_sections;
     NSMutableArray  *_langLinks;
     NSNumber        *_revid;
-    NSString        *_bodyHtml;
     
     
-    id<WikiPageDelegate> _delegate;
+    id<WikiPageInfoDelegate> _delegate;
 }
 
 - (id)initWithSite:(WikiSite *)site title:(NSString *)title;
@@ -32,23 +31,22 @@
 @property (nonatomic, readonly) NSArray *sections;
 @property (nonatomic, readonly) NSArray *langLinks;
 @property (nonatomic, readonly) NSNumber *revid;
-@property (nonatomic, readonly) NSString *bodyHtml;
 
-@property (nonatomic, assign) id<WikiPageDelegate> delegate;
+@property (nonatomic, assign) id<WikiPageInfoDelegate> delegate;
 
-// Fetch page from Internet
-- (void)loadPage;
+// Fetch page info from Internet
+- (void)loadPageInfo;
 
-//- (NSURL *)localPageURL;
+- (NSUInteger)topLevelSectionCount;
 
-- (NSString *)pageHTML;
+- (NSURL *)pageURL;
 
 @end
 
 
-@protocol WikiPageDelegate <NSObject>
+@protocol WikiPageInfoDelegate <NSObject>
 
-- (void)wikiPageLoadSuccess:(WikiPage*)wikiPage;
-- (void)wikiPageLoadFailed:(WikiPage*)wikiPage error:(NSError*)error;
+- (void)wikiPageInfoLoadSuccess:(WikiPageInfo*)wikiPage;
+- (void)wikiPageInfoLoadFailed:(WikiPageInfo*)wikiPage error:(NSError*)error;
 
 @end

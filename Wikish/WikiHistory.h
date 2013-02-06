@@ -7,7 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "WikiRecord.h"
+@interface WikiHistory : NSObject {
+    NSMutableArray *_history;
+}
 
-@interface WikiHistory : NSObject
+@property (nonatomic, readonly) NSArray *history;
+
++ (WikiHistory *)sharedInstance;
+- (void)addRecord:(WikiRecord*)record;
+- (void)removeRecord:(WikiRecord*)record;
 
 @end

@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C60C014C16A84743005848B4 /* WikiRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = C60C014B16A84742005848B4 /* WikiRecord.m */; };
+		C60C015016A8498F005848B4 /* WikiHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = C60C014F16A8498F005848B4 /* WikiHistory.m */; };
+		C615E1F516BCBE0600506BE2 /* TapDetectingWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = C615E1F416BCBE0600506BE2 /* TapDetectingWindow.m */; };
+		C615E1F616BCBE0600506BE2 /* TapDetectingWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = C615E1F416BCBE0600506BE2 /* TapDetectingWindow.m */; };
+		C615E20A16BE104F00506BE2 /* WikiSearchPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = C615E20916BE104F00506BE2 /* WikiSearchPanel.m */; };
+		C615E20B16BE104F00506BE2 /* WikiSearchPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = C615E20916BE104F00506BE2 /* WikiSearchPanel.m */; };
+		C615E20E16BE107200506BE2 /* WikiSearchPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = C615E20D16BE107200506BE2 /* WikiSearchPanel.xib */; };
+		C615E20F16BE107200506BE2 /* WikiSearchPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = C615E20D16BE107200506BE2 /* WikiSearchPanel.xib */; };
+		C615E21116BE23BE00506BE2 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C615E21016BE23BE00506BE2 /* QuartzCore.framework */; };
+		C615E21416BEA66100506BE2 /* WikiOpenSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = C615E21316BEA66100506BE2 /* WikiOpenSearch.m */; };
+		C615E21516BEA66100506BE2 /* WikiOpenSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = C615E21316BEA66100506BE2 /* WikiOpenSearch.m */; };
 		C6471745169B24F7006ACC7A /* wiki-page-head-html.txt in Resources */ = {isa = PBXBuildFile; fileRef = C6471744169B24F7006ACC7A /* wiki-page-head-html.txt */; };
 		C6471746169B24F7006ACC7A /* wiki-page-head-html.txt in Resources */ = {isa = PBXBuildFile; fileRef = C6471744169B24F7006ACC7A /* wiki-page-head-html.txt */; };
 		C6471748169B28A4006ACC7A /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6471747169B28A4006ACC7A /* MobileCoreServices.framework */; };
@@ -38,7 +49,7 @@
 		C69BB11816568C41002A1873 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6D94D86164DE0C100587E0C /* MainViewController.m */; };
 		C69BB11916568C46002A1873 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6D94D87164DE0C100587E0C /* MainViewController.xib */; };
 		C69BB11A16568C54002A1873 /* WikiApi.m in Sources */ = {isa = PBXBuildFile; fileRef = C6B83890164BB06800AD82A7 /* WikiApi.m */; };
-		C69BB11B16568C57002A1873 /* WikiPage.m in Sources */ = {isa = PBXBuildFile; fileRef = C6B83894164CAB2E00AD82A7 /* WikiPage.m */; };
+		C69BB11B16568C57002A1873 /* WikiPageInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = C6B83894164CAB2E00AD82A7 /* WikiPageInfo.m */; };
 		C69BB11C16568C5A002A1873 /* WikiSite.m in Sources */ = {isa = PBXBuildFile; fileRef = C6B83897164CE5DD00AD82A7 /* WikiSite.m */; };
 		C69BB11D16568C5E002A1873 /* SiteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C6D7AB4E1652813300508B14 /* SiteManager.m */; };
 		C69BB11E16568C67002A1873 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C69BB0D416566AA0002A1873 /* AFHTTPClient.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -70,8 +81,12 @@
 		C69DB275160EC07700B484FF /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C69DB274160EC07700B484FF /* Default@2x.png */; };
 		C69DB277160EC07700B484FF /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C69DB276160EC07700B484FF /* Default-568h@2x.png */; };
 		C6B83891164BB06800AD82A7 /* WikiApi.m in Sources */ = {isa = PBXBuildFile; fileRef = C6B83890164BB06800AD82A7 /* WikiApi.m */; };
-		C6B83895164CAB2E00AD82A7 /* WikiPage.m in Sources */ = {isa = PBXBuildFile; fileRef = C6B83894164CAB2E00AD82A7 /* WikiPage.m */; };
+		C6B83895164CAB2E00AD82A7 /* WikiPageInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = C6B83894164CAB2E00AD82A7 /* WikiPageInfo.m */; };
 		C6B83898164CE5DD00AD82A7 /* WikiSite.m in Sources */ = {isa = PBXBuildFile; fileRef = C6B83897164CE5DD00AD82A7 /* WikiSite.m */; };
+		C6D7672316AC3CE400CFC99A /* wiki-inject-functions.js in Resources */ = {isa = PBXBuildFile; fileRef = C6D7672016AC326A00CFC99A /* wiki-inject-functions.js */; };
+		C6D7672416AC3CE500CFC99A /* wiki-inject-functions.js in Resources */ = {isa = PBXBuildFile; fileRef = C6D7672016AC326A00CFC99A /* wiki-inject-functions.js */; };
+		C6D7684616AEF59600CFC99A /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = C6D7684516AEF59600CFC99A /* RegexKitLite.m */; };
+		C6D7684816AEF5B000CFC99A /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C6D7684716AEF5AF00CFC99A /* libicucore.dylib */; };
 		C6D7AB4F1652813300508B14 /* SiteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C6D7AB4E1652813300508B14 /* SiteManager.m */; };
 		C6D7AB561652836500508B14 /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = C6D7AB521652836500508B14 /* CHANGELOG.md */; };
 		C6D7AB571652836500508B14 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = C6D7AB541652836500508B14 /* JSONKit.m */; };
@@ -84,6 +99,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C60C014A16A84742005848B4 /* WikiRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WikiRecord.h; sourceTree = "<group>"; };
+		C60C014B16A84742005848B4 /* WikiRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WikiRecord.m; sourceTree = "<group>"; };
+		C60C014E16A8498F005848B4 /* WikiHistory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WikiHistory.h; sourceTree = "<group>"; };
+		C60C014F16A8498F005848B4 /* WikiHistory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WikiHistory.m; sourceTree = "<group>"; };
+		C615E1F316BCBE0600506BE2 /* TapDetectingWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapDetectingWindow.h; sourceTree = "<group>"; };
+		C615E1F416BCBE0600506BE2 /* TapDetectingWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TapDetectingWindow.m; sourceTree = "<group>"; };
+		C615E20816BE104F00506BE2 /* WikiSearchPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WikiSearchPanel.h; sourceTree = "<group>"; };
+		C615E20916BE104F00506BE2 /* WikiSearchPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WikiSearchPanel.m; sourceTree = "<group>"; };
+		C615E20D16BE107200506BE2 /* WikiSearchPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WikiSearchPanel.xib; sourceTree = "<group>"; };
+		C615E21016BE23BE00506BE2 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		C615E21216BEA66100506BE2 /* WikiOpenSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WikiOpenSearch.h; sourceTree = "<group>"; };
+		C615E21316BEA66100506BE2 /* WikiOpenSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WikiOpenSearch.m; sourceTree = "<group>"; };
 		C6471744169B24F7006ACC7A /* wiki-page-head-html.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "wiki-page-head-html.txt"; sourceTree = "<group>"; };
 		C6471747169B28A4006ACC7A /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		C67F8C5F1699A748004C9B3D /* LangLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LangLink.h; sourceTree = "<group>"; };
@@ -141,10 +168,14 @@
 		C69DB276160EC07700B484FF /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		C6B8388F164BB06800AD82A7 /* WikiApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WikiApi.h; sourceTree = "<group>"; };
 		C6B83890164BB06800AD82A7 /* WikiApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WikiApi.m; sourceTree = "<group>"; };
-		C6B83893164CAB2E00AD82A7 /* WikiPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WikiPage.h; sourceTree = "<group>"; };
-		C6B83894164CAB2E00AD82A7 /* WikiPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WikiPage.m; sourceTree = "<group>"; };
+		C6B83893164CAB2E00AD82A7 /* WikiPageInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WikiPageInfo.h; sourceTree = "<group>"; };
+		C6B83894164CAB2E00AD82A7 /* WikiPageInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WikiPageInfo.m; sourceTree = "<group>"; };
 		C6B83896164CE5DD00AD82A7 /* WikiSite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WikiSite.h; sourceTree = "<group>"; };
 		C6B83897164CE5DD00AD82A7 /* WikiSite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WikiSite.m; sourceTree = "<group>"; };
+		C6D7672016AC326A00CFC99A /* wiki-inject-functions.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "wiki-inject-functions.js"; sourceTree = "<group>"; };
+		C6D7684416AEF59600CFC99A /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
+		C6D7684516AEF59600CFC99A /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
+		C6D7684716AEF5AF00CFC99A /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		C6D7AB4D1652813300508B14 /* SiteManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SiteManager.h; sourceTree = "<group>"; };
 		C6D7AB4E1652813300508B14 /* SiteManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SiteManager.m; sourceTree = "<group>"; };
 		C6D7AB521652836500508B14 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG.md; sourceTree = "<group>"; };
@@ -179,6 +210,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C615E21116BE23BE00506BE2 /* QuartzCore.framework in Frameworks */,
+				C6D7684816AEF5B000CFC99A /* libicucore.dylib in Frameworks */,
 				C6471748169B28A4006ACC7A /* MobileCoreServices.framework in Frameworks */,
 				C69BB12A16568CEF002A1873 /* SystemConfiguration.framework in Frameworks */,
 				C69DB261160EC07700B484FF /* UIKit.framework in Frameworks */,
@@ -265,6 +298,9 @@
 		C69DB25F160EC07700B484FF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C615E21016BE23BE00506BE2 /* QuartzCore.framework */,
+				C6D7684716AEF5AF00CFC99A /* libicucore.dylib */,
+				C6D7684316AEF59600CFC99A /* RegexKitLite */,
 				C6471747169B28A4006ACC7A /* MobileCoreServices.framework */,
 				C69BB12816568CD6002A1873 /* SystemConfiguration.framework */,
 				C69BB10E165678DE002A1873 /* GHUnitIOS.framework */,
@@ -280,6 +316,7 @@
 		C69DB266160EC07700B484FF /* Wikish */ = {
 			isa = PBXGroup;
 			children = (
+				C6D7671E16ABC45300CFC99A /* JS */,
 				C6D7AB5D1652873B00508B14 /* Helpers */,
 				C6D94D84164DE0AD00587E0C /* Controller */,
 				C69DB26F160EC07700B484FF /* AppDelegate.h */,
@@ -287,12 +324,18 @@
 				C69DB267160EC07700B484FF /* Supporting Files */,
 				C6B8388F164BB06800AD82A7 /* WikiApi.h */,
 				C6B83890164BB06800AD82A7 /* WikiApi.m */,
-				C6B83893164CAB2E00AD82A7 /* WikiPage.h */,
-				C6B83894164CAB2E00AD82A7 /* WikiPage.m */,
+				C6B83893164CAB2E00AD82A7 /* WikiPageInfo.h */,
+				C6B83894164CAB2E00AD82A7 /* WikiPageInfo.m */,
+				C60C014A16A84742005848B4 /* WikiRecord.h */,
+				C60C014B16A84742005848B4 /* WikiRecord.m */,
+				C60C014E16A8498F005848B4 /* WikiHistory.h */,
+				C60C014F16A8498F005848B4 /* WikiHistory.m */,
 				C6B83896164CE5DD00AD82A7 /* WikiSite.h */,
 				C6B83897164CE5DD00AD82A7 /* WikiSite.m */,
 				C6D7AB4D1652813300508B14 /* SiteManager.h */,
 				C6D7AB4E1652813300508B14 /* SiteManager.m */,
+				C615E1F316BCBE0600506BE2 /* TapDetectingWindow.h */,
+				C615E1F416BCBE0600506BE2 /* TapDetectingWindow.m */,
 				C6D94D8A164DFE2C00587E0C /* Sites.plist */,
 				C69BB12C1658B2ED002A1873 /* MobileView.h */,
 				C69BB12D1658B2EE002A1873 /* MobileView.m */,
@@ -301,6 +344,11 @@
 				C67F8C601699A748004C9B3D /* LangLink.m */,
 				C67F8C681699AD02004C9B3D /* WikiSection.h */,
 				C67F8C691699AD02004C9B3D /* WikiSection.m */,
+				C615E21216BEA66100506BE2 /* WikiOpenSearch.h */,
+				C615E21316BEA66100506BE2 /* WikiOpenSearch.m */,
+				C615E20816BE104F00506BE2 /* WikiSearchPanel.h */,
+				C615E20916BE104F00506BE2 /* WikiSearchPanel.m */,
+				C615E20D16BE107200506BE2 /* WikiSearchPanel.xib */,
 			);
 			path = Wikish;
 			sourceTree = "<group>";
@@ -319,6 +367,23 @@
 				C69DB276160EC07700B484FF /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C6D7671E16ABC45300CFC99A /* JS */ = {
+			isa = PBXGroup;
+			children = (
+				C6D7672016AC326A00CFC99A /* wiki-inject-functions.js */,
+			);
+			path = JS;
+			sourceTree = "<group>";
+		};
+		C6D7684316AEF59600CFC99A /* RegexKitLite */ = {
+			isa = PBXGroup;
+			children = (
+				C6D7684416AEF59600CFC99A /* RegexKitLite.h */,
+				C6D7684516AEF59600CFC99A /* RegexKitLite.m */,
+			);
+			path = RegexKitLite;
 			sourceTree = "<group>";
 		};
 		C6D7AB511652836500508B14 /* JSONKit */ = {
@@ -432,6 +497,8 @@
 				C69BB11916568C46002A1873 /* MainViewController.xib in Resources */,
 				C69BB12B16568EC9002A1873 /* Sites.plist in Resources */,
 				C6471746169B24F7006ACC7A /* wiki-page-head-html.txt in Resources */,
+				C6D7672416AC3CE500CFC99A /* wiki-inject-functions.js in Resources */,
+				C615E20F16BE107200506BE2 /* WikiSearchPanel.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,6 +515,8 @@
 				C6D7AB561652836500508B14 /* CHANGELOG.md in Resources */,
 				C6D7AB581652836500508B14 /* README.md in Resources */,
 				C6471745169B24F7006ACC7A /* wiki-page-head-html.txt in Resources */,
+				C6D7672316AC3CE400CFC99A /* wiki-inject-functions.js in Resources */,
+				C615E20E16BE107200506BE2 /* WikiSearchPanel.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -464,7 +533,7 @@
 				C69BB11716568C3D002A1873 /* AppUtil.m in Sources */,
 				C69BB11816568C41002A1873 /* MainViewController.m in Sources */,
 				C69BB11A16568C54002A1873 /* WikiApi.m in Sources */,
-				C69BB11B16568C57002A1873 /* WikiPage.m in Sources */,
+				C69BB11B16568C57002A1873 /* WikiPageInfo.m in Sources */,
 				C69BB11C16568C5A002A1873 /* WikiSite.m in Sources */,
 				C69BB11D16568C5E002A1873 /* SiteManager.m in Sources */,
 				C69BB11E16568C67002A1873 /* AFHTTPClient.m in Sources */,
@@ -483,6 +552,9 @@
 				C67F8C621699A748004C9B3D /* LangLink.m in Sources */,
 				C67F8C671699A9BA004C9B3D /* AutoPropertyRelease.m in Sources */,
 				C67F8C6B1699AD02004C9B3D /* WikiSection.m in Sources */,
+				C615E1F616BCBE0600506BE2 /* TapDetectingWindow.m in Sources */,
+				C615E20B16BE104F00506BE2 /* WikiSearchPanel.m in Sources */,
+				C615E21516BEA66100506BE2 /* WikiOpenSearch.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -493,7 +565,7 @@
 				C69DB26D160EC07700B484FF /* main.m in Sources */,
 				C69DB271160EC07700B484FF /* AppDelegate.m in Sources */,
 				C6B83891164BB06800AD82A7 /* WikiApi.m in Sources */,
-				C6B83895164CAB2E00AD82A7 /* WikiPage.m in Sources */,
+				C6B83895164CAB2E00AD82A7 /* WikiPageInfo.m in Sources */,
 				C6B83898164CE5DD00AD82A7 /* WikiSite.m in Sources */,
 				C6D94D88164DE0C100587E0C /* MainViewController.m in Sources */,
 				C6D7AB4F1652813300508B14 /* SiteManager.m in Sources */,
@@ -515,6 +587,12 @@
 				C67F8C611699A748004C9B3D /* LangLink.m in Sources */,
 				C67F8C661699A9BA004C9B3D /* AutoPropertyRelease.m in Sources */,
 				C67F8C6A1699AD02004C9B3D /* WikiSection.m in Sources */,
+				C60C014C16A84743005848B4 /* WikiRecord.m in Sources */,
+				C60C015016A8498F005848B4 /* WikiHistory.m in Sources */,
+				C6D7684616AEF59600CFC99A /* RegexKitLite.m in Sources */,
+				C615E1F516BCBE0600506BE2 /* TapDetectingWindow.m in Sources */,
+				C615E20A16BE104F00506BE2 /* WikiSearchPanel.m in Sources */,
+				C615E21416BEA66100506BE2 /* WikiOpenSearch.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -634,6 +712,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Wikish/Wikish-Prefix.pch";
 				INFOPLIST_FILE = "Wikish/Wikish-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -645,6 +724,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Wikish/Wikish-Prefix.pch";
 				INFOPLIST_FILE = "Wikish/Wikish-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

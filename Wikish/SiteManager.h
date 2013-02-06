@@ -20,4 +20,6 @@
 
 - (WikiSite *)siteOfLang:(NSString *)lang;
 
+- (WikiSite *)siteOfName:(NSString *)name;
+
 @end

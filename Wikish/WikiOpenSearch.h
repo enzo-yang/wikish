@@ -7,7 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+@class WikiSite;
 
-@interface WikiOpenSearch : NSObject
+@interface WikiOpenSearch : NSObject {
+    int _searchCnt;
+    int _currentTag;
+    NSArray *_results;
+    WikiSite *_site;
+}
+
+@property (nonatomic, retain) NSArray *results;
+- (void)request:(NSString *)incompleteKeyword;
 
 @end

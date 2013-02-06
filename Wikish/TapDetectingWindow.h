@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TapDetectingWindow : UIWindow
+// http://mithin.in/2009/08/26/detecting-taps-and-events-on-uiwebview-the-right-way/
+@protocol TapDetectingWindowDelegate <NSObject>
+- (void)userDidTapWebView:(id)tapPoint;
+@end
+
+@interface TapDetectingWindow : UIWindow {
+}
+
+@property (nonatomic, retain) UIView *viewToObserve;
+@property (nonatomic, assign) id<TapDetectingWindowDelegate> controllerThatObserves;
 
 @end

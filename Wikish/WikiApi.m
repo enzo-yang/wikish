@@ -37,17 +37,27 @@ static NSString *const kDefaultWikiFolder = @"wiki";
 //}
 //
 + (NSString *)infoApiOfSite:(WikiSite *)site title:(NSString *)title {
-    // https://zh.wikipedia.org/w/api.php?action=parse&prop=langlinks|headhtml|sections|displaytitle|categories|revid&page=%E7%8B%97&format=json&redirects=
+    // https://zh.wikipedia.org/w/api.php?action=parse&prop=langlinks|sections|displaytitle|revid&page=%E7%8B%97&format=json&redirects=
     title = [title urlEncodedString];
     
-    NSString *api = [NSString stringWithFormat:@"https://%@.wikipedia.org/w/api.php?action=parse&prop=%@&format=json&redirects=yes&page=%@&uselang=%@",site.lang, @"langlinks%7Csections%7Cdisplaytitle%7Ccategories%7Crevid%7Ctext",  title, site.sublang];
+    NSString *api = [NSString stringWithFormat:@"https://%@.wikipedia.org/w/api.php?action=parse&prop=%@&format=json&redirects=yes&page=%@&uselang=%@",site.lang, @"langlinks%7Csections%7Cdisplaytitle%7Crevid",  title, site.sublang];
     
     return api;
 }
 
++ (NSString *)pageURLStringOfSite:(WikiSite *)site title:(NSString *)title {
+    NSString *urlString = nil;
+    urlString = [NSString stringWithFormat:@"https://%@.m.wikipedia.org/%@/%@", site.lang, site.sublang, [title urlEncodedString]];
+    
+//    if (![site.sublang isEqualToString:@"wiki"]) {
+//        urlString = [urlString stringByAppendingFormat:@"?uselang=%@", site.sublang];
+//    }
+    return urlString;
+}
+
 + (NSString *)openSearchApiOfSite:(WikiSite *)site keyword:(NSString *)incompleteKeyword {
     incompleteKeyword = [incompleteKeyword urlEncodedString];
-    NSString *api = [NSString stringWithFormat:@"https://%@.wikipedia.org/w/api.php?action=opensearch&format=json&search=%@", site.lang, incompleteKeyword];
+    NSString *api = [NSString stringWithFormat:@"https://%@.m.wikipedia.org/w/api.php?action=opensearch&format=json&limit=20&search=%@", site.lang, incompleteKeyword];
     return api;
 }
 
