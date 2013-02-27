@@ -56,7 +56,7 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if ([keyPath isEqualToString:@"results"]) {
-        NSLog(@"result changed, %@", _openSearch.results);
+        // NSLog(@"result changed, %@", _openSearch.results);
         self.resultTable.hidden = NO;
         [self.resultTable reloadData];
     }
@@ -64,7 +64,7 @@
 
 - (IBAction)textChanged:(id)sender {
     if (self.textField.markedTextRange == nil) {
-        NSLog(@"%@", self.textField.text);
+        // NSLog(@"%@", self.textField.text);
         if (self.textField.text && self.textField.text.length > 0)
             [_openSearch request:self.textField.text];
     }
@@ -155,6 +155,7 @@
 }
 
 - (void)dealloc {
+    [_openSearch removeObserver:self forKeyPath:@"results"];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [super dealloc];
 }

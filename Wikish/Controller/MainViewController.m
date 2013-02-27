@@ -15,6 +15,7 @@
 #import "RegexKitLite.h"
 #import "TapDetectingWindow.h"
 #import "WikiSearchPanel.h"
+#import "SettingViewController.h"
 
 #define kScrollViewDirectionNone    0
 #define kScrollViewDirectionUp      1
@@ -36,7 +37,7 @@
 - (id)init {
     self = [super init];
     if (self) {
-        self.currentSite = [[SiteManager sharedInstance] siteOfName:@"马新简体"];
+        self.currentSite = [[SiteManager sharedInstance] siteOfName:@"简体"];
         _canLoadThisRequest = NO;
     }
     return self;
@@ -45,7 +46,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    NSLog(@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"UserAgent"]);
 //    NSDictionary *dictionnary = [[NSDictionary alloc] initWithObjectsAndKeys:@"Wikish/1.0 (http://www.baidu.com/; trm_tt@msn.com)", @"UserAgent", nil];
+//    [[NSUserDefaults standardUserDefaults] registerDefaults:dictionnary];
+//    [dictionnary release];
+    // [[NSUserDefaults standardUserDefaults] setObject:@"Wikish/1.0 (http://www.baidu.com/; trm_tt@msn.com)" forKey:@"UserAgent"];
+    // [[NSUserDefaults standardUserDefaults] synchronize];
+    NSLog(@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"UserAgent"]);
+    
+//    dictionnary = [[NSDictionary alloc] initWithObjectsAndKeys:@"Mozilla/5.0 (iPhone; CPU iPhone OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Mobile/10A403", @"UserAgent", nil];
 //    [[NSUserDefaults standardUserDefaults] registerDefaults:dictionnary];
 //    [dictionnary release];
     
@@ -55,7 +64,7 @@
     self.webView.scrollView.delegate = self;
     [self.webView.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
     
-    [self _loadSite:self.currentSite title:@"猫科动物"];
+    [self _loadSite:self.currentSite title:@""];
     
     self.leftView.hidden = YES;
     self.rightView.hidden = YES;
@@ -138,14 +147,17 @@
 }
 
 - (void)_scrollViewContentSizeChanged {
-    // [self scrollViewDidScroll:self.webView.scrollView];
-    if (_sectionFinished) return;
-    if (3 > _jsInjectedCount++) {
-        NSString *js = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"wiki-inject-functions" ofType:@"js"] encoding:NSUTF8StringEncoding error:nil];
-        [self.webView stringByEvaluatingJavaScriptFromString:js];
-    }
-    [self.webView stringByEvaluatingJavaScriptFromString:@"toggle_all_section(true)"];
-    NSLog(@"toggle_all_sections(true)");
+    [self scrollViewDidScroll:self.webView.scrollView];
+//    if (_sectionFinished) return;
+//    if (3 > _jsInjectedCount++) {
+//        NSString *js = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"wiki-inject-functions" ofType:@"js"] encoding:NSUTF8StringEncoding error:nil];
+//        [self.webView stringByEvaluatingJavaScriptFromString:js];
+//    }
+//    [self.webView stringByEvaluatingJavaScriptFromString:@"toggle_all_section(true)"];
+//    NSLog(@"toggle_all_sections(true)");
+    
+    // 限制不能左右滚动 以及 头部offset 大于50
+    
 }
 
 - (void)wikiPageInfoLoadSuccess:(WikiPageInfo *)wikiPage {
@@ -158,6 +170,8 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     NSLog(@"%@", request);
+    NSMutableURLRequest *mRequest = (NSMutableURLRequest *)request;
+    NSLog(@"webview user agent: %@", [mRequest valueForHTTPHeaderField:@"User-Agent"]);
     if (_canLoadThisRequest) {
         _canLoadThisRequest = NO;
         _sectionFinished = NO;
@@ -211,7 +225,7 @@
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    // 限制不能左右滚动
+    // 限制不能左右滚动 以及 头部offset 大于50
     [scrollView setContentOffset:CGPointMake(0, scrollView.contentOffset.y < 50.0f ? 50.0f :scrollView.contentOffset.y)];
     
     CGFloat offsetY = scrollView.contentOffset.y;
@@ -291,7 +305,9 @@
 
 - (IBAction)searchBtnPressed:(id)sender {
     // [self.webView stringByEvaluatingJavaScriptFromString:@"toggle_all_section(true)"];
-    [WikiSearchPanel showInView:self.view];
+    // [WikiSearchPanel showInView:self.view];
+    SettingViewController *svc = [[SettingViewController new] autorelease];
+    [self presentModalViewController:svc animated:YES];
 }
 
 - (IBAction)otherLangBtnPressed:(id)sender {

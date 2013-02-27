@@ -10,4 +10,14 @@
 
 @interface SettingViewController : UIViewController
 
+@property (nonatomic, retain) IBOutlet UISwitch     *httpsSwitch;
+@property (nonatomic, retain) IBOutlet UISwitch     *expanedSwitch;
+@property (nonatomic, retain) IBOutlet UITextField  *langTextField;
+@property (nonatomic, retain) IBOutlet UITextField  *langNameTextField;
+@property (nonatomic, retain) IBOutlet UILabel      *siteLabel;
+@property (nonatomic, retain) IBOutlet UITableView  *sitesTable;
+@property (nonatomic, retain) IBOutlet UITableView  *commonSitesTable;
+
+- (IBAction)useHttpsSwitchChanged:(UISwitch *)sender;
+- (IBAction)sectionExpandedSwitchChanged:(UISwitch *)sender;
 @end

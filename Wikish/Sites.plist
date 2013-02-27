@@ -44,35 +44,19 @@
 	</dict>
 	<dict>
 		<key>name</key>
-		<string>台湾正体</string>
+		<string>繁體</string>
 		<key>lang</key>
 		<string>zh</string>
 		<key>sub-lang</key>
-		<string>zh-tw</string>
+		<string>zh-hant</string>
 	</dict>
 	<dict>
 		<key>name</key>
-		<string>马新简体</string>
+		<string>简体</string>
 		<key>lang</key>
 		<string>zh</string>
 		<key>sub-lang</key>
-		<string>zh-sg</string>
-	</dict>
-	<dict>
-		<key>name</key>
-		<string>大陆简体</string>
-		<key>lang</key>
-		<string>zh</string>
-		<key>sub-lang</key>
-		<string>wiki</string>
-	</dict>
-	<dict>
-		<key>name</key>
-		<string>香港繁体</string>
-		<key>lang</key>
-		<string>zh</string>
-		<key>sub-lang</key>
-		<string>zh-hk</string>
+		<string>zh-hans</string>
 	</dict>
 </array>
 </plist>

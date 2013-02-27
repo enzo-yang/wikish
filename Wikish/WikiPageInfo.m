@@ -111,7 +111,10 @@ static NSString *const kSectionsKey = @"sections";
     }
     
     
-    if (!revid || !langlinks || !sections) [self _loadContentFailed:[NSError errorWithDomain:kWikiPageInfoMissingErrorDomain code:kWikiPageInfoMissingErrorCode userInfo:nil]];
+    if (!revid || !langlinks || !sections) {
+        [self _loadContentFailed:[NSError errorWithDomain:kWikiPageInfoMissingErrorDomain code:kWikiPageInfoMissingErrorCode userInfo:nil]];
+        return;
+    }
     
     [self _cleanInfos];
     _revid = [revid copy];

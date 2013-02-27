@@ -12,11 +12,27 @@
 
 @interface SiteManager : NSObject {
     NSMutableArray *_sites;
+    NSMutableArray *_commonSites;
 }
 
 + (SiteManager *)sharedInstance;
 
 - (NSArray *)supportedSites;
+
+- (NSArray *)commonSites;
+
+- (WikiSite *)defaultSite;
+// set next wikisite in _commonSites to be defaultSite
+- (WikiSite *)alterDefaultSite;
+- (void)setDefaultSite:(WikiSite *)site;
+
+- (void)addCommonSite:(WikiSite *)site;
+- (BOOL)isCommonSite:(WikiSite *)site;
+- (void)removeCommonSite:(WikiSite *)site;
+
+- (void)addSite:(WikiSite *)site;
+- (BOOL)hasSite:(WikiSite *)site;
+- (void)removeSite:(WikiSite *)site;
 
 - (WikiSite *)siteOfLang:(NSString *)lang;
 

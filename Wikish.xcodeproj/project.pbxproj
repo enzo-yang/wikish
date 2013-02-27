@@ -18,10 +18,15 @@
 		C615E21116BE23BE00506BE2 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C615E21016BE23BE00506BE2 /* QuartzCore.framework */; };
 		C615E21416BEA66100506BE2 /* WikiOpenSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = C615E21316BEA66100506BE2 /* WikiOpenSearch.m */; };
 		C615E21516BEA66100506BE2 /* WikiOpenSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = C615E21316BEA66100506BE2 /* WikiOpenSearch.m */; };
+		C63E140316D8729C001CA8E2 /* TableViewGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = C63E140216D8729C001CA8E2 /* TableViewGestureRecognizer.m */; };
 		C6471745169B24F7006ACC7A /* wiki-page-head-html.txt in Resources */ = {isa = PBXBuildFile; fileRef = C6471744169B24F7006ACC7A /* wiki-page-head-html.txt */; };
 		C6471746169B24F7006ACC7A /* wiki-page-head-html.txt in Resources */ = {isa = PBXBuildFile; fileRef = C6471744169B24F7006ACC7A /* wiki-page-head-html.txt */; };
 		C6471748169B28A4006ACC7A /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6471747169B28A4006ACC7A /* MobileCoreServices.framework */; };
 		C6471749169B28AC006ACC7A /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6471747169B28A4006ACC7A /* MobileCoreServices.framework */; };
+		C64ECDD216C2A9C2006D3767 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C64ECDD016C2A9C2006D3767 /* SettingViewController.m */; };
+		C64ECDD316C2A9C2006D3767 /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C64ECDD116C2A9C2006D3767 /* SettingViewController.xib */; };
+		C64ECDDC16C32A92006D3767 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C64ECDDE16C32A92006D3767 /* Localizable.strings */; };
+		C64ECDE916C49A9C006D3767 /* Wikish-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C64ECDE816C49A9C006D3767 /* Wikish-Info.plist */; };
 		C67F8C611699A748004C9B3D /* LangLink.m in Sources */ = {isa = PBXBuildFile; fileRef = C67F8C601699A748004C9B3D /* LangLink.m */; };
 		C67F8C621699A748004C9B3D /* LangLink.m in Sources */ = {isa = PBXBuildFile; fileRef = C67F8C601699A748004C9B3D /* LangLink.m */; };
 		C67F8C661699A9BA004C9B3D /* AutoPropertyRelease.m in Sources */ = {isa = PBXBuildFile; fileRef = C67F8C651699A9BA004C9B3D /* AutoPropertyRelease.m */; };
@@ -111,8 +116,18 @@
 		C615E21016BE23BE00506BE2 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		C615E21216BEA66100506BE2 /* WikiOpenSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WikiOpenSearch.h; sourceTree = "<group>"; };
 		C615E21316BEA66100506BE2 /* WikiOpenSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WikiOpenSearch.m; sourceTree = "<group>"; };
+		C63E140116D8729C001CA8E2 /* TableViewGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewGestureRecognizer.h; sourceTree = "<group>"; };
+		C63E140216D8729C001CA8E2 /* TableViewGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewGestureRecognizer.m; sourceTree = "<group>"; };
 		C6471744169B24F7006ACC7A /* wiki-page-head-html.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "wiki-page-head-html.txt"; sourceTree = "<group>"; };
 		C6471747169B28A4006ACC7A /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		C64ECDCF16C2A9C2006D3767 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		C64ECDD016C2A9C2006D3767 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		C64ECDD116C2A9C2006D3767 /* SettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingViewController.xib; sourceTree = "<group>"; };
+		C64ECDDD16C32A92006D3767 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C64ECDDF16C32AD1006D3767 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		C64ECDE016C32AD1006D3767 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C64ECDE116C32AD1006D3767 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		C64ECDE816C49A9C006D3767 /* Wikish-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Wikish-Info.plist"; sourceTree = "<group>"; };
 		C67F8C5F1699A748004C9B3D /* LangLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LangLink.h; sourceTree = "<group>"; };
 		C67F8C601699A748004C9B3D /* LangLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LangLink.m; sourceTree = "<group>"; };
 		C67F8C641699A9BA004C9B3D /* AutoPropertyRelease.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoPropertyRelease.h; sourceTree = "<group>"; };
@@ -157,7 +172,6 @@
 		C69DB260160EC07700B484FF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C69DB262160EC07700B484FF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C69DB264160EC07700B484FF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		C69DB268160EC07700B484FF /* Wikish-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Wikish-Info.plist"; sourceTree = "<group>"; };
 		C69DB26A160EC07700B484FF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C69DB26C160EC07700B484FF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C69DB26E160EC07700B484FF /* Wikish-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Wikish-Prefix.pch"; sourceTree = "<group>"; };
@@ -349,6 +363,8 @@
 				C615E20816BE104F00506BE2 /* WikiSearchPanel.h */,
 				C615E20916BE104F00506BE2 /* WikiSearchPanel.m */,
 				C615E20D16BE107200506BE2 /* WikiSearchPanel.xib */,
+				C63E140116D8729C001CA8E2 /* TableViewGestureRecognizer.h */,
+				C63E140216D8729C001CA8E2 /* TableViewGestureRecognizer.m */,
 			);
 			path = Wikish;
 			sourceTree = "<group>";
@@ -356,15 +372,16 @@
 		C69DB267160EC07700B484FF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C64ECDE816C49A9C006D3767 /* Wikish-Info.plist */,
 				C6471744169B24F7006ACC7A /* wiki-page-head-html.txt */,
 				C6471742169B24E3006ACC7A /* images */,
-				C69DB268160EC07700B484FF /* Wikish-Info.plist */,
 				C69DB269160EC07700B484FF /* InfoPlist.strings */,
 				C69DB26C160EC07700B484FF /* main.m */,
 				C69DB26E160EC07700B484FF /* Wikish-Prefix.pch */,
 				C69DB272160EC07700B484FF /* Default.png */,
 				C69DB274160EC07700B484FF /* Default@2x.png */,
 				C69DB276160EC07700B484FF /* Default-568h@2x.png */,
+				C64ECDDE16C32A92006D3767 /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -420,6 +437,9 @@
 				C6D94D85164DE0C100587E0C /* MainViewController.h */,
 				C6D94D86164DE0C100587E0C /* MainViewController.m */,
 				C6D94D87164DE0C100587E0C /* MainViewController.xib */,
+				C64ECDCF16C2A9C2006D3767 /* SettingViewController.h */,
+				C64ECDD016C2A9C2006D3767 /* SettingViewController.m */,
+				C64ECDD116C2A9C2006D3767 /* SettingViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -476,6 +496,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				"zh-Hans",
 			);
 			mainGroup = C69DB251160EC07700B484FF;
 			productRefGroup = C69DB25D160EC07700B484FF /* Products */;
@@ -517,6 +538,9 @@
 				C6471745169B24F7006ACC7A /* wiki-page-head-html.txt in Resources */,
 				C6D7672316AC3CE400CFC99A /* wiki-inject-functions.js in Resources */,
 				C615E20E16BE107200506BE2 /* WikiSearchPanel.xib in Resources */,
+				C64ECDD316C2A9C2006D3767 /* SettingViewController.xib in Resources */,
+				C64ECDDC16C32A92006D3767 /* Localizable.strings in Resources */,
+				C64ECDE916C49A9C006D3767 /* Wikish-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -593,16 +617,28 @@
 				C615E1F516BCBE0600506BE2 /* TapDetectingWindow.m in Sources */,
 				C615E20A16BE104F00506BE2 /* WikiSearchPanel.m in Sources */,
 				C615E21416BEA66100506BE2 /* WikiOpenSearch.m in Sources */,
+				C64ECDD216C2A9C2006D3767 /* SettingViewController.m in Sources */,
+				C63E140316D8729C001CA8E2 /* TableViewGestureRecognizer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		C64ECDDE16C32A92006D3767 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C64ECDDD16C32A92006D3767 /* en */,
+				C64ECDE016C32AD1006D3767 /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		C69BB0FC165678B7002A1873 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				C69BB0FD165678B7002A1873 /* en */,
+				C64ECDE116C32AD1006D3767 /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -611,6 +647,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				C69DB26A160EC07700B484FF /* en */,
+				C64ECDDF16C32AD1006D3767 /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -680,7 +717,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -699,7 +736,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
