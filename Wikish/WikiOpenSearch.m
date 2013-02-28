@@ -31,7 +31,7 @@
 - (id)init {
     self = [super init];
     if (self) {
-        _site = [[[SiteManager sharedInstance] siteOfName:@"马新简体"] retain];
+        _site = [[[SiteManager sharedInstance] siteOfName:@"简体"] retain];
         self.operations = [[NSMutableArray new] autorelease];
         self.results = [[NSArray new] autorelease];
         _searchCnt = 0;
@@ -50,8 +50,11 @@
 }
 
 - (void)request:(NSString *)incompleteKeyword {
+    NSLog(@"%@", _site.lang);
+    
     NSString *urlstring = [WikiApi openSearchApiOfSite:_site keyword:incompleteKeyword];
     OpenSearchRequest *request = [OpenSearchRequest requestWithURL:[NSURL URLWithString:urlstring]];
+    NSLog(@"%@", urlstring);
     request.tag = ++_searchCnt;
     AFJSONRequestOperation *op = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
                                                                                  success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {

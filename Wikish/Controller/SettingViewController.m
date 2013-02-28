@@ -11,7 +11,9 @@
 #import "SiteManager.h"
 #import "WikiSite.h"
 
-@interface SettingViewController ()<UITableViewDataSource, UITableViewDelegate>
+#import "TableViewGestureRecognizer.h"
+
+@interface SettingViewController ()<UITableViewDataSource, UITableViewDelegate, TableViewGesturePanningRowDelegate>
 
 @property (nonatomic, assign) SiteManager *siteManager;
 
@@ -38,6 +40,8 @@
     // expanded
     NSNumber *expanded = [defaults objectForKey:kUserDefaultsIsInitExpandedKey];
     [self.expanedSwitch setOn:[expanded boolValue] animated:NO];
+    
+    [[self.sitesTable enableGestureTableViewWithDelegate:self] retain];
     
 }
 
@@ -85,6 +89,9 @@
     if (!cell) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cid] autorelease];
     }
+    cell.contentView.backgroundColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1];
+    cell.textLabel.backgroundColor = [UIColor clearColor];
+    
     WikiSite *site = [[_siteManager supportedSites] objectAtIndex:indexPath.row];
     cell.textLabel.text = site.name;
     return cell;
@@ -100,4 +107,40 @@
     cell.textLabel.text = site.name;
     return cell;
 }
+
+#pragma mark -
+#pragma mark TableViewGesturePanningRowDelegate
+- (BOOL)gestureRecognizer:(TableViewGestureRecognizer *)gestureRecognizer canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (void)gestureRecognizer:(TableViewGestureRecognizer *)gestureRecognizer didEnterPanState:(TableViewCellPanState)state forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (gestureRecognizer.tableView == self.sitesTable) {
+        UITableViewCell *cell = [self.sitesTable cellForRowAtIndexPath:indexPath];
+//        if (gestureRecognizer.swipeState == TableViewCellPanStateLeft) {
+//            cell.contentView.backgroundColor = [UIColor redColor];
+//        }
+        CGFloat left = cell.contentView.frame.origin.x;
+        CGFloat color_offset = fabsf(left)/150.0f;
+        if (left > 0) {
+            cell.contentView.backgroundColor = [UIColor colorWithRed:0.9-color_offset green:0.9 blue:0.9-color_offset alpha:1];
+        } else {
+            cell.contentView.backgroundColor = [UIColor colorWithRed:0.9 green:0.9-color_offset blue:0.9-color_offset alpha:1];
+        }
+        
+    } else {
+        // TODO
+    }
+    
+}
+- (void)gestureRecognizer:(TableViewGestureRecognizer *)gestureRecognizer commitPanState:(TableViewCellPanState)state forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (gestureRecognizer.tableView == self.sitesTable) {
+        [self.sitesTable beginUpdates];
+        [self.sitesTable deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        WikiSite *theSite = [[_siteManager supportedSites] objectAtIndex:indexPath.row];
+        [_siteManager removeSite:theSite];
+        [self.sitesTable endUpdates];
+    }
+}
+
 @end

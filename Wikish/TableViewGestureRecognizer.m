@@ -14,11 +14,11 @@ typedef enum {
     TableViewGestureRecognizerStatePanning,
 } TableViewGestureRecognizerState;
 
-CGFloat const TableViewCommitEditingRowDefaultLength = 80;
+CGFloat const TableViewCommitPanningRowDefaultLength = 80;
 
 @interface TableViewGestureRecognizer() <UIGestureRecognizerDelegate>
 
-@property (nonatomic, assign) id<TableViewGestureEditingRowDelegate>   delegate;
+@property (nonatomic, assign) id<TableViewGesturePanningRowDelegate>   delegate;
 @property (nonatomic, assign) id<UITableViewDelegate>               tableViewDelegate;
 @property (nonatomic, assign) UITableView                           *tableView;
 @property (nonatomic, retain) UIPanGestureRecognizer                *panRecognizer;
@@ -37,10 +37,10 @@ CGFloat const TableViewCommitEditingRowDefaultLength = 80;
         
         CGPoint location1 = [recognizer locationOfTouch:0 inView:self.tableView];
         
-        NSIndexPath *indexPath = self.addingIndexPath;
+        NSIndexPath *indexPath = self.theIndexPath;
         if ( ! indexPath) {
             indexPath = [self.tableView indexPathForRowAtPoint:location1];
-            self.addingIndexPath = indexPath;
+            self.theIndexPath = indexPath;
         }
         
         self.state = TableViewGestureRecognizerStatePanning;
@@ -54,42 +54,43 @@ CGFloat const TableViewCommitEditingRowDefaultLength = 80;
             [self.delegate gestureRecognizer:self didChangeContentViewTranslation:translation forRowAtIndexPath:indexPath];
         }
         
-        CGFloat commitEditingLength = TableViewCommitEditingRowDefaultLength;
-        if ([self.delegate respondsToSelector:@selector(gestureRecognizer:lengthForCommitEditingRowAtIndexPath:)]) {
-            commitEditingLength = [self.delegate gestureRecognizer:self lengthForCommitEditingRowAtIndexPath:indexPath];
+        CGFloat commitEditingLength = TableViewCommitPanningRowDefaultLength;
+        if ([self.delegate respondsToSelector:@selector(gestureRecognizer:lengthForCommitPanningRowAtIndexPath:)]) {
+            commitEditingLength = [self.delegate gestureRecognizer:self lengthForCommitPanningRowAtIndexPath:indexPath];
         }
         if (fabsf(translation.x) >= commitEditingLength) {
-            if (self.addingCellState == TableViewCellEditingStateMiddle) {
-                self.addingCellState = translation.x > 0 ? TableViewCellEditingStateRight : TableViewCellEditingStateLeft;
+            if (self.swipeState == TableViewCellPanStateMiddle) {
+                self.swipeState = translation.x > 0 ? TableViewCellPanStateRight : TableViewCellPanStateLeft;
             }
         } else {
-            if (self.addingCellState != TableViewCellEditingStateMiddle) {
-                self.addingCellState = TableViewCellEditingStateMiddle;
+            if (self.swipeState != TableViewCellPanStateMiddle) {
+                self.swipeState = TableViewCellPanStateMiddle;
             }
         }
         
-        if ([self.delegate respondsToSelector:@selector(gestureRecognizer:didEnterEditingState:forRowAtIndexPath:)]) {
-            [self.delegate gestureRecognizer:self didEnterEditingState:self.addingCellState forRowAtIndexPath:indexPath];
+        if ([self.delegate respondsToSelector:@selector(gestureRecognizer:didEnterPanState:forRowAtIndexPath:)]) {
+            [self.delegate gestureRecognizer:self didEnterPanState:self.swipeState forRowAtIndexPath:indexPath];
         }
         
     } else if (recognizer.state == UIGestureRecognizerStateEnded) {
         
-        NSIndexPath *indexPath = self.addingIndexPath;
+        NSIndexPath *indexPath = self.theIndexPath;
+        [[indexPath retain] autorelease];
         
         // Removes addingIndexPath before updating then tableView will be able
         // to determine correct table row height
-        self.addingIndexPath = nil;
+        self.theIndexPath = nil;
         
         UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
         CGPoint translation = [recognizer translationInView:self.tableView];
         
-        CGFloat commitEditingLength = TableViewCommitEditingRowDefaultLength;
-        if ([self.delegate respondsToSelector:@selector(gestureRecognizer:lengthForCommitEditingRowAtIndexPath:)]) {
-            commitEditingLength = [self.delegate gestureRecognizer:self lengthForCommitEditingRowAtIndexPath:indexPath];
+        CGFloat commitEditingLength = TableViewCommitPanningRowDefaultLength;
+        if ([self.delegate respondsToSelector:@selector(gestureRecognizer:lengthForCommitPanningRowAtIndexPath:)]) {
+            commitEditingLength = [self.delegate gestureRecognizer:self lengthForCommitPanningRowAtIndexPath:indexPath];
         }
         if (fabsf(translation.x) >= commitEditingLength) {
-            if ([self.delegate respondsToSelector:@selector(gestureRecognizer:commitEditingState:forRowAtIndexPath:)]) {
-                [self.delegate gestureRecognizer:self commitEditingState:self.addingCellState forRowAtIndexPath:indexPath];
+            if ([self.delegate respondsToSelector:@selector(gestureRecognizer:commitPanState:forRowAtIndexPath:)]) {
+                [self.delegate gestureRecognizer:self commitPanState:self.swipeState forRowAtIndexPath:indexPath];
             }
         } else {
             [UIView beginAnimations:@"" context:nil];
@@ -97,7 +98,7 @@ CGFloat const TableViewCommitEditingRowDefaultLength = 80;
             [UIView commitAnimations];
         }
         
-        self.addingCellState = TableViewCellEditingStateMiddle;
+        self.swipeState = TableViewCellPanStateMiddle;
         self.state = TableViewGestureRecognizerStateNone;
     }
 }
@@ -105,7 +106,7 @@ CGFloat const TableViewCommitEditingRowDefaultLength = 80;
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
     
     if (gestureRecognizer == self.panRecognizer) {
-        if ( ! [self.delegate conformsToProtocol:@protocol(TableViewGestureEditingRowDelegate)]) {
+        if ( ! [self.delegate conformsToProtocol:@protocol(TableViewGesturePanningRowDelegate)]) {
             return NO;
         }
         
@@ -158,11 +159,29 @@ CGFloat const TableViewCommitEditingRowDefaultLength = 80;
     recognizer.tableViewDelegate = tableView.delegate;
     tableView.delegate = recognizer;
     
-    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureRecognizer:)];
+    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:recognizer action:@selector(panGestureRecognizer:)];
     [tableView addGestureRecognizer:pan];
     pan.delegate = recognizer;
     recognizer.panRecognizer = pan;
+    [pan release];
     
+    return [recognizer autorelease];
+}
+
+- (void)dealloc {
+    NSLog(@"dealloc");
+    [super dealloc];
+}
+
+@end
+
+@implementation UITableView (TableViewGestureDelegate)
+
+- (TableViewGestureRecognizer *)enableGestureTableViewWithDelegate:(id)delegate {
+    if ( ! [delegate conformsToProtocol:@protocol(TableViewGesturePanningRowDelegate)]) {
+        [NSException raise:@"delegate should at least conform to one of JTTableViewGestureAddingRowDelegate" format:nil];
+    }
+    TableViewGestureRecognizer *recognizer = [TableViewGestureRecognizer gestureRecognizerWithTableView:self delegate:delegate];
     return recognizer;
 }
 

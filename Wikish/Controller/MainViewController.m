@@ -305,9 +305,9 @@
 
 - (IBAction)searchBtnPressed:(id)sender {
     // [self.webView stringByEvaluatingJavaScriptFromString:@"toggle_all_section(true)"];
-    // [WikiSearchPanel showInView:self.view];
-    SettingViewController *svc = [[SettingViewController new] autorelease];
-    [self presentModalViewController:svc animated:YES];
+    [WikiSearchPanel showInView:self.view];
+    // SettingViewController *svc = [[SettingViewController new] autorelease];
+    // [self presentModalViewController:svc animated:YES];
 }
 
 - (IBAction)otherLangBtnPressed:(id)sender {
