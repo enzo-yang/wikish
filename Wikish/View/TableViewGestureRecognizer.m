@@ -93,15 +93,20 @@ CGFloat const TableViewCommitPanningRowDefaultLength = 80;
                 [self.delegate gestureRecognizer:self commitPanState:self.swipeState forRowAtIndexPath:indexPath];
             }
         } else {
-            [UIView beginAnimations:@"" context:nil];
-            cell.contentView.frame = cell.contentView.bounds;
-            [UIView commitAnimations];
+            [UIView animateWithDuration:0.3f animations:^{
+                cell.contentView.frame = cell.contentView.bounds;
+            } completion:^(BOOL finished) {
+                if ([self.delegate respondsToSelector:@selector(gestureRecognizer:recoverRowAtIndexPath:)]) {
+                    [self.delegate gestureRecognizer:self recoverRowAtIndexPath:indexPath];
+                }
+            }];
         }
         
         self.swipeState = TableViewCellPanStateMiddle;
         self.state = TableViewGestureRecognizerStateNone;
     }
 }
+
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
     

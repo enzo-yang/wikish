@@ -164,11 +164,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Wikish/TableViewGestureRecognizer.m"
-         timestampString = "383746861.269778"
+         timestampString = "383756190.556339"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "172"
-         endingLineNumber = "172"
+         startingLineNumber = "177"
+         endingLineNumber = "177"
          landmarkName = "-dealloc"
          landmarkType = "5">
       </FileBreakpoint>

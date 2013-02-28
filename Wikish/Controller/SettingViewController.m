@@ -134,13 +134,32 @@
     
 }
 - (void)gestureRecognizer:(TableViewGestureRecognizer *)gestureRecognizer commitPanState:(TableViewCellPanState)state forRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [gestureRecognizer.tableView cellForRowAtIndexPath:indexPath];
     if (gestureRecognizer.tableView == self.sitesTable) {
-        [self.sitesTable beginUpdates];
-        [self.sitesTable deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         WikiSite *theSite = [[_siteManager supportedSites] objectAtIndex:indexPath.row];
-        [_siteManager removeSite:theSite];
-        [self.sitesTable endUpdates];
+        
+        if (gestureRecognizer.swipeState == TableViewCellPanStateLeft) {
+            [self.sitesTable beginUpdates];
+            [self.sitesTable deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [_siteManager removeSite:theSite];
+            [self.sitesTable endUpdates];
+        } else if (gestureRecognizer.swipeState == TableViewCellPanStateRight) {
+            [_siteManager addCommonSite:theSite];
+            [self.commonSitesTable reloadData];
+            [UIView beginAnimations:nil context:nil];
+            cell.contentView.frame = cell.contentView.bounds;
+            cell.contentView.backgroundColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.0];
+            [UIView commitAnimations];
+        }
+        
     }
+}
+
+- (void)gestureRecognizer:(TableViewGestureRecognizer *)gestureRecognizer recoverRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [gestureRecognizer.tableView cellForRowAtIndexPath:indexPath];
+    [UIView beginAnimations:nil context:nil];
+    cell.contentView.backgroundColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.0];
+    [UIView commitAnimations];
 }
 
 @end
