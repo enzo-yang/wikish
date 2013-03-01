@@ -7,6 +7,7 @@
 //
 
 #import "MainViewController.h"
+#import "Constants.h"
 #import "WikiSite.h"
 #import "SiteManager.h"
 #import "WikiPageInfo.h"
@@ -16,6 +17,10 @@
 #import "TapDetectingWindow.h"
 #import "WikiSearchPanel.h"
 #import "SettingViewController.h"
+
+#import "HistoryTableController.h"
+#import "SectionTableController.h"
+#import "FavouriteTableController.h"
 
 #define kScrollViewDirectionNone    0
 #define kScrollViewDirectionUp      1
@@ -46,18 +51,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSLog(@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"UserAgent"]);
-//    NSDictionary *dictionnary = [[NSDictionary alloc] initWithObjectsAndKeys:@"Wikish/1.0 (http://www.baidu.com/; trm_tt@msn.com)", @"UserAgent", nil];
-//    [[NSUserDefaults standardUserDefaults] registerDefaults:dictionnary];
-//    [dictionnary release];
-    // [[NSUserDefaults standardUserDefaults] setObject:@"Wikish/1.0 (http://www.baidu.com/; trm_tt@msn.com)" forKey:@"UserAgent"];
-    // [[NSUserDefaults standardUserDefaults] synchronize];
-    NSLog(@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"UserAgent"]);
-    
-//    dictionnary = [[NSDictionary alloc] initWithObjectsAndKeys:@"Mozilla/5.0 (iPhone; CPU iPhone OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Mobile/10A403", @"UserAgent", nil];
-//    [[NSUserDefaults standardUserDefaults] registerDefaults:dictionnary];
-//    [dictionnary release];
-    
     self.webView.delegate = self;
     self.webView.scrollView.showsHorizontalScrollIndicator = NO;
     self.webView.scrollView.bounces = NO;
@@ -72,6 +65,8 @@
     _webViewOrgHeight   = self.webView.frame.size.height;
     _webViewOrgY        = self.webView.frame.origin.y;
     _headViewHided = NO;
+    
+    [self _initializeTables];
     
 }
 
@@ -292,6 +287,7 @@
     if (_viewStatus != kViewStatusNormal) {
         [self _recoverNormalStatus];
     } else {
+        [self.historyTable reloadData];
         _viewStatus = kViewStatusHistory;
         self.leftView.hidden = NO;
         [UIView beginAnimations:nil context:nil];
@@ -310,25 +306,26 @@
     [self presentModalViewController:svc animated:YES];
 }
 
-- (IBAction)otherLangBtnPressed:(id)sender {
+- (IBAction)sectionBtnPressed:(id)sender {
     if (_viewStatus != kViewStatusNormal) {
         [self _recoverNormalStatus];
     } else {
-        _viewStatus = kViewStatusOtherLang;
+        [self.sectionTable reloadData];
+        _viewStatus = kViewStatusSection;
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:0.3];
         CGRect f = self.bottomView.frame;
-        f.origin.y -= 200.0f;
+        f.origin.y -= 300.0f;
         self.bottomView.frame = f;
         [UIView commitAnimations];
     }
 }
 
-- (IBAction)changeLangBtnPressed:(id)sender {
+- (IBAction)favouriteKitBtnPressed:(id)sender {
     if (_viewStatus != kViewStatusNormal) {
         [self _recoverNormalStatus];
     } else {
-        _viewStatus = kViewStatusChangingLang;
+        _viewStatus = kViewStatusFavouriteKit;
         self.rightView.hidden = NO;
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:0.3];
@@ -337,6 +334,22 @@
         self.middleView.frame = f;
         [UIView commitAnimations];
     }
+}
+
+- (void)_initializeTables {
+    self.historyTable.backgroundColor = GetTableBackgourndColor();
+    self.sectionTable.backgroundColor = GetTableBackgourndColor();
+    self.favouriteTable.backgroundColor = GetTableBackgourndColor();
+    
+    self.historyController = [[HistoryTableController new] autorelease];
+    [self.historyController setTableView:self.historyTable andMainController:self];
+    
+    self.sectionController = [[SectionTableController new] autorelease];
+    [self.sectionController setTableView:self.sectionTable andMainController:self];
+    
+    self.favouriteController = [[FavouriteTableController new] autorelease];
+    [self.favouriteController setTableView:self.favouriteTable andMainController:self];
+    
 }
 
 - (void)_recoverNormalStatus {
@@ -348,11 +361,11 @@
         f.origin.x -= 260.0f;
         theViewShouldHide = self.leftView;
         theViewShouldChangeFrame = self.middleView;
-    } else if (_viewStatus == kViewStatusOtherLang) {
+    } else if (_viewStatus == kViewStatusSection) {
         f = self.bottomView.frame;
-        f.origin.y += 200.0f;
+        f.origin.y += 300.0f;
         theViewShouldChangeFrame = self.bottomView;
-    } else if (_viewStatus == kViewStatusChangingLang) {
+    } else if (_viewStatus == kViewStatusFavouriteKit) {
         f = self.middleView.frame;
         f.origin.x += 260.0f;
         theViewShouldHide = self.rightView;

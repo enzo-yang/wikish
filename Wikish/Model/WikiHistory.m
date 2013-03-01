@@ -70,7 +70,7 @@
 - (void)addRecord:(WikiRecord *)record {
     @synchronized(self) {
         [self _removeRecord:record];
-        [_history addObject:record];
+        [_history insertObject:record atIndex:0];
     }
 }
 

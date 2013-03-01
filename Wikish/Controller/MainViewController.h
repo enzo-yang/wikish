@@ -11,13 +11,16 @@
 typedef enum {
     kViewStatusNormal,
     kViewStatusHistory,
-    kViewStatusChangingLang,
-    kViewStatusOtherLang,
+    kViewStatusSection,
+    kViewStatusFavouriteKit,
     kViewStatusCount
 } ViewStatus;
 
 @class WikiPageInfo;
 @class WikiSite;
+@class HistoryTableController;
+@class SectionTableController;
+@class FavouriteTableController;
 
 @interface MainViewController : UIViewController {
     ViewStatus _viewStatus;
@@ -43,10 +46,19 @@ typedef enum {
 @property (retain, nonatomic) IBOutlet UIView *bottomView;
 @property (retain, nonatomic) IBOutlet UIView *headerView;
 
+@property (retain, nonatomic) IBOutlet UITableView *historyTable;
+@property (retain, nonatomic) HistoryTableController *historyController;
+@property (retain, nonatomic) IBOutlet UITableView *sectionTable;
+@property (retain, nonatomic) SectionTableController *sectionController;
+@property (retain, nonatomic) IBOutlet UITableView *favouriteTable;
+@property (retain, nonatomic) FavouriteTableController *favouriteController;
+
+@property (readonly, nonatomic) WikiPageInfo *pageInfo;
+
 - (IBAction)historyBtnPressed:(id)sender;
 - (IBAction)searchBtnPressed:(id)sender;
-- (IBAction)otherLangBtnPressed:(id)sender;
-- (IBAction)changeLangBtnPressed:(id)sender;
+- (IBAction)sectionBtnPressed:(id)sender;
+- (IBAction)favouriteKitBtnPressed:(id)sender;
 
 
 @end
