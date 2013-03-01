@@ -18,6 +18,11 @@
 		C64ECDE916C49A9C006D3767 /* Wikish-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C64ECDE816C49A9C006D3767 /* Wikish-Info.plist */; };
 		C67F8C661699A9BA004C9B3D /* AutoPropertyRelease.m in Sources */ = {isa = PBXBuildFile; fileRef = C67F8C651699A9BA004C9B3D /* AutoPropertyRelease.m */; };
 		C67F8C671699A9BA004C9B3D /* AutoPropertyRelease.m in Sources */ = {isa = PBXBuildFile; fileRef = C67F8C651699A9BA004C9B3D /* AutoPropertyRelease.m */; };
+		C696DD5B16E0CD8A009A7A58 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = C696DD5A16E0CD8A009A7A58 /* Constants.m */; };
+		C696DD5E16E0D0C8009A7A58 /* HistoryTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = C696DD5D16E0D0C8009A7A58 /* HistoryTableController.m */; };
+		C696DD6116E0D0E2009A7A58 /* SectionTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = C696DD6016E0D0E2009A7A58 /* SectionTableController.m */; };
+		C696DD6416E0D10B009A7A58 /* FavouriteTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = C696DD6316E0D10B009A7A58 /* FavouriteTableController.m */; };
+		C696DD6716E0D81E009A7A58 /* MainTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = C696DD6616E0D81D009A7A58 /* MainTableController.m */; };
 		C69BB0E616566AA0002A1873 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C69BB0D416566AA0002A1873 /* AFHTTPClient.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		C69BB0E716566AA0002A1873 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = C69BB0D616566AA0002A1873 /* AFHTTPRequestOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		C69BB0E816566AA0002A1873 /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = C69BB0D816566AA0002A1873 /* AFImageRequestOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -106,6 +111,15 @@
 		C64ECDE816C49A9C006D3767 /* Wikish-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Wikish-Info.plist"; sourceTree = "<group>"; };
 		C67F8C641699A9BA004C9B3D /* AutoPropertyRelease.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoPropertyRelease.h; sourceTree = "<group>"; };
 		C67F8C651699A9BA004C9B3D /* AutoPropertyRelease.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoPropertyRelease.m; sourceTree = "<group>"; };
+		C696DD5A16E0CD8A009A7A58 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		C696DD5C16E0D0C8009A7A58 /* HistoryTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryTableController.h; sourceTree = "<group>"; };
+		C696DD5D16E0D0C8009A7A58 /* HistoryTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryTableController.m; sourceTree = "<group>"; };
+		C696DD5F16E0D0E2009A7A58 /* SectionTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SectionTableController.h; sourceTree = "<group>"; };
+		C696DD6016E0D0E2009A7A58 /* SectionTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SectionTableController.m; sourceTree = "<group>"; };
+		C696DD6216E0D10B009A7A58 /* FavouriteTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavouriteTableController.h; sourceTree = "<group>"; };
+		C696DD6316E0D10B009A7A58 /* FavouriteTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavouriteTableController.m; sourceTree = "<group>"; };
+		C696DD6516E0D81D009A7A58 /* MainTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTableController.h; sourceTree = "<group>"; };
+		C696DD6616E0D81D009A7A58 /* MainTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTableController.m; sourceTree = "<group>"; };
 		C69BB0D316566AA0002A1873 /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
 		C69BB0D416566AA0002A1873 /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPClient.m; sourceTree = "<group>"; };
 		C69BB0D516566AA0002A1873 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -329,6 +343,7 @@
 				C69DB267160EC07700B484FF /* Supporting Files */,
 				C6D94D8A164DFE2C00587E0C /* Sites.plist */,
 				C69BB1301658C24A002A1873 /* Constants.h */,
+				C696DD5A16E0CD8A009A7A58 /* Constants.m */,
 			);
 			path = Wikish;
 			sourceTree = "<group>";
@@ -445,6 +460,14 @@
 				C64ECDCF16C2A9C2006D3767 /* SettingViewController.h */,
 				C64ECDD016C2A9C2006D3767 /* SettingViewController.m */,
 				C64ECDD116C2A9C2006D3767 /* SettingViewController.xib */,
+				C696DD5C16E0D0C8009A7A58 /* HistoryTableController.h */,
+				C696DD5D16E0D0C8009A7A58 /* HistoryTableController.m */,
+				C696DD5F16E0D0E2009A7A58 /* SectionTableController.h */,
+				C696DD6016E0D0E2009A7A58 /* SectionTableController.m */,
+				C696DD6216E0D10B009A7A58 /* FavouriteTableController.h */,
+				C696DD6316E0D10B009A7A58 /* FavouriteTableController.m */,
+				C696DD6516E0D81D009A7A58 /* MainTableController.h */,
+				C696DD6616E0D81D009A7A58 /* MainTableController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -613,6 +636,11 @@
 				C69EE4A316DFB6A30074AF3D /* TableViewGestureRecognizer.m in Sources */,
 				C69EE4A416DFB6A30074AF3D /* TapDetectingWindow.m in Sources */,
 				C69EE4A516DFB6A30074AF3D /* WikiSearchPanel.m in Sources */,
+				C696DD5B16E0CD8A009A7A58 /* Constants.m in Sources */,
+				C696DD5E16E0D0C8009A7A58 /* HistoryTableController.m in Sources */,
+				C696DD6116E0D0E2009A7A58 /* SectionTableController.m in Sources */,
+				C696DD6416E0D10B009A7A58 /* FavouriteTableController.m in Sources */,
+				C696DD6716E0D81E009A7A58 /* MainTableController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

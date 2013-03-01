@@ -20,4 +20,7 @@
 #define kUserDefaultsSearchSiteKey      @"search-site"
 #define kUserDefaultsUseHttpsKey        @"use-https"
 
+UIColor *GetTableBackgourndColor();
+UIColor *GetTableCellBackgroundColor();
+
 #endif
