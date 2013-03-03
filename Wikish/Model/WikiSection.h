@@ -13,6 +13,7 @@
 @property (nonatomic, assign)   NSUInteger  level;
 @property (nonatomic, copy)     NSString    *line;
 @property (nonatomic, copy)     NSString    *anchor;
+@property (nonatomic, copy)     NSString    *index;
 
 - (id)initWithDict:(NSDictionary *)dict;
 

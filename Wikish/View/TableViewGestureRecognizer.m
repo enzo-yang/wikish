@@ -43,11 +43,16 @@ CGFloat const TableViewCommitPanningRowDefaultLength = 80;
             self.theIndexPath = indexPath;
         }
         
+        if (! indexPath ) return;
+        
         self.state = TableViewGestureRecognizerStatePanning;
         
         UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
         
         CGPoint translation = [recognizer translationInView:self.tableView];
+        if (translation.x < 0.0f && self.blockSide == TableViewCellBlockLeft) return;
+        if (translation.x > 0.0f && self.blockSide == TableViewCellBlockRight) return;
+        
         cell.contentView.frame = CGRectOffset(cell.contentView.bounds, translation.x, 0);
         
         if ([self.delegate respondsToSelector:@selector(gestureRecognizer:didChangeContentViewTranslation:forRowAtIndexPath:)]) {
@@ -59,22 +64,23 @@ CGFloat const TableViewCommitPanningRowDefaultLength = 80;
             commitEditingLength = [self.delegate gestureRecognizer:self lengthForCommitPanningRowAtIndexPath:indexPath];
         }
         if (fabsf(translation.x) >= commitEditingLength) {
-            if (self.swipeState == TableViewCellPanStateMiddle) {
-                self.swipeState = translation.x > 0 ? TableViewCellPanStateRight : TableViewCellPanStateLeft;
+            if (self.panState == TableViewCellPanStateMiddle) {
+                self.panState = translation.x > 0 ? TableViewCellPanStateRight : TableViewCellPanStateLeft;
             }
         } else {
-            if (self.swipeState != TableViewCellPanStateMiddle) {
-                self.swipeState = TableViewCellPanStateMiddle;
+            if (self.panState != TableViewCellPanStateMiddle) {
+                self.panState = TableViewCellPanStateMiddle;
             }
         }
         
         if ([self.delegate respondsToSelector:@selector(gestureRecognizer:didEnterPanState:forRowAtIndexPath:)]) {
-            [self.delegate gestureRecognizer:self didEnterPanState:self.swipeState forRowAtIndexPath:indexPath];
+            [self.delegate gestureRecognizer:self didEnterPanState:self.panState forRowAtIndexPath:indexPath];
         }
         
     } else if (recognizer.state == UIGestureRecognizerStateEnded) {
         
         NSIndexPath *indexPath = self.theIndexPath;
+        if (!indexPath) return;
         [[indexPath retain] autorelease];
         
         // Removes addingIndexPath before updating then tableView will be able
@@ -90,7 +96,7 @@ CGFloat const TableViewCommitPanningRowDefaultLength = 80;
         }
         if (fabsf(translation.x) >= commitEditingLength) {
             if ([self.delegate respondsToSelector:@selector(gestureRecognizer:commitPanState:forRowAtIndexPath:)]) {
-                [self.delegate gestureRecognizer:self commitPanState:self.swipeState forRowAtIndexPath:indexPath];
+                [self.delegate gestureRecognizer:self commitPanState:self.panState forRowAtIndexPath:indexPath];
             }
         } else {
             [UIView animateWithDuration:0.3f animations:^{
@@ -102,7 +108,7 @@ CGFloat const TableViewCommitPanningRowDefaultLength = 80;
             }];
         }
         
-        self.swipeState = TableViewCellPanStateMiddle;
+        self.panState = TableViewCellPanStateMiddle;
         self.state = TableViewGestureRecognizerStateNone;
     }
 }
@@ -162,6 +168,7 @@ CGFloat const TableViewCommitPanningRowDefaultLength = 80;
     recognizer.delegate = delegate;
     recognizer.tableView = tableView;
     recognizer.tableViewDelegate = tableView.delegate;
+    recognizer.blockSide = TableViewCellBlockNone;
     tableView.delegate = recognizer;
     
     UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:recognizer action:@selector(panGestureRecognizer:)];
@@ -174,7 +181,7 @@ CGFloat const TableViewCommitPanningRowDefaultLength = 80;
 }
 
 - (void)dealloc {
-    NSLog(@"dealloc");
+    self.theIndexPath = nil;
     [super dealloc];
 }
 

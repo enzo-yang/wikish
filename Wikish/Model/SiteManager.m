@@ -13,8 +13,8 @@
 #import "WikiSite.h"
 #import "Constants.h"
 
-static NSString *const kSitesFileName = @"sites.json";
-static NSString *const kVersionToCompare = @"kVersionToCompare_Sites";
+//static NSString *const kSitesFileName = @"sites.json";
+//static NSString *const kVersionToCompare = @"kVersionToCompare_Sites";
 
 static NSString *const kCommonSitesFileName = @"common-sites.json";
 static NSString *const kDefaultSiteKey      = @"default-site";
@@ -23,26 +23,6 @@ static NSString *const kDefaultSiteKey      = @"default-site";
 
 @property (nonatomic, retain) NSMutableArray *sites;
 @property (nonatomic, retain) NSMutableArray *commonSites;
-
-- (NSString *)_sitesFilePath;
-- (NSMutableArray *)_loadSitesFromPlist;
-- (NSMutableArray *)_loadSitesFromFile;
-
-- (NSString *)_commonSitesFilePath;
-- (NSMutableArray *)_loadCommonSitesFromFile;
-- (NSMutableArray *)_defaultCommonSites;
-
-- (WikiSite *)_defaultSite;
-- (void)_setDefaultSite:(WikiSite*)site;
-
-- (NSMutableArray *)_loadSitesFromFile:(NSString *)path;
-
-- (NSMutableArray *)_dictsToSites:(NSArray *)dicts;
-- (NSMutableArray *)_sitesToDicts:(NSArray *)sites;
-- (void)_mergeSites;
-- (BOOL)_justUpdatedToNewVersion;
-- (void)_saveSites;
-- (void)_saveCommonSites;
 
 @end
 
@@ -62,12 +42,8 @@ static NSString *const kDefaultSiteKey      = @"default-site";
 - (id)init {
     self = [super init];
     if (self) {
-        self.sites = [self _loadSitesFromFile];
-        if (nil == _sites) {
-            self.sites = [self _loadSitesFromPlist];
-        } else if ([self _justUpdatedToNewVersion]) {
-            [self _mergeSites];
-        }
+        self.sites = [self _loadSitesFromPlist];
+        [self _addSitesFromSystem];
     }
     return self;
 }
@@ -177,18 +153,23 @@ static NSString *const kDefaultSiteKey      = @"default-site";
     return NO;
 }
 
-- (void)removeCommonSite:(WikiSite *)site {
-    if (!_commonSites) return;
-    if ([self isCommonSite:site]) {
+- (BOOL)removeCommonSite:(WikiSite *)site {
+    if (!_commonSites) return NO;
+    if (![self isCommonSite:site] || [_commonSites count] == 1) {
         // TODO(enzo) notify
-        return;
+        return NO;
     }
     for (WikiSite *aSite in _commonSites) {
         if ([aSite sameAs:site]) {
             [_commonSites removeObject:aSite];
-            return;
+            [self _saveCommonSites];
+            if ([[self _defaultSite] sameAs:site]) {
+                [self _setDefaultSite:[_commonSites objectAtIndex:0]];
+            }
+            return YES;
         }
     }
+    return NO;
 }
 
 - (void)addSite:(WikiSite *)site {
@@ -197,7 +178,6 @@ static NSString *const kDefaultSiteKey      = @"default-site";
         return;
     }
     [_sites addObject:site];
-    [self _saveSites];
 }
 
 - (BOOL)hasSite:(WikiSite *)site {
@@ -225,6 +205,16 @@ static NSString *const kDefaultSiteKey      = @"default-site";
     return nil;
 }
 
+- (WikiSite *)siteOfLang:(NSString *)lang subLang:(NSString *)subLang {
+    lang = [lang lowercaseString];
+    subLang = [subLang lowercaseString];
+    for (WikiSite *site in _sites) {
+        if ([site.lang isEqualToString:lang] && [site.sublang isEqualToString:subLang])
+            return site;
+    }
+    return nil;
+}
+
 - (WikiSite *)siteOfName:(NSString *)name {
     for (WikiSite *site in _sites) {
         if ([site.name isEqualToString:name])
@@ -233,19 +223,24 @@ static NSString *const kDefaultSiteKey      = @"default-site";
     return nil;
 }
 
-- (NSString *)_sitesFilePath {
-    return [[FileUtil documentPath] stringByAppendingPathComponent:kSitesFileName];
-}
-
 - (NSMutableArray *)_loadSitesFromPlist {
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"Sites" ofType:@"plist"];
     NSArray *dicts = [NSArray arrayWithContentsOfFile:plistPath];
     return [self _dictsToSites:dicts];
 }
 
-- (NSMutableArray *)_loadSitesFromFile {
-    NSString *path = [self _sitesFilePath];
-    return [self _loadSitesFromFile:path];
+- (void)_addSitesFromSystem {
+    NSArray *langCodes = [NSLocale preferredLanguages];
+    for (NSString *langCode in langCodes) {
+        langCode = [langCode substringToIndex:2];
+        if ([self siteOfLang:langCode]) continue;
+        NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:langCode];
+        NSString *langName = [locale displayNameForKey:NSLocaleIdentifier value:langCode];
+        WikiSite *site = [[WikiSite alloc] initWithName:langName lang:langCode sublang:@"wiki"];
+        [self addSite:site];
+        [locale release];
+        [site release];
+    }
 }
 
 - (NSString *)_commonSitesFilePath {
@@ -299,51 +294,6 @@ static NSString *const kDefaultSiteKey      = @"default-site";
     return dicts;
 }
 
-- (void)_mergeSites {
-    NSArray *plistSites = [self _loadSitesFromPlist];
-    NSMutableArray *appends = [NSMutableArray new];
-    
-    for (WikiSite *plistSite in plistSites) {
-        BOOL exist = NO;
-        for (WikiSite *site in _sites) {
-            if ([site sameAs:plistSite]) {
-                [site copy:plistSite];
-                exist = YES;
-                break;
-            }
-        }
-        
-        if (!exist) {
-            [appends addObject:plistSite];
-        }
-    }
-    
-    [_sites addObjectsFromArray:appends];
-    [appends release];
-    
-    [self _saveSites];
-}
-
-- (BOOL)_justUpdatedToNewVersion {
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *currentVersion = [AppUtil currentVersion];
-    
-    NSString *recordedVersion = [userDefaults valueForKey:kVersionToCompare];
-    
-    if ([currentVersion isEqualToString:recordedVersion]) {
-        return NO;
-    } else {
-        [userDefaults setValue:currentVersion forKey:kVersionToCompare];
-        [userDefaults synchronize];
-    }
-    return YES;
-}
-
-- (void)_saveSites {
-    NSArray *dicts = [self _sitesToDicts:_sites];
-    NSData *data = [dicts JSONData];
-    [data writeToFile:[self _sitesFilePath] atomically:YES];
-}
 
 - (void)_saveCommonSites {
     if (_commonSites == nil) {

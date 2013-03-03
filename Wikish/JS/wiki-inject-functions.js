@@ -19,7 +19,7 @@ function expand_section_of_id( section_id ) {
       return;
 
     section_index = hob.attr('id').split('_')[1];
-    mw.mobileFrontend.getModule('toggle').wm_toggle_section(section_index);
+    mw.mobileFrontend._modules.toggle.wm_toggle_section(section_index);
   }
 }
 
@@ -30,15 +30,21 @@ function toggle_all_section( expand ) {
     section_selector = '#section_' + i;
     if ($(section_selector).hasClass('openSection') != expand) {
       toggle_cnt = toggle_cnt + 1;
-      mw.mobileFrontend.getModule('toggle').wm_toggle_section(i);
+      mw.mobileFrontend._modules.toggle.wm_toggle_section(i);
     }
   }
   return '' + toggle_cnt;
 }
 
 function scroll_to_section( section_id ) {
+  // alert( section_id );
   expand_section_of_id( section_id );
   $(document.getElementById( section_id )).goTo();
+    
+}
+ 
+function scroll_to_expanded_section ( section_id ) {
+    document.getElementById(section_id).scrollIntoView();
 }
 
 function section_not_expand_cnt() {

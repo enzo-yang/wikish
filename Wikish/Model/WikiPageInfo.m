@@ -94,7 +94,7 @@ static NSString *const kSectionsKey = @"sections";
     revid : 0,
     redirects : [ { from : "", to : "" } ],
     langlinks : [ { lang : "", url : "", * : "" } ],
-    sections : [ { toclevel : 1, line : "", anchor : "" }] 
+    sections : [ { toclevel : 1, line : "", anchor : "" , number : ""}] 
  */
 - (void)_loadContentFromWebSuccess:(NSDictionary *)resultDict {
     NSNumber *revid = nil;
@@ -159,6 +159,20 @@ static NSString *const kSectionsKey = @"sections";
     for (NSDictionary *rawSection in rawSections) {
         WikiSection *section = [[[WikiSection alloc] initWithDict:rawSection] autorelease];
         if (section) [sections addObject:section];
+//        NSInteger nIndex = [sections indexOfObject:section];
+//        int i = nIndex-1;
+//        int sameLevelCnt = 1;
+//        WikiSection *pre = nil;
+//        for (; i>=0; --i) {
+//            pre = [sections objectAtIndex:i];
+//            if (pre.level < section.level) break;
+//            if (pre.level == section.level) sameLevelCnt++;
+//        }
+//        if (i<0)
+//            section.index = [NSString stringWithFormat:@"%d", sameLevelCnt];
+//        else {
+//            section.index = [pre.index stringByAppendingFormat:@".%d", sameLevelCnt];
+//        }
     }
     
     return sections;

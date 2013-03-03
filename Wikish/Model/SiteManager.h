@@ -28,13 +28,14 @@
 
 - (void)addCommonSite:(WikiSite *)site;
 - (BOOL)isCommonSite:(WikiSite *)site;
-- (void)removeCommonSite:(WikiSite *)site;
+- (BOOL)removeCommonSite:(WikiSite *)site;
 
 - (void)addSite:(WikiSite *)site;
 - (BOOL)hasSite:(WikiSite *)site;
 - (void)removeSite:(WikiSite *)site;
 
 - (WikiSite *)siteOfLang:(NSString *)lang;
+- (WikiSite *)siteOfLang:(NSString *)lang subLang:(NSString *)subLang;
 
 - (WikiSite *)siteOfName:(NSString *)name;
 
