@@ -5,3 +5,17 @@
   Created by YANG ENZO on 13-2-7.
   Copyright (c) 2013年 Side Trip. All rights reserved.
 */
+// setting
+"use-https" = "0";
+
+"OK" = "OK";
+"Setting" = "Setting";
+"Use HTTPS" = "  Use HTTPS";
+"Section Expanded" = "  Section Expanded";
+"Notice" = "Notice";
+"Setting Needs Reboot App" = "This setting needs reboot application to work";
+"I know" = "I know";
+"All Language" = "  All Language";
+"Common Use" = "  Common Use";
+
+

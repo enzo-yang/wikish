@@ -15,3 +15,15 @@ UIColor *GetTableBackgourndColor() {
 UIColor *GetTableCellBackgroundColor() {
     return [UIColor grayColor];
 }
+
+UIColor *DarkGreenColor() {
+    return [UIColor colorWithRed:0.349 green:0.345 blue:0.22 alpha:1.0];
+}
+
+UIColor *SeperatorColor() {
+    return [UIColor colorWithRed:224.0/255.0 green:224.0/255.0 blue:224.0/255.0 alpha:1.0];
+}
+
+UIColor *GetTableHighlightRowColor() {
+    return [UIColor colorWithRed:0.70f green:0.70f blue:0.50f alpha:1.0f];
+}

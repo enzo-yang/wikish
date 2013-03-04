@@ -95,6 +95,17 @@
 		C6D94D88164DE0C100587E0C /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6D94D86164DE0C100587E0C /* MainViewController.m */; };
 		C6D94D89164DE0C100587E0C /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6D94D87164DE0C100587E0C /* MainViewController.xib */; };
 		C6D94D8B164DFE2C00587E0C /* Sites.plist in Resources */ = {isa = PBXBuildFile; fileRef = C6D94D8A164DFE2C00587E0C /* Sites.plist */; };
+		C6F9405916E20F17005DBBD5 /* Setting.m in Sources */ = {isa = PBXBuildFile; fileRef = C6F9405816E20F16005DBBD5 /* Setting.m */; };
+		C6F9406416E33456005DBBD5 /* time-12-64.png in Resources */ = {isa = PBXBuildFile; fileRef = C6F9405D16E33456005DBBD5 /* time-12-64.png */; };
+		C6F9406516E33456005DBBD5 /* star-5-64.png in Resources */ = {isa = PBXBuildFile; fileRef = C6F9405E16E33456005DBBD5 /* star-5-64.png */; };
+		C6F9406616E33456005DBBD5 /* gear-4-64.png in Resources */ = {isa = PBXBuildFile; fileRef = C6F9405F16E33456005DBBD5 /* gear-4-64.png */; };
+		C6F9406716E33456005DBBD5 /* magnifier-2-64.png in Resources */ = {isa = PBXBuildFile; fileRef = C6F9406016E33456005DBBD5 /* magnifier-2-64.png */; };
+		C6F9406816E33456005DBBD5 /* info-64.png in Resources */ = {isa = PBXBuildFile; fileRef = C6F9406116E33456005DBBD5 /* info-64.png */; };
+		C6F9406916E33456005DBBD5 /* star-2-64.png in Resources */ = {isa = PBXBuildFile; fileRef = C6F9406216E33456005DBBD5 /* star-2-64.png */; };
+		C6F9406A16E33456005DBBD5 /* list-view-64.png in Resources */ = {isa = PBXBuildFile; fileRef = C6F9406316E33456005DBBD5 /* list-view-64.png */; };
+		C6F9406C16E3379E005DBBD5 /* star-7-64.png in Resources */ = {isa = PBXBuildFile; fileRef = C6F9406B16E3379E005DBBD5 /* star-7-64.png */; };
+		C6F9407116E36574005DBBD5 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C6F9406E16E36574005DBBD5 /* SVProgressHUD.bundle */; };
+		C6F9407216E36574005DBBD5 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = C6F9407016E36574005DBBD5 /* SVProgressHUD.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -105,7 +116,6 @@
 		C64ECDD016C2A9C2006D3767 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		C64ECDD116C2A9C2006D3767 /* SettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingViewController.xib; sourceTree = "<group>"; };
 		C64ECDDD16C32A92006D3767 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		C64ECDDF16C32AD1006D3767 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		C64ECDE016C32AD1006D3767 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		C64ECDE116C32AD1006D3767 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		C64ECDE816C49A9C006D3767 /* Wikish-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Wikish-Info.plist"; sourceTree = "<group>"; };
@@ -207,6 +217,19 @@
 		C6D94D86164DE0C100587E0C /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		C6D94D87164DE0C100587E0C /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
 		C6D94D8A164DFE2C00587E0C /* Sites.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Sites.plist; sourceTree = "<group>"; };
+		C6F9405716E20F16005DBBD5 /* Setting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Setting.h; sourceTree = "<group>"; };
+		C6F9405816E20F16005DBBD5 /* Setting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Setting.m; sourceTree = "<group>"; };
+		C6F9405D16E33456005DBBD5 /* time-12-64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "time-12-64.png"; sourceTree = "<group>"; };
+		C6F9405E16E33456005DBBD5 /* star-5-64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "star-5-64.png"; sourceTree = "<group>"; };
+		C6F9405F16E33456005DBBD5 /* gear-4-64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gear-4-64.png"; sourceTree = "<group>"; };
+		C6F9406016E33456005DBBD5 /* magnifier-2-64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "magnifier-2-64.png"; sourceTree = "<group>"; };
+		C6F9406116E33456005DBBD5 /* info-64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "info-64.png"; sourceTree = "<group>"; };
+		C6F9406216E33456005DBBD5 /* star-2-64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "star-2-64.png"; sourceTree = "<group>"; };
+		C6F9406316E33456005DBBD5 /* list-view-64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list-view-64.png"; sourceTree = "<group>"; };
+		C6F9406B16E3379E005DBBD5 /* star-7-64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "star-7-64.png"; sourceTree = "<group>"; };
+		C6F9406E16E36574005DBBD5 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		C6F9406F16E36574005DBBD5 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		C6F9407016E36574005DBBD5 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -243,6 +266,14 @@
 		C6471742169B24E3006ACC7A /* images */ = {
 			isa = PBXGroup;
 			children = (
+				C6F9406B16E3379E005DBBD5 /* star-7-64.png */,
+				C6F9405D16E33456005DBBD5 /* time-12-64.png */,
+				C6F9405E16E33456005DBBD5 /* star-5-64.png */,
+				C6F9405F16E33456005DBBD5 /* gear-4-64.png */,
+				C6F9406016E33456005DBBD5 /* magnifier-2-64.png */,
+				C6F9406116E33456005DBBD5 /* info-64.png */,
+				C6F9406216E33456005DBBD5 /* star-2-64.png */,
+				C6F9406316E33456005DBBD5 /* list-view-64.png */,
 			);
 			path = images;
 			sourceTree = "<group>";
@@ -388,6 +419,8 @@
 				C69EE48616DFB4EE0074AF3D /* WikiHistory.m */,
 				C69EE48B16DFB4EE0074AF3D /* WikiRecord.h */,
 				C69EE48C16DFB4EE0074AF3D /* WikiRecord.m */,
+				C6F9405716E20F16005DBBD5 /* Setting.h */,
+				C6F9405816E20F16005DBBD5 /* Setting.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -395,6 +428,7 @@
 		C69EE49B16DFB6A30074AF3D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C6F9406D16E36574005DBBD5 /* SVProgressHUD */,
 				C69EE49C16DFB6A30074AF3D /* TableViewGestureRecognizer.h */,
 				C69EE49D16DFB6A30074AF3D /* TableViewGestureRecognizer.m */,
 				C69EE49E16DFB6A30074AF3D /* TapDetectingWindow.h */,
@@ -470,6 +504,16 @@
 				C696DD6616E0D81D009A7A58 /* MainTableController.m */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		C6F9406D16E36574005DBBD5 /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				C6F9406E16E36574005DBBD5 /* SVProgressHUD.bundle */,
+				C6F9406F16E36574005DBBD5 /* SVProgressHUD.h */,
+				C6F9407016E36574005DBBD5 /* SVProgressHUD.m */,
+			);
+			path = SVProgressHUD;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -568,6 +612,15 @@
 				C64ECDDC16C32A92006D3767 /* Localizable.strings in Resources */,
 				C64ECDE916C49A9C006D3767 /* Wikish-Info.plist in Resources */,
 				C69EE4A616DFB6A30074AF3D /* WikiSearchPanel.xib in Resources */,
+				C6F9406416E33456005DBBD5 /* time-12-64.png in Resources */,
+				C6F9406516E33456005DBBD5 /* star-5-64.png in Resources */,
+				C6F9406616E33456005DBBD5 /* gear-4-64.png in Resources */,
+				C6F9406716E33456005DBBD5 /* magnifier-2-64.png in Resources */,
+				C6F9406816E33456005DBBD5 /* info-64.png in Resources */,
+				C6F9406916E33456005DBBD5 /* star-2-64.png in Resources */,
+				C6F9406A16E33456005DBBD5 /* list-view-64.png in Resources */,
+				C6F9406C16E3379E005DBBD5 /* star-7-64.png in Resources */,
+				C6F9407116E36574005DBBD5 /* SVProgressHUD.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -641,6 +694,8 @@
 				C696DD6116E0D0E2009A7A58 /* SectionTableController.m in Sources */,
 				C696DD6416E0D10B009A7A58 /* FavouriteTableController.m in Sources */,
 				C696DD6716E0D81E009A7A58 /* MainTableController.m in Sources */,
+				C6F9405916E20F17005DBBD5 /* Setting.m in Sources */,
+				C6F9407216E36574005DBBD5 /* SVProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -669,7 +724,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				C69DB26A160EC07700B484FF /* en */,
-				C64ECDDF16C32AD1006D3767 /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";

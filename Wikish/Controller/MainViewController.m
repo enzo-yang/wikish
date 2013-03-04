@@ -7,16 +7,21 @@
 //
 
 #import "MainViewController.h"
+
+#import "RegexKitLite.h"
+#import "SVProgressHUD.h"
+
 #import "Constants.h"
 #import "WikiSite.h"
 #import "SiteManager.h"
 #import "WikiPageInfo.h"
 #import "WikiHistory.h"
 #import "NSString+Wikish.h"
-#import "RegexKitLite.h"
 #import "TapDetectingWindow.h"
 #import "WikiSearchPanel.h"
+
 #import "SettingViewController.h"
+#import "Setting.h"
 
 #import "HistoryTableController.h"
 #import "SectionTableController.h"
@@ -57,7 +62,7 @@
     self.webView.scrollView.delegate = self;
     [self.webView.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
     
-    [self _loadSite:self.currentSite title:@""];
+    [self loadSite:self.currentSite title:@""];
     
     self.leftView.hidden = YES;
     self.rightView.hidden = YES;
@@ -101,7 +106,9 @@
 
 #pragma mask -
 #pragma mask load page logic
-- (void)_loadSite:(WikiSite *)site title:(NSString *)theTitle {
+- (void)loadSite:(WikiSite *)site title:(NSString *)theTitle {
+    if (_viewStatus != kViewStatusNormal) [self _recoverNormalStatus];
+    
     NSString *title = [theTitle urlDecodedString];
     WikiPageInfo *aPageInfo = [[[WikiPageInfo alloc] initWithSite:site title:title] autorelease];
     if (aPageInfo) {
@@ -142,11 +149,14 @@
 }
 
 - (void)_scrollViewContentSizeChanged {
+    if ([SVProgressHUD isVisible]) {
+        [SVProgressHUD dismiss];
+    }
     [self scrollViewDidScroll:self.webView.scrollView];
 //    if (_sectionFinished) return;
 //    if (3 > _jsInjectedCount++) {
-//        NSString *js = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"wiki-inject-functions" ofType:@"js"] encoding:NSUTF8StringEncoding error:nil];
-//        [self.webView stringByEvaluatingJavaScriptFromString:js];
+        NSString *js = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"wiki-inject-functions" ofType:@"js"] encoding:NSUTF8StringEncoding error:nil];
+        [self.webView stringByEvaluatingJavaScriptFromString:js];
 //    }
 //    [self.webView stringByEvaluatingJavaScriptFromString:@"toggle_all_section(true)"];
 //    NSLog(@"toggle_all_sections(true)");
@@ -171,6 +181,7 @@
         _canLoadThisRequest = NO;
         _sectionFinished = NO;
         _jsInjectedCount = 0;
+        [SVProgressHUD showWithStatus:@"Loading" maskType:SVProgressHUDMaskTypeBlack];
         return YES;
     }
     if ([self _isSameAsCurrentRequest:request]) return NO;
@@ -181,7 +192,7 @@
     if (range.length) {
         NSString *anotherTitle = [absolute lastPathComponent];
         dispatch_async(dispatch_get_main_queue(), ^(){
-            [self _loadSite:_currentSite title:anotherTitle];
+            [self loadSite:_currentSite title:anotherTitle];
         });
         return NO;
     }
@@ -192,9 +203,10 @@
         NSString *subLang = [absolute stringByMatching:@"(?<=wikipedia.org/).*(?=/)" capture:0];
         NSString *title = [absolute lastPathComponent];
         NSLog(@"%@, %@, %@", lang, subLang, title);
-        WikiSite *site = [[[WikiSite alloc] initWithLang:lang sublang:subLang] autorelease];
+        WikiSite *site = [[SiteManager sharedInstance] siteOfLang:lang subLang:subLang];
+        if (!site) site = [[[WikiSite alloc] initWithLang:lang sublang:subLang] autorelease];
         dispatch_async(dispatch_get_main_queue(), ^(){
-            [self _loadSite:site title:title];
+            [self loadSite:site title:title];
         });
         return NO;
     }
@@ -204,7 +216,6 @@
 - (void)webViewDidStartLoad:(UIWebView *)webView {
     
 }
-
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     NSLog(@"page finish load");
@@ -216,6 +227,9 @@
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
     NSLog(@"failed load web page, %@", webView.request);
+    if ([SVProgressHUD isVisible]) {
+        [SVProgressHUD dismiss];
+    }
     _sectionFinished = YES;
 }
 
@@ -260,6 +274,11 @@
 }
 
 - (void)userDidTapWebView:(id)tapPoint {
+    if (_viewStatus != kViewStatusNormal) {
+        [self _recoverNormalStatus];
+        return;
+    }
+    
     UIScrollView *scrollView = self.webView.scrollView;
     if (!scrollView) return;
     
@@ -267,6 +286,15 @@
     if (currentY > kHandleDragThreshold) {
         [self _hideHeadView:!_headViewHided];
     }
+}
+
+- (void)scrollTo:(NSString *)anchorPoint {
+    if ([Setting isLaunchTimeInitExpanded]) {
+        [self.webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"scroll_to_expanded_section(\"%@\")", anchorPoint]];
+    } else {
+        [self.webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"scroll_to_section(\"%@\")", anchorPoint]];
+    }
+    [self _recoverNormalStatus];
 }
 
 - (BOOL)_isSameAsCurrentRequest:(NSURLRequest *)request {
@@ -300,10 +328,12 @@
 }
 
 - (IBAction)searchBtnPressed:(id)sender {
+    if (_viewStatus != kViewStatusNormal) {
+        [self _recoverNormalStatus];
+        return;
+    }
     // [self.webView stringByEvaluatingJavaScriptFromString:@"toggle_all_section(true)"];
-    //[WikiSearchPanel showInView:self.view];
-    SettingViewController *svc = [[SettingViewController new] autorelease];
-    [self presentModalViewController:svc animated:YES];
+    [WikiSearchPanel showInView:self.view];
 }
 
 - (IBAction)sectionBtnPressed:(id)sender {
@@ -334,6 +364,16 @@
         self.middleView.frame = f;
         [UIView commitAnimations];
     }
+}
+
+- (IBAction)settingBtnPressed:(id)sender {
+    if (_viewStatus != kViewStatusNormal) {
+        [self _recoverNormalStatus];
+        return;
+    }
+    SettingViewController *svc = [[SettingViewController new] autorelease];
+    [self presentModalViewController:svc animated:YES];
+    
 }
 
 - (void)_initializeTables {

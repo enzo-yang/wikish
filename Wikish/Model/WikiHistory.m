@@ -15,7 +15,7 @@
 @interface WikiHistory()
 
 - (NSMutableArray *)_historyFromFile;
-- (void)_appWillResignActive;
+- (void)_appWillResignActive:(NSNotification *)notification;
 - (void)_save;
 
 @end

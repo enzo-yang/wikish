@@ -59,6 +59,10 @@ typedef enum {
 - (IBAction)searchBtnPressed:(id)sender;
 - (IBAction)sectionBtnPressed:(id)sender;
 - (IBAction)favouriteKitBtnPressed:(id)sender;
+- (IBAction)settingBtnPressed:(id)sender;
+
+- (void)scrollTo:(NSString *)anchorPoint;
+- (void)loadSite:(WikiSite *)site title:(NSString *)theTitle;
 
 
 @end

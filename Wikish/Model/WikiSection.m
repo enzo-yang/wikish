@@ -11,7 +11,7 @@
 
 @implementation WikiSection
 
-@synthesize level, line, anchor;
+@synthesize level, line, anchor, index;
 
 - (id)initWithDict:(NSDictionary *)dict {
     self = [super init];
@@ -21,6 +21,7 @@
         
         self.line = [dict objectForKey:@"line"];
         self.anchor = [dict objectForKey:@"anchor"];
+        self.index = [dict objectForKey:@"number"];
         
         if (!self.line || !self.anchor) {
             [self release];
@@ -37,6 +38,7 @@
         self.level = [aDecoder decodeIntegerForKey:@"level"];
         self.line = [aDecoder decodeObjectForKey:@"line"];
         self.anchor = [aDecoder decodeObjectForKey:@"anchor"];
+        self.index = [aDecoder decodeObjectForKey:@"index"];
     }
     return self;
 }
@@ -45,6 +47,7 @@
     [aCoder encodeInteger:self.level forKey:@"level"];
     [aCoder encodeObject:self.line forKey:@"line"];
     [aCoder encodeObject:self.anchor forKey:@"anchor"];
+    [aCoder encodeObject:self.index forKey:@"index"];
 }
 
 - (void)dealloc {

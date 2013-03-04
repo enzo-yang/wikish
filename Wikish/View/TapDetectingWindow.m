@@ -33,6 +33,7 @@
     UITouch *touch = touches.anyObject;
     if (touch.phase != UITouchPhaseEnded) return;
     
+    // NSLog(@"%@", touch.view);
     if ([touch.view isDescendantOfView:viewToObserve] == NO) return;
     
     CGPoint tapPoint = [touch locationInView:viewToObserve];

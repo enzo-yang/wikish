@@ -10,6 +10,9 @@
 #import "MainViewController.h"
 #import "TapDetectingWindow.h"
 #import "Constants.h"
+#import "Setting.h"
+//#import "SiteManager.h"
+//#import "WikiSite.h"
 
 
 @implementation AppDelegate
@@ -22,20 +25,15 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [self _registerUserAgent];
+//    NSLog( @"%@", [[SiteManager sharedInstance] defaultSite].name);
     
+    if ([self _isFirstLaunch]) [Setting useDefaultSetting];
+    [Setting registerUserAgent];
     self.window = [[[TapDetectingWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-    // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
     self.window.rootViewController = [[MainViewController new] autorelease];
-    
-    // NSUserDefaults* defs = [NSUserDefaults standardUserDefaults];
-    // NSArray* languages = [defs objectForKey:@"AppleLanguages"];
-    // NSLog(@"%@", languages);
-    // languages = [NSLocale preferredLanguages];
-    // NSLog(@"%@", languages);
     
     return YES;
 }
@@ -55,15 +53,15 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
 }
 
-- (void)_registerUserAgent {
+- (BOOL)_isFirstLaunch {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSMutableDictionary *dictionary = [NSMutableDictionary new];
-    if ([defaults objectForKey:kUserDefaultsUserAgentKey] == nil) {
-        NSDictionary *dictionnary = [[NSDictionary alloc] initWithObjectsAndKeys:@"Wikish/1.0 (http://www.baidu.com/; trm_tt@msn.com)", @"UserAgent", nil];
-        [dictionary setObject:@"Wikish/1.0 (http://www.baidu.com/; trm_tt@msn.com)" forKey:kUserDefaultsUserAgentKey];
-        [defaults registerDefaults:dictionnary];
-        [dictionnary release];
+    BOOL result = NO;
+    if (![defaults objectForKey:kUserDefaultsIsFirstLaunch]) {
+        result = YES;
+        [defaults setBool:NO forKey:kUserDefaultsIsFirstLaunch];
     }
+    return result;
 }
+
 
 @end

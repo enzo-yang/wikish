@@ -5,3 +5,15 @@
   Created by YANG ENZO on 13-2-7.
   Copyright (c) 2013年 Side Trip. All rights reserved.
 */
+// setting
+"use-https" = "1";
+
+"OK" = "完成";
+"Setting" = "设置";
+"Use HTTPS" = "  使用 HTTPS";
+"Section Expanded" = "  段落默认展开";
+"Notice" = "提示";
+"Setting Needs Reboot App" = "此设置需要重启应用程序才能生效";
+"I know" = "知道";
+"All Language" = "  全部语言";
+"Common Use" = "  常用语言";

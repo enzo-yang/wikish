@@ -34,13 +34,17 @@
         cell.backgroundView = [[UIView new] autorelease];
         cell.backgroundView.backgroundColor = GetTableCellBackgroundColor();
         cell.contentView.backgroundColor    = GetTableBackgourndColor();
+        cell.textLabel.font = [UIFont systemFontOfSize:17.0f];
     }
     WikiSection *section = [self.mainController.pageInfo.sections objectAtIndex:indexPath.row];
-    NSString *text = @"";
-    for (int i=0; i<section.level-1; ++i) text = [text stringByAppendingString:@"  "];
-    text = [text stringByAppendingString:section.line];
+    NSString *text = [NSString stringWithFormat:@"%@ %@", section.index, section.line];
     cell.textLabel.text = text;
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    WikiSection *section = [self.mainController.pageInfo.sections objectAtIndex:indexPath.row];
+    [self.mainController scrollTo:section.anchor];
 }
 
 @end
