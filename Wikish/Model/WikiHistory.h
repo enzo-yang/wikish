@@ -17,5 +17,6 @@
 + (WikiHistory *)sharedInstance;
 - (void)addRecord:(WikiRecord*)record;
 - (void)removeRecord:(WikiRecord*)record;
+- (WikiRecord *)lastRecord;
 
 @end

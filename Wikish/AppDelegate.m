@@ -9,11 +9,11 @@
 #import "AppDelegate.h"
 #import "MainViewController.h"
 #import "TapDetectingWindow.h"
-#import "Constants.h"
 #import "Setting.h"
 //#import "SiteManager.h"
 //#import "WikiSite.h"
 
+#define kUserDefaultsIsFirstLaunch      @"is-first-launch"
 
 @implementation AppDelegate
 

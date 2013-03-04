@@ -47,7 +47,6 @@
 - (id)init {
     self = [super init];
     if (self) {
-        self.currentSite = [[SiteManager sharedInstance] siteOfName:@"简体"];
         _canLoadThisRequest = NO;
     }
     return self;
@@ -62,8 +61,8 @@
     self.webView.scrollView.delegate = self;
     [self.webView.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
     
-    [self loadSite:self.currentSite title:@""];
-    
+    [self _loadHomePage];
+
     self.leftView.hidden = YES;
     self.rightView.hidden = YES;
     
@@ -106,6 +105,17 @@
 
 #pragma mask -
 #pragma mask load page logic
+- (void)_loadHomePage {
+    if ([Setting homePage] == kHomePageTypeRecommend) {
+        [self loadSite:[SiteManager sharedInstance].defaultSite title:@""];
+    } else if ([Setting homePage] == kHomePageTypeHistory) {
+        WikiRecord *record = [[WikiHistory sharedInstance] lastRecord];
+        if (record) [self loadSite:record title:record.title];
+    } else {
+        ;
+    }
+}
+
 - (void)loadSite:(WikiSite *)site title:(NSString *)theTitle {
     if (_viewStatus != kViewStatusNormal) [self _recoverNormalStatus];
     
@@ -179,8 +189,6 @@
     NSLog(@"webview user agent: %@", [mRequest valueForHTTPHeaderField:@"User-Agent"]);
     if (_canLoadThisRequest) {
         _canLoadThisRequest = NO;
-        _sectionFinished = NO;
-        _jsInjectedCount = 0;
         [SVProgressHUD showWithStatus:@"Loading" maskType:SVProgressHUDMaskTypeBlack];
         return YES;
     }
@@ -218,8 +226,10 @@
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
+    if ([SVProgressHUD isVisible]) {
+        [SVProgressHUD dismiss];
+    }
     NSLog(@"page finish load");
-    _sectionFinished = YES;
 }
 
 
@@ -227,10 +237,7 @@
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
     NSLog(@"failed load web page, %@", webView.request);
-    if ([SVProgressHUD isVisible]) {
-        [SVProgressHUD dismiss];
-    }
-    _sectionFinished = YES;
+    [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"page load failed", nil)];
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{

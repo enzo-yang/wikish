@@ -8,9 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
+typedef enum {
+    kHomePageTypeEmpty,
+    kHomePageTypeRecommend,
+    kHomePageTypeHistory
+} HomePageType;
+
 @interface Setting : NSObject
 
 + (void)useDefaultSetting;
+
++ (void)setHomePage:(HomePageType)type;
++ (HomePageType)homePage;
 
 + (void)setUseHttps:(BOOL)use;
 + (BOOL)isHttpsUsed;

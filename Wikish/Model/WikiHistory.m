@@ -90,4 +90,10 @@
     }
 }
 
+- (WikiRecord *)lastRecord {
+    if ([_history count] == 0) return nil;
+    
+    return [_history objectAtIndex:0];
+}
+
 @end

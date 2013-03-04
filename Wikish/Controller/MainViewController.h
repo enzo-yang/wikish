@@ -25,9 +25,7 @@ typedef enum {
 @interface MainViewController : UIViewController {
     ViewStatus _viewStatus;
     
-    BOOL        _sectionFinished;
     BOOL        _canLoadThisRequest;
-    NSInteger   _jsInjectedCount;
     
     WikiPageInfo *_pageInfo;
     WikiSite     *_currentSite;
