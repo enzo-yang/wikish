@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class Button;
 @class TableViewGestureRecognizer;
 
 @interface SettingViewController : UIViewController
 
-@property (nonatomic, retain) IBOutlet UIButton     *okButton;
+@property (nonatomic, retain) IBOutlet Button       *okButton;
 @property (nonatomic, retain) IBOutlet UILabel      *settingLabel;
 
 @property (nonatomic, retain) IBOutlet UIView       *httpsView;
@@ -23,6 +24,10 @@
 @property (nonatomic, retain) IBOutlet UILabel      *expanedLabel;
 @property (nonatomic, retain) IBOutlet UISwitch     *expanedSwitch;
 
+@property (nonatomic, retain) IBOutlet UILabel      *homeLabel;
+@property (nonatomic, retain) IBOutletCollection(Button) NSArray *homeButtons;
+
+
 @property (nonatomic, retain) IBOutlet UITableView  *sitesTable;
 @property (nonatomic, retain) IBOutlet UITableView  *commonSitesTable;
 
@@ -32,4 +37,5 @@
 - (IBAction)useHttpsSwitchChanged:(UISwitch *)sender;
 - (IBAction)sectionExpandedSwitchChanged:(UISwitch *)sender;
 - (IBAction)okButtonPressed:(id)sender;
+- (IBAction)homeTypeButtonPressed:(id)sender;
 @end

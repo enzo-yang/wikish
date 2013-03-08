@@ -8,6 +8,8 @@
 
 #import "WikiSearchPanel.h"
 
+NSString *const kNotificationMessageSearchKeyword = @"kNotificationMessageSearchKeyword";
+
 #define kPi 3.1415926
 #define kRowHeight 40.0f
 
@@ -17,11 +19,6 @@
     WikiSearchPanel *panel =  (WikiSearchPanel*) [[[UINib nibWithNibName:@"WikiSearchPanel" bundle:nil]
                                              instantiateWithOwner:self options:nil] objectAtIndex:0];
     
-    
-    
-//    CGRect panelFrame = panel.frame;
-//    panelFrame.origin.y = - panel.frame.size.height; // appFrame.size.height;
-//    panel.frame = panelFrame;
     
     panel.frame = [self _panelOrgFrame:panel];
     
@@ -50,7 +47,7 @@
     [super awakeFromNib];
     _openSearch = [WikiOpenSearch new];
     [_openSearch addObserver:self forKeyPath:@"results" options:NSKeyValueObservingOptionNew context:nil];
-    CGAffineTransform transform = CGAffineTransformMakeRotation(3.1415926);
+    CGAffineTransform transform = CGAffineTransformMakeRotation(M_PI);
     self.resultTable.transform = transform; 
 }
 
@@ -69,6 +66,16 @@
             [_openSearch request:self.textField.text];
     }
 }
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    NSString *text = textField.text;
+    if (text) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationMessageSearchKeyword object:nil userInfo:@{@"keyword" : text}];
+    }
+    [textField resignFirstResponder];
+    return NO;
+}
+
 
 - (void)_keyboardWillShow:(NSNotification *)notification {
     NSDictionary *userInfo = [notification userInfo];
@@ -98,15 +105,12 @@
     NSTimeInterval duration;
     [durationValue getValue:&duration];
     
-    // CGRect appFrame = [UIScreen mainScreen].applicationFrame;
     CGRect theFrame = self.frame;
     theFrame.origin.y = -theFrame.size.height; // appFrame.size.height - (theFrame.size.height - self.textPlatform.frame.size.height);
     
     [UIView animateWithDuration:duration animations:^{
-//        self.frame = theFrame;
         self.frame = [WikiSearchPanel _panelOrgFrame:self];
         self.resultTable.hidden = YES;
-        // self.resultTable.alpha = 0;
     }completion:^(BOOL finished) {
         [self removeFromSuperview];
     }];
@@ -135,7 +139,7 @@
     if (!cell) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID] autorelease];
         cell.textLabel.font = [UIFont systemFontOfSize:17.0f];
-        CGAffineTransform transform = CGAffineTransformMakeRotation(3.1415926);
+        CGAffineTransform transform = CGAffineTransformMakeRotation(M_PI);
         cell.transform = transform;
     }
     NSString *text = @"";
@@ -150,6 +154,14 @@
     return kRowHeight;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([_openSearch.results count] > indexPath.row) {
+        NSString *text = [_openSearch.results objectAtIndex:indexPath.row];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationMessageSearchKeyword object:nil userInfo:@{@"keyword" : text}];
+    }
+    [self.textField resignFirstResponder];
+}
+
 - (void)hideKeyboard:(id)sender {
     [self.textField resignFirstResponder];
 }
@@ -157,6 +169,11 @@
 - (void)dealloc {
     [_openSearch removeObserver:self forKeyPath:@"results"];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    [_openSearch release];
+    self.textField = nil;
+    self.resultTable = nil;
+    self.textPlatform = nil;
     [super dealloc];
 }
 @end

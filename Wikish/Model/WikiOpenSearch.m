@@ -23,6 +23,7 @@
 @interface WikiOpenSearch()
 
 @property (nonatomic, retain) NSMutableArray *operations;
+@property (nonatomic, retain) NSString          *lastIncompleteKeyword;
 
 @end
 
@@ -31,9 +32,10 @@
 - (id)init {
     self = [super init];
     if (self) {
-        _site = [[[SiteManager sharedInstance] siteOfName:@"简体"] retain];
+        _site = [[[SiteManager sharedInstance] defaultSite] retain];
         self.operations = [[NSMutableArray new] autorelease];
         self.results = [[NSArray new] autorelease];
+        self.lastIncompleteKeyword = @"";
         _searchCnt = 0;
         _currentTag = -1;
     }
@@ -51,6 +53,10 @@
 
 - (void)request:(NSString *)incompleteKeyword {
     NSLog(@"%@", _site.lang);
+    if (incompleteKeyword == nil) incompleteKeyword = @"";
+    incompleteKeyword = [incompleteKeyword stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    self.lastIncompleteKeyword = incompleteKeyword;
+    if ([incompleteKeyword isEqualToString:@""]) return;
     
     NSString *urlstring = [WikiApi openSearchApiOfSite:_site keyword:incompleteKeyword];
     OpenSearchRequest *request = [OpenSearchRequest requestWithURL:[NSURL URLWithString:urlstring]];
@@ -69,6 +75,18 @@
     
     if (op) [self.operations addObject:op];
     
+}
+
+- (void)updateSite {
+    WikiSite *site = [[SiteManager sharedInstance] defaultSite];
+    if (![site sameAs:_site]) {
+        [self _cancelAllOperations];
+        [_site release];
+        _site = [site retain];
+        
+        self.results = @[];
+        [self request:self.lastIncompleteKeyword];
+    }
 }
 
 - (void)_removeOperationOfRequest:(NSURLRequest *)request {

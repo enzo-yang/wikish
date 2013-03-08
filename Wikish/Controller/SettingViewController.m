@@ -14,6 +14,7 @@
 #import "WikiSite.h"
 #import "AutoPropertyRelease.h"
 #import "TableViewGestureRecognizer.h"
+#import "Button.h"
 
 
 
@@ -48,6 +49,8 @@
     // expanded
     [self.expanedSwitch setOn:[Setting isInitExpanded] animated:NO];
     
+    [self _refreshHomeButtons];
+    
     self.sitesTable.backgroundColor = GetTableBackgourndColor();
     self.commonSitesTable.backgroundColor = GetTableBackgourndColor();
     
@@ -69,6 +72,11 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
+- (IBAction)homeTypeButtonPressed:(id)sender {
+    [Setting setHomePage:((UIButton *)sender).tag];
+    [self _refreshHomeButtons];
+}
+
 #pragma mark -
 #pragma mark UITableViewDelegate
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -84,7 +92,7 @@
     if (tableView == _sitesTable) {
         label.text = NSLocalizedString(@"All Language", nil);
     } else {
-        label.text = NSLocalizedString(@"Common Use", nil);
+        label.text = NSLocalizedString(@"Search Language", nil);
     }
     
     return headerView;
@@ -289,7 +297,14 @@
     
     self.okButton.layer.cornerRadius = 6.0f;
     self.okButton.layer.masksToBounds = YES;
-    [self.okButton setBackgroundColor:DarkGreenColor()];
+    [self.okButton setBackgroundColor:DarkGreenColor() forState:UIControlStateNormal];
+    [self.okButton setBackgroundColor:GetTableHighlightRowColor() forState:UIControlStateHighlighted];
+    
+    for (Button *btn in self.homeButtons) {
+        [btn setBackgroundColor:GetDarkColor() forState:UIControlStateNormal];
+        [btn setBackgroundColor:DarkGreenColor() forState:UIControlStateSelected];
+        [btn setBackgroundColor:GetTableHighlightRowColor() forState:UIControlStateHighlighted];
+    }
     
 }
 
@@ -298,6 +313,18 @@
     self.settingLabel.text  = NSLocalizedString(@"Setting", nil);
     self.httpsLabel.text    = NSLocalizedString(@"Use HTTPS", nil);
     self.expanedLabel.text  = NSLocalizedString(@"Section Expanded", nil);
+    self.homeLabel.text     = NSLocalizedString(@"Home Page", nil);
+    [(UIButton *)[self.homeButtons objectAtIndex:0] setTitle:NSLocalizedString(@"Blank", nil) forState:UIControlStateNormal];
+    [(UIButton *)[self.homeButtons objectAtIndex:1] setTitle:NSLocalizedString(@"Extract", nil) forState:UIControlStateNormal];
+    [(UIButton *)[self.homeButtons objectAtIndex:2] setTitle:NSLocalizedString(@"Last", nil) forState:UIControlStateNormal];
+}
+
+- (void)_refreshHomeButtons {
+    NSInteger index = (NSInteger)[Setting homePage];
+    for (Button *btn in self.homeButtons) {
+        btn.selected = NO;
+    }
+    ((Button*)[self.homeButtons objectAtIndex:index]).selected = YES;
 }
 
 @end

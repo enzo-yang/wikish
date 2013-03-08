@@ -27,3 +27,7 @@ UIColor *SeperatorColor() {
 UIColor *GetTableHighlightRowColor() {
     return [UIColor colorWithRed:0.70f green:0.70f blue:0.50f alpha:1.0f];
 }
+
+UIColor *GetDarkColor() {
+    return [UIColor colorWithRed:0.156 green:0.141 blue:0.105 alpha:1.0f];
+}

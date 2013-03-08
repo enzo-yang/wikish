@@ -12,10 +12,14 @@
 "Setting" = "设置";
 "Use HTTPS" = "  使用 HTTPS";
 "Section Expanded" = "  段落默认展开";
+"Home Page" = "  首页";
+"Blank" = "空白";
+"Extract" = "特色";
+"Last" = "上次";
 "Notice" = "提示";
 "Setting Needs Reboot App" = "此设置需要重启应用程序才能生效";
 "I know" = "知道";
 "All Language" = "  全部语言";
-"Common Use" = "  常用语言";
+"Search Language" = "  搜索语言";
 
 "page load failed" = "页面加载失败";

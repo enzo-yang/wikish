@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+
+extern NSString *const kNotificationMessageSearchKeyword;
+
 #import "WikiOpenSearch.h"
 @interface WikiSearchPanel : UIView<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate> {
     WikiOpenSearch *_openSearch;

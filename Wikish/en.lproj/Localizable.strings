@@ -12,11 +12,15 @@
 "Setting" = "Setting";
 "Use HTTPS" = "  Use HTTPS";
 "Section Expanded" = "  Section Expanded";
+"Home Page" = "  Home Page";
+"Blank" = "Blank";
+"Extract" = "Extract";
+"Last" = "Last";
 "Notice" = "Notice";
 "Setting Needs Reboot App" = "This setting needs reboot application to work";
 "I know" = "I know";
 "All Language" = "  All Language";
-"Common Use" = "  Common Use";
+"Search Language" = "  Search Language";
 
 "page load failed" = "Failed Loading Page";
 

@@ -18,5 +18,6 @@
 
 @property (nonatomic, retain) NSArray *results;
 - (void)request:(NSString *)incompleteKeyword;
+- (void)updateSite;
 
 @end

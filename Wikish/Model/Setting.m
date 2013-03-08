@@ -35,7 +35,7 @@
 
 + (void)setHomePage:(HomePageType)type {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setInteger:(NSInteger)kHomePageTypeRecommend forKey:kUserDefaultsHomePageKey];
+    [defaults setInteger:(NSInteger)type forKey:kUserDefaultsHomePageKey];
     [defaults synchronize];
 }
 

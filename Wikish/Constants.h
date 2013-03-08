@@ -20,5 +20,6 @@ UIColor *GetTableCellBackgroundColor();
 UIColor *DarkGreenColor();
 UIColor *SeperatorColor();
 UIColor *GetTableHighlightRowColor();
+UIColor *GetDarkColor();
 
 #endif
