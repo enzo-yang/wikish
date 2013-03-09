@@ -7,9 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-extern NSString *const kNotificationMessageSearchKeyword;
-
+#import "Button.h"
 #import "WikiOpenSearch.h"
 @interface WikiSearchPanel : UIView<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate> {
     WikiOpenSearch *_openSearch;
@@ -17,8 +15,11 @@ extern NSString *const kNotificationMessageSearchKeyword;
 @property (nonatomic, retain) IBOutlet UITextField  *textField;
 @property (nonatomic, retain) IBOutlet UITableView  *resultTable;
 @property (nonatomic, retain) IBOutlet UIView       *textPlatform;
+@property (retain, nonatomic) IBOutlet UIButton *langBtn;
+@property (retain, nonatomic) IBOutlet UIButton *cancelBtn;
 + (void)showInView:(UIView *)view;
 
 - (IBAction)hideKeyboard:(id)sender;
+- (IBAction)languageButtonPressed:(id)sender;
 
 @end

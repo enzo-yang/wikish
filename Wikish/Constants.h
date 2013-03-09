@@ -12,7 +12,7 @@
 #define kWikiPageInfoMissingErrorDomain @"Wiki Page Infomation Missing"
 #define kWikiPageInfoMissingErrorCode -11
 
-
+extern NSString *const kNotificationMessageSearchKeyword;
 
 
 UIColor *GetTableBackgourndColor();

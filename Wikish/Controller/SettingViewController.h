@@ -24,6 +24,7 @@
 @property (nonatomic, retain) IBOutlet UILabel      *expanedLabel;
 @property (nonatomic, retain) IBOutlet UISwitch     *expanedSwitch;
 
+@property (nonatomic, retain) IBOutlet UIView       *homeView;
 @property (nonatomic, retain) IBOutlet UILabel      *homeLabel;
 @property (nonatomic, retain) IBOutletCollection(Button) NSArray *homeButtons;
 

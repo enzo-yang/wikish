@@ -28,6 +28,9 @@
 }
 
 - (void)dealloc {
+    [self removeObserver:self forKeyPath:@"highlighted"];
+    [self removeObserver:self forKeyPath:@"selected"];
+    [self removeObserver:self forKeyPath:@"enabled"];
     self.normalColor = nil;
     self.selectedColor = nil;
     self.highlightColor = nil;

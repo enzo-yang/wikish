@@ -84,7 +84,7 @@
         [_site release];
         _site = [site retain];
         
-        self.results = @[];
+        if ([self.results count] != 0) self.results = @[];
         [self request:self.lastIncompleteKeyword];
     }
 }

@@ -21,6 +21,7 @@
 @property (nonatomic, readonly) NSString *name;
 @property (nonatomic, readonly) NSString *lang;
 @property (nonatomic, readonly) NSString *sublang;
+- (NSString *)briefName;
 
 - (BOOL)sameAs:(WikiSite *)site;
 - (void)copy:(WikiSite *)site;

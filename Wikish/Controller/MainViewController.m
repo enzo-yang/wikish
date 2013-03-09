@@ -7,6 +7,7 @@
 //
 
 #import "MainViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 #import "RegexKitLite.h"
 #import "SVProgressHUD.h"
@@ -61,6 +62,8 @@
     self.webView.scrollView.delegate = self;
     [self.webView.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
     
+    self.titleLabel.text = NSLocalizedString(@"Blank", nil);
+    
     [self _loadHomePage];
 
     self.leftView.hidden = YES;
@@ -71,6 +74,9 @@
     _headViewHided = NO;
     
     [self _initializeTables];
+    
+    [self _customizeAppearance];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_loadPageFromNotification:) name:kNotificationMessageSearchKeyword object:nil];
     
 }
 
@@ -85,9 +91,12 @@
 }
 
 - (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self _windowEndDetectWebViewTap];
+    [self.webView.scrollView removeObserver:self forKeyPath:@"contentSize"];
     [_webView release];
     // TODO(enzo)
+    [_titleLabel release];
     [super dealloc];
 }
 
@@ -105,6 +114,16 @@
 
 #pragma mask -
 #pragma mask load page logic
+
+- (void)_loadPageFromNotification:(NSNotification *)notification {
+    NSDictionary *info = notification.userInfo;
+    NSString *keyword = [info objectForKey:@"keyword"];
+    
+    if (!keyword) return;
+    WikiSite *site = [[SiteManager sharedInstance] defaultSite];
+    [self loadSite:site title:keyword];
+}
+
 - (void)_loadHomePage {
     if ([Setting homePage] == kHomePageTypeRecommend) {
         [self loadSite:[SiteManager sharedInstance].defaultSite title:@""];
@@ -125,6 +144,11 @@
         self.pageInfo = aPageInfo;
         NSURLRequest *request = [NSURLRequest requestWithURL:[aPageInfo pageURL]];
         if (request) {
+            if ([theTitle isEqualToString:@""]) {
+                self.titleLabel.text = NSLocalizedString(@"Home_Page", nil);
+            } else {
+                self.titleLabel.text = [theTitle urlDecodedString];
+            }
             self.currentSite        = site;
             _canLoadThisRequest     = YES;
             WikiRecord *record      = [[WikiRecord alloc] initWithSite:site title:title];
@@ -458,5 +482,27 @@
         
         _headViewHided = hide;
     }
+}
+
+- (void)_customizeAppearance {
+    
+    CGRect shadowRect = CGRectMake(0, 0, 2, CGRectGetHeight(self.middleView.frame));
+    UIView *shadowView = [[[UIView alloc] initWithFrame:shadowRect] autorelease];
+    shadowView.layer.shadowOpacity = 1;
+    shadowView.layer.shadowOffset = CGSizeZero;
+    shadowView.layer.shadowColor = [UIColor blackColor].CGColor;
+    shadowView.layer.shadowRadius = 4;
+    shadowView.layer.borderWidth = 1;
+    shadowView.layer.rasterizationScale = [[UIScreen mainScreen] scale];
+    shadowView.layer.shouldRasterize = YES;
+    
+    [self.middleView insertSubview:shadowView atIndex:0];
+    shadowView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+    
+    self.middleView.layer.masksToBounds = NO;
+}
+- (void)viewDidUnload {
+    [self setTitleLabel:nil];
+    [super viewDidUnload];
 }
 @end

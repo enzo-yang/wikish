@@ -10,7 +10,7 @@
 
 "OK" = "完成";
 "Setting" = "设置";
-"Use HTTPS" = "  使用 HTTPS";
+"Use HTTPS" = "  使用 https";
 "Section Expanded" = "  段落默认展开";
 "Home Page" = "  首页";
 "Blank" = "空白";
@@ -23,3 +23,6 @@
 "Search Language" = "  搜索语言";
 
 "page load failed" = "页面加载失败";
+
+"Cancel" = "取消";
+"Home_Page" = "首页";

@@ -7,8 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
-@class WikiSite;
+#import "WikiSite.h"
 
 @interface SiteManager : NSObject {
     NSMutableArray *_sites;

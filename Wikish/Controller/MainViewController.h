@@ -43,6 +43,7 @@ typedef enum {
 @property (retain, nonatomic) IBOutlet UIView *rightView;
 @property (retain, nonatomic) IBOutlet UIView *bottomView;
 @property (retain, nonatomic) IBOutlet UIView *headerView;
+@property (retain, nonatomic) IBOutlet UILabel *titleLabel;
 
 @property (retain, nonatomic) IBOutlet UITableView *historyTable;
 @property (retain, nonatomic) HistoryTableController *historyController;

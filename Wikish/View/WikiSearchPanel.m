@@ -7,6 +7,9 @@
 //
 
 #import "WikiSearchPanel.h"
+#import <QuartzCore/QuartzCore.h>
+#import "SiteManager.h"
+#import "Constants.h"
 
 NSString *const kNotificationMessageSearchKeyword = @"kNotificationMessageSearchKeyword";
 
@@ -48,7 +51,23 @@ NSString *const kNotificationMessageSearchKeyword = @"kNotificationMessageSearch
     _openSearch = [WikiOpenSearch new];
     [_openSearch addObserver:self forKeyPath:@"results" options:NSKeyValueObservingOptionNew context:nil];
     CGAffineTransform transform = CGAffineTransformMakeRotation(M_PI);
-    self.resultTable.transform = transform; 
+    self.resultTable.transform = transform;
+    
+    [self _updateLanguageButton];
+    [self _customizeAppearance];
+}
+
+- (void)dealloc {
+    [_openSearch removeObserver:self forKeyPath:@"results"];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    [_openSearch release];
+    self.textField = nil;
+    self.resultTable = nil;
+    self.textPlatform = nil;
+    [_langBtn release];
+    [_cancelBtn release];
+    [super dealloc];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
@@ -166,14 +185,37 @@ NSString *const kNotificationMessageSearchKeyword = @"kNotificationMessageSearch
     [self.textField resignFirstResponder];
 }
 
-- (void)dealloc {
-    [_openSearch removeObserver:self forKeyPath:@"results"];
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-    [_openSearch release];
-    self.textField = nil;
-    self.resultTable = nil;
-    self.textPlatform = nil;
-    [super dealloc];
+- (IBAction)languageButtonPressed:(id)sender {
+    [[SiteManager sharedInstance] alterDefaultSite];
+    [_openSearch updateSite];
+    [self _updateLanguageButton];
 }
+
+- (void)_updateLanguageButton {
+    WikiSite *site = [[SiteManager sharedInstance] defaultSite];
+    [self.langBtn setTitle:[site briefName] forState:UIControlStateNormal];
+}
+
+- (void)_customizeAppearance {
+    self.textPlatform.backgroundColor = GetDarkColor();
+    
+//    [self.langBtn setBackgroundColor:GetDarkColor() forState:UIControlStateNormal];
+//    [self.langBtn setBackgroundColor:DarkGreenColor() forState:UIControlStateSelected];
+//    [self.langBtn setBackgroundColor:GetTableHighlightRowColor() forState:UIControlStateHighlighted];
+//
+//    self.langBtn.layer.borderWidth = 2;
+//    self.langBtn.layer.borderColor = [UIColor whiteColor].CGColor;
+//    self.langBtn.layer.cornerRadius = 4;
+//    self.langBtn.layer.rasterizationScale = [UIScreen mainScreen].scale;
+//    self.langBtn.layer.shouldRasterize = YES;
+    
+    UIImage *noramlImage = [[UIImage imageNamed:@"square-normal.png"] stretchableImageWithLeftCapWidth:24 topCapHeight:24];
+    UIImage *highlightImage = [[UIImage imageNamed:@"square-highlight.png"] stretchableImageWithLeftCapWidth:24 topCapHeight:24];
+    [self.cancelBtn setBackgroundImage:noramlImage forState:UIControlStateNormal];
+    [self.cancelBtn setBackgroundImage:highlightImage forState:UIControlStateHighlighted];
+    [self.cancelBtn setTitle:NSLocalizedString(@"Cancel", nil) forState:UIControlStateNormal];
+    
+}
+
+
 @end

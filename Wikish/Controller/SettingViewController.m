@@ -277,34 +277,76 @@
 }
 
 - (void)_customizeSettingAppearance {
+    CGFloat scale = [[UIScreen mainScreen] scale];
+    
+    self.view.backgroundColor = [UIColor colorWithRed:0.7 green:0.7 blue:0.75 alpha:1];
+    
     [self.httpsSwitch setOnTintColor:GetTableHighlightRowColor()];
     [self.expanedSwitch setOnTintColor:GetTableHighlightRowColor()];
     
-// 统一风格 不要圆角
-//    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:self.httpsView.bounds
-//                                                   byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight
-//                                                         cornerRadii:CGSizeMake(6.0, 6.0)];
-//    CAShapeLayer *maskLayer = [CAShapeLayer layer];
-//    maskLayer.frame = self.httpsView.bounds;
-//    maskLayer.path = maskPath.CGPath;
-//    self.httpsView.layer.mask = maskLayer;
-//    self.httpsView.layer.masksToBounds = YES;
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:self.httpsView.bounds
+                                                   byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight
+                                                         cornerRadii:CGSizeMake(6.0, 6.0)];
+    CAShapeLayer *maskLayer = [CAShapeLayer layer];
+    maskLayer.frame = self.httpsView.bounds;
+    maskLayer.path = maskPath.CGPath;
+    self.httpsView.layer.mask = maskLayer;
     self.httpsView.layer.borderColor = SeperatorColor().CGColor;
     self.httpsView.layer.borderWidth = 0.5f;
+    self.httpsView.layer.rasterizationScale = scale;
+    self.httpsView.layer.shouldRasterize = YES;
     
     self.expanedView.layer.borderColor = SeperatorColor().CGColor;
     self.expanedView.layer.borderWidth = 0.5f;
+    self.expanedView.layer.rasterizationScale = scale;
+    self.expanedView.layer.shouldRasterize = YES;
+    
+    maskPath = [UIBezierPath bezierPathWithRoundedRect:self.homeView.bounds
+                                                   byRoundingCorners:UIRectCornerBottomLeft | UIRectCornerBottomRight
+                                                         cornerRadii:CGSizeMake(6.0, 6.0)];
+    maskLayer = [CAShapeLayer layer];
+    maskLayer.frame = self.homeView.bounds;
+    maskLayer.path = maskPath.CGPath;
+    self.homeView.layer.mask = maskLayer;
+    self.homeView.layer.borderColor = SeperatorColor().CGColor;
+    self.homeView.layer.borderWidth = 0.5f;
+    self.homeView.layer.rasterizationScale = scale;
+    self.homeView.layer.shouldRasterize = YES;
     
     self.okButton.layer.cornerRadius = 6.0f;
     self.okButton.layer.masksToBounds = YES;
     [self.okButton setBackgroundColor:DarkGreenColor() forState:UIControlStateNormal];
     [self.okButton setBackgroundColor:GetTableHighlightRowColor() forState:UIControlStateHighlighted];
+    self.okButton.layer.rasterizationScale = scale;
+    self.okButton.layer.shouldRasterize = YES;
     
     for (Button *btn in self.homeButtons) {
         [btn setBackgroundColor:GetDarkColor() forState:UIControlStateNormal];
         [btn setBackgroundColor:DarkGreenColor() forState:UIControlStateSelected];
         [btn setBackgroundColor:GetTableHighlightRowColor() forState:UIControlStateHighlighted];
     }
+    
+    Button *leftBtn = [self.homeButtons objectAtIndex:0];
+    maskPath = [UIBezierPath bezierPathWithRoundedRect:leftBtn.bounds
+                                     byRoundingCorners:UIRectCornerBottomLeft | UIRectCornerTopLeft
+                                           cornerRadii:CGSizeMake(4.0, 4.0)];
+    maskLayer = [CAShapeLayer layer];
+    maskLayer.frame = leftBtn.bounds;
+    maskLayer.path = maskPath.CGPath;
+    leftBtn.layer.mask = maskLayer;
+    leftBtn.layer.rasterizationScale = scale;
+    leftBtn.layer.shouldRasterize = YES;
+    
+    Button *rightBtn = [self.homeButtons lastObject];
+    maskPath = [UIBezierPath bezierPathWithRoundedRect:rightBtn.bounds
+                                     byRoundingCorners:UIRectCornerBottomRight | UIRectCornerTopRight
+                                           cornerRadii:CGSizeMake(4.0, 4.0)];
+    maskLayer = [CAShapeLayer layer];
+    maskLayer.frame = leftBtn.bounds;
+    maskLayer.path = maskPath.CGPath;
+    rightBtn.layer.mask = maskLayer;
+    rightBtn.layer.rasterizationScale = scale;
+    rightBtn.layer.shouldRasterize = YES;
     
 }
 

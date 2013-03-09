@@ -75,6 +75,12 @@ static NSString *const kSubLangKey   = @"sub-lang";
     [super dealloc];
 }
 
+- (NSString *)briefName {
+    if ([self.sublang isEqualToString:@"wiki"]) return [self.lang uppercaseString];
+    
+    return [self.name substringToIndex:1];
+}
+
 - (BOOL)sameAs:(WikiSite *)site {
     return ([_lang isEqualToString:site.lang] && [_sublang isEqualToString:site.sublang]);
 }

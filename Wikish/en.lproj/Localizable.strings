@@ -14,7 +14,7 @@
 "Section Expanded" = "  Section Expanded";
 "Home Page" = "  Home Page";
 "Blank" = "Blank";
-"Extract" = "Extract";
+"Extract" = "Feature";
 "Last" = "Last";
 "Notice" = "Notice";
 "Setting Needs Reboot App" = "This setting needs reboot application to work";
@@ -23,4 +23,7 @@
 "Search Language" = "  Search Language";
 
 "page load failed" = "Failed Loading Page";
+
+"Cancel" = "Cancel";
+"Home_Page" = "Home Page";
 

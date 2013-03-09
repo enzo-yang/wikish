@@ -96,6 +96,8 @@
 		C6D94D89164DE0C100587E0C /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6D94D87164DE0C100587E0C /* MainViewController.xib */; };
 		C6D94D8B164DFE2C00587E0C /* Sites.plist in Resources */ = {isa = PBXBuildFile; fileRef = C6D94D8A164DFE2C00587E0C /* Sites.plist */; };
 		C6EFA0E016E78637006FE551 /* Button.m in Sources */ = {isa = PBXBuildFile; fileRef = C6EFA0DF16E78637006FE551 /* Button.m */; };
+		C6EFA0E316EB6B19006FE551 /* square-normal.png in Resources */ = {isa = PBXBuildFile; fileRef = C6EFA0E116EB6B19006FE551 /* square-normal.png */; };
+		C6EFA0E416EB6B19006FE551 /* square-highlight.png in Resources */ = {isa = PBXBuildFile; fileRef = C6EFA0E216EB6B19006FE551 /* square-highlight.png */; };
 		C6F9405916E20F17005DBBD5 /* Setting.m in Sources */ = {isa = PBXBuildFile; fileRef = C6F9405816E20F16005DBBD5 /* Setting.m */; };
 		C6F9406416E33456005DBBD5 /* time-12-64.png in Resources */ = {isa = PBXBuildFile; fileRef = C6F9405D16E33456005DBBD5 /* time-12-64.png */; };
 		C6F9406516E33456005DBBD5 /* star-5-64.png in Resources */ = {isa = PBXBuildFile; fileRef = C6F9405E16E33456005DBBD5 /* star-5-64.png */; };
@@ -220,6 +222,8 @@
 		C6D94D8A164DFE2C00587E0C /* Sites.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Sites.plist; sourceTree = "<group>"; };
 		C6EFA0DE16E78637006FE551 /* Button.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Button.h; sourceTree = "<group>"; };
 		C6EFA0DF16E78637006FE551 /* Button.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Button.m; sourceTree = "<group>"; };
+		C6EFA0E116EB6B19006FE551 /* square-normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "square-normal.png"; sourceTree = "<group>"; };
+		C6EFA0E216EB6B19006FE551 /* square-highlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "square-highlight.png"; sourceTree = "<group>"; };
 		C6F9405716E20F16005DBBD5 /* Setting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Setting.h; sourceTree = "<group>"; };
 		C6F9405816E20F16005DBBD5 /* Setting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Setting.m; sourceTree = "<group>"; };
 		C6F9405D16E33456005DBBD5 /* time-12-64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "time-12-64.png"; sourceTree = "<group>"; };
@@ -269,6 +273,8 @@
 		C6471742169B24E3006ACC7A /* images */ = {
 			isa = PBXGroup;
 			children = (
+				C6EFA0E116EB6B19006FE551 /* square-normal.png */,
+				C6EFA0E216EB6B19006FE551 /* square-highlight.png */,
 				C6F9406B16E3379E005DBBD5 /* star-7-64.png */,
 				C6F9405D16E33456005DBBD5 /* time-12-64.png */,
 				C6F9405E16E33456005DBBD5 /* star-5-64.png */,
@@ -626,6 +632,8 @@
 				C6F9406A16E33456005DBBD5 /* list-view-64.png in Resources */,
 				C6F9406C16E3379E005DBBD5 /* star-7-64.png in Resources */,
 				C6F9407116E36574005DBBD5 /* SVProgressHUD.bundle in Resources */,
+				C6EFA0E316EB6B19006FE551 /* square-normal.png in Resources */,
+				C6EFA0E416EB6B19006FE551 /* square-highlight.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
