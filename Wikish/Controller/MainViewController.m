@@ -69,10 +69,6 @@
     self.leftView.hidden = YES;
     self.rightView.hidden = YES;
     
-    _webViewOrgHeight   = self.webView.frame.size.height;
-    _webViewOrgY        = self.webView.frame.origin.y;
-    _headViewHided = NO;
-    
     [self _initializeTables];
     
     [self _customizeAppearance];
@@ -83,6 +79,16 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self _windowBeginDetectWebViewTap];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    // 只有显示后的大小才是正确的
+    if (_webViewOrgHeight == 0.0f) {
+        _webViewOrgHeight   = self.webView.frame.size.height;
+        _webViewOrgY        = self.webView.frame.origin.y;
+        _headViewHided = NO;
+    }
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
