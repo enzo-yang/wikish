@@ -103,6 +103,8 @@
     [_webView release];
     // TODO(enzo)
     [_titleLabel release];
+    [_lightnessView release];
+    [_lightnessMask release];
     [super dealloc];
 }
 
@@ -388,17 +390,17 @@
     }
 }
 
-- (IBAction)favouriteKitBtnPressed:(id)sender {
+- (IBAction)lightnessBtnPressed:(id)sender {
     if (_viewStatus != kViewStatusNormal) {
         [self _recoverNormalStatus];
     } else {
-        _viewStatus = kViewStatusFavouriteKit;
-        self.rightView.hidden = NO;
+        _viewStatus = kViewStatusLightness;
+        self.lightnessView.hidden = NO;
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:0.3];
-        CGRect f = self.middleView.frame;
-        f.origin.x -= 260.0f;
-        self.middleView.frame = f;
+        CGRect f = self.lightnessView.frame;
+        f.origin.y -= 100.0f;
+        self.lightnessView.frame = f;
         [UIView commitAnimations];
     }
 }
@@ -411,6 +413,16 @@
     SettingViewController *svc = [[SettingViewController new] autorelease];
     [self presentModalViewController:svc animated:YES];
     
+}
+
+- (IBAction)lightnessUpBtnPressed:(id)sender {
+    [Setting lightnessUp];
+    self.lightnessMask.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:[Setting lightnessMaskValue]];
+}
+
+- (IBAction)lightnessDownBtnPressed:(id)sender {
+    [Setting lightnessDown];
+    self.lightnessMask.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:[Setting lightnessMaskValue]];
 }
 
 - (void)_initializeTables {
@@ -442,11 +454,14 @@
         f = self.bottomView.frame;
         f.origin.y += 300.0f;
         theViewShouldChangeFrame = self.bottomView;
-    } else if (_viewStatus == kViewStatusFavouriteKit) {
-        f = self.middleView.frame;
-        f.origin.x += 260.0f;
-        theViewShouldHide = self.rightView;
-        theViewShouldChangeFrame = self.middleView;
+    } else if (_viewStatus == kViewStatusLightness) {
+//        f = self.middleView.frame;
+//        f.origin.x += 260.0f;
+//        theViewShouldHide = self.rightView;
+//        theViewShouldChangeFrame = self.middleView;
+        f = self.lightnessView.frame;
+        f.origin.y += 100.0f;
+        theViewShouldChangeFrame = self.lightnessView;
     }
     
     [UIView animateWithDuration:0.3 animations:^(){
@@ -506,9 +521,13 @@
     shadowView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     
     self.middleView.layer.masksToBounds = NO;
+    
+    self.lightnessMask.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:[Setting lightnessMaskValue]];
 }
 - (void)viewDidUnload {
     [self setTitleLabel:nil];
+    [self setLightnessView:nil];
+    [self setLightnessMask:nil];
     [super viewDidUnload];
 }
 @end

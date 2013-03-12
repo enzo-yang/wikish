@@ -28,6 +28,11 @@ typedef enum {
 + (BOOL)isInitExpanded;
 + (BOOL)isLaunchTimeInitExpanded;
 
++ (void)lightnessUp;
++ (void)lightnessDown;
++ (CGFloat)lightnessMaskValue;
+
+
 + (void)registerUserAgent;
 
 @end

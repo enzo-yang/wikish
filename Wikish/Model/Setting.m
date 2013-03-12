@@ -17,6 +17,7 @@
 #define kUserDefaultsSearchSiteKey      @"search-site"
 #define kUserDefaultsUseHttpsKey        @"use-https"
 #define kUserDefaultsHomePageKey        @"home-page"
+#define kUserDefaultsDarknessKey        @"darkness"
 
 @implementation Setting
 
@@ -29,6 +30,8 @@
     [defaults setBool:bUseHttps forKey:kUserDefaultsUseHttpsKey];
     
     [defaults setInteger:(NSInteger)kHomePageTypeRecommend forKey:kUserDefaultsHomePageKey];
+    
+    [defaults setFloat:0.0f forKey:kUserDefaultsDarknessKey];
     
     [defaults synchronize];
 }
@@ -81,6 +84,31 @@
         isExpanded = [[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultsIsInitExpandedKey];
     });
     return isExpanded;
+}
+
++ (void)lightnessUp {
+    CGFloat darkness = [self lightnessMaskValue];
+    darkness -= 0.02;
+    if (darkness <= 0) {
+        darkness = 0.0f; return;
+    }
+    [self setLightnessMaskValue:darkness];
+}
++ (void)lightnessDown {
+    CGFloat darkness = [self lightnessMaskValue];
+    darkness += 0.02;
+    if (darkness >= 0.25) {
+        darkness = 0.25f; return;
+    }
+    [self setLightnessMaskValue:darkness];
+}
+
++ (CGFloat)lightnessMaskValue {
+    return [[NSUserDefaults standardUserDefaults] floatForKey:kUserDefaultsDarknessKey];
+}
+
++ (void)setLightnessMaskValue:(CGFloat)darkness {
+    [[NSUserDefaults standardUserDefaults] setFloat:darkness forKey:kUserDefaultsDarknessKey];
 }
 
 + (void)registerUserAgent {

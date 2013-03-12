@@ -12,7 +12,7 @@ typedef enum {
     kViewStatusNormal,
     kViewStatusHistory,
     kViewStatusSection,
-    kViewStatusFavouriteKit,
+    kViewStatusLightness,
     kViewStatusCount
 } ViewStatus;
 
@@ -44,6 +44,8 @@ typedef enum {
 @property (retain, nonatomic) IBOutlet UIView *bottomView;
 @property (retain, nonatomic) IBOutlet UIView *headerView;
 @property (retain, nonatomic) IBOutlet UILabel *titleLabel;
+@property (retain, nonatomic) IBOutlet UIView *lightnessView;
+@property (retain, nonatomic) IBOutlet UIView *lightnessMask;
 
 @property (retain, nonatomic) IBOutlet UITableView *historyTable;
 @property (retain, nonatomic) HistoryTableController *historyController;
@@ -57,8 +59,10 @@ typedef enum {
 - (IBAction)historyBtnPressed:(id)sender;
 - (IBAction)searchBtnPressed:(id)sender;
 - (IBAction)sectionBtnPressed:(id)sender;
-- (IBAction)favouriteKitBtnPressed:(id)sender;
+- (IBAction)lightnessBtnPressed:(id)sender;
 - (IBAction)settingBtnPressed:(id)sender;
+- (IBAction)lightnessUpBtnPressed:(id)sender;
+- (IBAction)lightnessDownBtnPressed:(id)sender;
 
 - (void)scrollTo:(NSString *)anchorPoint;
 - (void)loadSite:(WikiSite *)site title:(NSString *)theTitle;
