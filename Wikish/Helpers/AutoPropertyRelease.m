@@ -22,7 +22,7 @@
 	objc_property_t *properties = class_copyPropertyList(thisClass, &count);
     
 #if defined(LOGGING)
-	NSLog(@"class \"%s\" has %d properties",
+	LOG(@"class \"%s\" has %d properties",
           class_getName(thisClass), count);
 #endif
     
@@ -31,7 +31,7 @@
 		const char *attrs = property_getAttributes(property);
         
 #if defined(LOGGING)
-		NSLog(@"property \"%s\" [%s]",
+		LOG(@"property \"%s\" [%s]",
               property_getName(property),
               attrs);
 #endif
@@ -97,7 +97,7 @@
         
 		if ([ivarPart length] < 2 || [ivarPart characterAtIndex:0] != 'V') {
 #if defined(LOGGING)
-			NSLog(@"skipping property \"%s\", likely lacking @synthesize",
+			LOG(@"skipping property \"%s\", likely lacking @synthesize",
                   property_getName(property));
 #endif
 			continue;
@@ -149,7 +149,7 @@
 			object_setIvar(obj, ivar, nil);
             
 #if defined(LOGGING)
-			NSLog(@"released readonly id obj->%s", ivar_getName(ivar));
+			LOG(@"released readonly id obj->%s", ivar_getName(ivar));
 #endif
 		} else if (releaseObject) {
 			if (propSetterMethodName == nil) {
@@ -168,7 +168,7 @@
 			objc_msgSend(obj, setPropertySelector, nil);
             
 #if defined(LOGGING)
-			NSLog(@"invoked %@%@", propSetterMethodName, @"nil");
+			LOG(@"invoked %@%@", propSetterMethodName, @"nil");
 #endif
 		}
 	}

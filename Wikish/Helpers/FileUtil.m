@@ -84,7 +84,7 @@
   NSFileManager *fileManager = [NSFileManager defaultManager];
   NSArray *elementArray = [fileManager contentsOfDirectoryAtPath:folderPath error:nil];
   for (NSString* elementName in elementArray) {
-    NSLog(@"%@", elementName);
+    LOG(@"%@", elementName);
     NSString *aPath = [folderPath stringByAppendingPathComponent:elementName];
     if ([FileUtil isFolderAtPath:aPath]) {
       [FileUtil addSkipBackupAttributeToFilesUnderFolder:aPath];

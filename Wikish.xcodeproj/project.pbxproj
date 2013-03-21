@@ -18,6 +18,8 @@
 		C64ECDE916C49A9C006D3767 /* Wikish-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C64ECDE816C49A9C006D3767 /* Wikish-Info.plist */; };
 		C67F8C661699A9BA004C9B3D /* AutoPropertyRelease.m in Sources */ = {isa = PBXBuildFile; fileRef = C67F8C651699A9BA004C9B3D /* AutoPropertyRelease.m */; };
 		C67F8C671699A9BA004C9B3D /* AutoPropertyRelease.m in Sources */ = {isa = PBXBuildFile; fileRef = C67F8C651699A9BA004C9B3D /* AutoPropertyRelease.m */; };
+		C694256816F9EF710094572E /* sun-4-64.png in Resources */ = {isa = PBXBuildFile; fileRef = C694256716F9EF710094572E /* sun-4-64.png */; };
+		C694256C16F9F1270094572E /* sun-4-58.png in Resources */ = {isa = PBXBuildFile; fileRef = C694256B16F9F1270094572E /* sun-4-58.png */; };
 		C696DD5B16E0CD8A009A7A58 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = C696DD5A16E0CD8A009A7A58 /* Constants.m */; };
 		C696DD5E16E0D0C8009A7A58 /* HistoryTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = C696DD5D16E0D0C8009A7A58 /* HistoryTableController.m */; };
 		C696DD6116E0D0E2009A7A58 /* SectionTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = C696DD6016E0D0E2009A7A58 /* SectionTableController.m */; };
@@ -122,8 +124,12 @@
 		C64ECDE016C32AD1006D3767 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		C64ECDE116C32AD1006D3767 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		C64ECDE816C49A9C006D3767 /* Wikish-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Wikish-Info.plist"; sourceTree = "<group>"; };
+		C66C343616FAEC5E00DB3926 /* Macros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
 		C67F8C641699A9BA004C9B3D /* AutoPropertyRelease.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoPropertyRelease.h; sourceTree = "<group>"; };
 		C67F8C651699A9BA004C9B3D /* AutoPropertyRelease.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoPropertyRelease.m; sourceTree = "<group>"; };
+		C694256716F9EF710094572E /* sun-4-64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sun-4-64.png"; sourceTree = "<group>"; };
+		C694256B16F9F1270094572E /* sun-4-58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sun-4-58.png"; sourceTree = "<group>"; };
+		C694256D16F9F3BA0094572E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		C696DD5A16E0CD8A009A7A58 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		C696DD5C16E0D0C8009A7A58 /* HistoryTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryTableController.h; sourceTree = "<group>"; };
 		C696DD5D16E0D0C8009A7A58 /* HistoryTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryTableController.m; sourceTree = "<group>"; };
@@ -273,6 +279,8 @@
 		C6471742169B24E3006ACC7A /* images */ = {
 			isa = PBXGroup;
 			children = (
+				C694256B16F9F1270094572E /* sun-4-58.png */,
+				C694256716F9EF710094572E /* sun-4-64.png */,
 				C6EFA0E116EB6B19006FE551 /* square-normal.png */,
 				C6EFA0E216EB6B19006FE551 /* square-highlight.png */,
 				C6F9406B16E3379E005DBBD5 /* star-7-64.png */,
@@ -492,6 +500,7 @@
 				C69BB1321658C4B1002A1873 /* WikishFileUtil.m */,
 				C69BB1351658C8E0002A1873 /* NSString+Wikish.h */,
 				C69BB1361658C8E1002A1873 /* NSString+Wikish.m */,
+				C66C343616FAEC5E00DB3926 /* Macros.h */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -634,6 +643,8 @@
 				C6F9407116E36574005DBBD5 /* SVProgressHUD.bundle in Resources */,
 				C6EFA0E316EB6B19006FE551 /* square-normal.png in Resources */,
 				C6EFA0E416EB6B19006FE551 /* square-highlight.png in Resources */,
+				C694256816F9EF710094572E /* sun-4-64.png in Resources */,
+				C694256C16F9F1270094572E /* sun-4-58.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -738,6 +749,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				C69DB26A160EC07700B484FF /* en */,
+				C694256D16F9F3BA0094572E /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";

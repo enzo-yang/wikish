@@ -88,7 +88,7 @@
 
 + (void)lightnessUp {
     CGFloat darkness = [self lightnessMaskValue];
-    darkness -= 0.02;
+    darkness -= 0.04;
     if (darkness <= 0) {
         darkness = 0.0f; return;
     }
@@ -96,9 +96,9 @@
 }
 + (void)lightnessDown {
     CGFloat darkness = [self lightnessMaskValue];
-    darkness += 0.02;
-    if (darkness >= 0.25) {
-        darkness = 0.25f; return;
+    darkness += 0.04;
+    if (darkness >= 0.32) {
+        darkness = 0.32f; return;
     }
     [self setLightnessMaskValue:darkness];
 }

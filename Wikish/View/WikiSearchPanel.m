@@ -72,7 +72,7 @@ NSString *const kNotificationMessageSearchKeyword = @"kNotificationMessageSearch
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if ([keyPath isEqualToString:@"results"]) {
-        // NSLog(@"result changed, %@", _openSearch.results);
+        // LOG(@"result changed, %@", _openSearch.results);
         self.resultTable.hidden = NO;
         [self.resultTable reloadData];
     }
@@ -80,7 +80,7 @@ NSString *const kNotificationMessageSearchKeyword = @"kNotificationMessageSearch
 
 - (IBAction)textChanged:(id)sender {
     if (self.textField.markedTextRange == nil) {
-        // NSLog(@"%@", self.textField.text);
+        // LOG(@"%@", self.textField.text);
         if (self.textField.text && self.textField.text.length > 0)
             [_openSearch request:self.textField.text];
     }

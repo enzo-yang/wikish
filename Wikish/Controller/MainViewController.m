@@ -60,7 +60,7 @@
     self.webView.scrollView.showsHorizontalScrollIndicator = NO;
     self.webView.scrollView.bounces = NO;
     self.webView.scrollView.delegate = self;
-    [self.webView.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
+    
     
     self.titleLabel.text = NSLocalizedString(@"Blank", nil);
     
@@ -89,17 +89,19 @@
         _webViewOrgY        = self.webView.frame.origin.y;
         _headViewHided = NO;
     }
+    // 下面这句如果放在view did load 在 ipod 4 上会显示不出webview
+    [self.webView.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     [self _windowEndDetectWebViewTap];
+    [self.webView.scrollView removeObserver:self forKeyPath:@"contentSize"];
 }
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self _windowEndDetectWebViewTap];
-    [self.webView.scrollView removeObserver:self forKeyPath:@"contentSize"];
     [_webView release];
     // TODO(enzo)
     [_titleLabel release];
@@ -201,24 +203,24 @@
         [self.webView stringByEvaluatingJavaScriptFromString:js];
 //    }
 //    [self.webView stringByEvaluatingJavaScriptFromString:@"toggle_all_section(true)"];
-//    NSLog(@"toggle_all_sections(true)");
+//    LOG(@"toggle_all_sections(true)");
     
     // 限制不能左右滚动 以及 头部offset 大于50
     
 }
 
 - (void)wikiPageInfoLoadSuccess:(WikiPageInfo *)wikiPage {
-    NSLog(@"load success");
+    LOG(@"load success");
 }
 
 - (void)wikiPageInfoLoadFailed:(WikiPageInfo *)wikiPage error:(NSError *)error {
-    NSLog(@"wiki page load failed");
+    LOG(@"wiki page load failed");
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    NSLog(@"%@", request);
+    LOG(@"%@", request);
     NSMutableURLRequest *mRequest = (NSMutableURLRequest *)request;
-    NSLog(@"webview user agent: %@", [mRequest valueForHTTPHeaderField:@"User-Agent"]);
+    LOG(@"webview user agent: %@", [mRequest valueForHTTPHeaderField:@"User-Agent"]);
     if (_canLoadThisRequest) {
         _canLoadThisRequest = NO;
         [SVProgressHUD showWithStatus:@"Loading" maskType:SVProgressHUDMaskTypeBlack];
@@ -242,7 +244,7 @@
         NSString *lang = [absolute stringByMatching:@"(?<=//).*(?=\\.m\\.wikipedia)" capture:0];
         NSString *subLang = [absolute stringByMatching:@"(?<=wikipedia.org/).*(?=/)" capture:0];
         NSString *title = [absolute lastPathComponent];
-        NSLog(@"%@, %@, %@", lang, subLang, title);
+        LOG(@"%@, %@, %@", lang, subLang, title);
         WikiSite *site = [[SiteManager sharedInstance] siteOfLang:lang subLang:subLang];
         if (!site) site = [[[WikiSite alloc] initWithLang:lang sublang:subLang] autorelease];
         dispatch_async(dispatch_get_main_queue(), ^(){
@@ -261,14 +263,14 @@
     if ([SVProgressHUD isVisible]) {
         [SVProgressHUD dismiss];
     }
-    NSLog(@"page finish load");
+    LOG(@"page finish load");
 }
 
 
 
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    NSLog(@"failed load web page, %@", webView.request);
+    LOG(@"failed load web page, %@", webView.request);
     [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"page load failed", nil)];
 }
 
@@ -305,7 +307,7 @@
 }
 
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
-    // NSLog(@"velocity:(%f, %f), offset:(%f, %f)", velocity.x, velocity.y, (*targetContentOffset).x, (*targetContentOffset).y);
+    // LOG(@"velocity:(%f, %f), offset:(%f, %f)", velocity.x, velocity.y, (*targetContentOffset).x, (*targetContentOffset).y);
     CGFloat currentY = scrollView.contentOffset.y;
     if (currentY > kHandleDragThreshold && currentY > _webViewDragOrgY) { // content direction up
         [self _hideHeadView:YES];

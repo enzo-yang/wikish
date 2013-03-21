@@ -183,7 +183,7 @@ static NSString *const kSectionsKey = @"sections";
 }
 
 - (void)_loadContentFailed:(NSError *)error {
-    NSLog(@"load content failed, reason: %@", [error localizedDescription]);
+    LOG(@"load content failed, reason: %@", [error localizedDescription]);
     [self.delegate wikiPageInfoLoadFailed:self error:error];
 }
 
