@@ -1,3 +1,7 @@
 /* Localized versions of Info.plist keys */
+<<<<<<< HEAD
 "CFBundleDisplayName" = "Ductionary";
+=======
+"CFBundleDisplayName" = "The Pedia";
+>>>>>>> 8270438cb01977002ef1d665f351b7e3eb90e401
 "CFBundleName" = "wikish";

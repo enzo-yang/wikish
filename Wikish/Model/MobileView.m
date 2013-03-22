@@ -35,7 +35,7 @@
         </head>\
         <body>"];
     }
-    NSLog(@"title is :%@", _title);
+    LOG(@"title is :%@", _title);
     return self;
 }
 
@@ -94,7 +94,7 @@
         [FileUtil createFolderAtPath:folderPath];
     }
     NSString *filePath = [folderPath stringByAppendingPathComponent:@"page.html"];
-    NSLog(@"filePath: %@", filePath);
+    LOG(@"filePath: %@", filePath);
     [page writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
 }
 

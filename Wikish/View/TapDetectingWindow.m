@@ -33,11 +33,11 @@
     UITouch *touch = touches.anyObject;
     if (touch.phase != UITouchPhaseEnded) return;
     
-    // NSLog(@"%@", touch.view);
+    // LOG(@"%@", touch.view);
     if ([touch.view isDescendantOfView:viewToObserve] == NO) return;
     
     CGPoint tapPoint = [touch locationInView:viewToObserve];
-    // NSLog(@"TapPoint = %f, %f", tapPoint.x, tapPoint.y);
+    // LOG(@"TapPoint = %f, %f", tapPoint.x, tapPoint.y);
     
     NSArray *pointArray = [NSArray arrayWithObjects:[NSNumber numberWithFloat:tapPoint.x], [NSNumber numberWithFloat:tapPoint.y], nil];
     if (touch.tapCount == 1) {

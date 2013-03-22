@@ -52,7 +52,7 @@
 }
 
 - (void)request:(NSString *)incompleteKeyword {
-    NSLog(@"%@", _site.lang);
+    LOG(@"%@", _site.lang);
     if (incompleteKeyword == nil) incompleteKeyword = @"";
     incompleteKeyword = [incompleteKeyword stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     self.lastIncompleteKeyword = incompleteKeyword;
@@ -60,7 +60,7 @@
     
     NSString *urlstring = [WikiApi openSearchApiOfSite:_site keyword:incompleteKeyword];
     OpenSearchRequest *request = [OpenSearchRequest requestWithURL:[NSURL URLWithString:urlstring]];
-    NSLog(@"%@", urlstring);
+    LOG(@"%@", urlstring);
     request.tag = ++_searchCnt;
     AFJSONRequestOperation *op = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
                                                                                  success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {

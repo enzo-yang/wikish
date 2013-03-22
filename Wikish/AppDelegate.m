@@ -25,7 +25,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-//    NSLog( @"%@", [[SiteManager sharedInstance] defaultSite].name);
+//    LOG( @"%@", [[SiteManager sharedInstance] defaultSite].name);
     
     if ([self _isFirstLaunch]) [Setting useDefaultSetting];
     [Setting registerUserAgent];
