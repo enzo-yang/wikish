@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C603784216FCAC5000020AA0 /* ductionary-57.png in Resources */ = {isa = PBXBuildFile; fileRef = C603784116FCAC5000020AA0 /* ductionary-57.png */; };
+		C603784416FCAC7E00020AA0 /* ductionary-114.png in Resources */ = {isa = PBXBuildFile; fileRef = C603784316FCAC7E00020AA0 /* ductionary-114.png */; };
 		C615E21116BE23BE00506BE2 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C615E21016BE23BE00506BE2 /* QuartzCore.framework */; };
 		C6471745169B24F7006ACC7A /* wiki-page-head-html.txt in Resources */ = {isa = PBXBuildFile; fileRef = C6471744169B24F7006ACC7A /* wiki-page-head-html.txt */; };
 		C6471746169B24F7006ACC7A /* wiki-page-head-html.txt in Resources */ = {isa = PBXBuildFile; fileRef = C6471744169B24F7006ACC7A /* wiki-page-head-html.txt */; };
@@ -112,6 +114,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C603784116FCAC5000020AA0 /* ductionary-57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ductionary-57.png"; sourceTree = "<group>"; };
+		C603784316FCAC7E00020AA0 /* ductionary-114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ductionary-114.png"; sourceTree = "<group>"; };
+		C603784516FCACC800020AA0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		C615E21016BE23BE00506BE2 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		C6471744169B24F7006ACC7A /* wiki-page-head-html.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "wiki-page-head-html.txt"; sourceTree = "<group>"; };
 		C6471747169B28A4006ACC7A /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -336,6 +341,8 @@
 		C69DB251160EC07700B484FF = {
 			isa = PBXGroup;
 			children = (
+				C603784316FCAC7E00020AA0 /* ductionary-114.png */,
+				C603784116FCAC5000020AA0 /* ductionary-57.png */,
 				C69DB266160EC07700B484FF /* Wikish */,
 				C69BB0F9165678B7002A1873 /* Tests */,
 				C69DB25F160EC07700B484FF /* Frameworks */,
@@ -634,6 +641,8 @@
 				C6F9407116E36574005DBBD5 /* SVProgressHUD.bundle in Resources */,
 				C6EFA0E316EB6B19006FE551 /* square-normal.png in Resources */,
 				C6EFA0E416EB6B19006FE551 /* square-highlight.png in Resources */,
+				C603784216FCAC5000020AA0 /* ductionary-57.png in Resources */,
+				C603784416FCAC7E00020AA0 /* ductionary-114.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -738,6 +747,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				C69DB26A160EC07700B484FF /* en */,
+				C603784516FCACC800020AA0 /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
