@@ -12,6 +12,11 @@
 #define kWikiPageInfoMissingErrorDomain @"Wiki Page Infomation Missing"
 #define kWikiPageInfoMissingErrorCode -11
 
+#define kGAUserHabit    @"UserHabit"
+#define kGALaunguage    @"Language"
+#define kGAHomePage     @"HomePage"
+#define kGAIsExpanded   @"IsExpanded"
+
 extern NSString *const kNotificationMessageSearchKeyword;
 
 

@@ -86,7 +86,7 @@ static NSString *const kDefaultSiteKey      = @"default-site";
     NSString *lang = [[NSLocale preferredLanguages] objectAtIndex:0];
     site = [self siteOfLang:lang];
     if (site == nil) {
-        site = [[WikiSite alloc] initWithName:lang lang:lang sublang:@"wiki"];
+        site = [[[WikiSite alloc] initWithName:lang lang:lang sublang:@"wiki"] autorelease];
     }
     
     [self _setDefaultSite:site];
@@ -125,7 +125,7 @@ static NSString *const kDefaultSiteKey      = @"default-site";
         [self setDefaultSite:theSite];
     } else {
         NSInteger index = [commonSites indexOfObject:theSite];
-        index = (index + 1) % [commonSites count];
+        index = (index + 1) % [commonSites count]; // count won't be zero
         theSite = [commonSites objectAtIndex:index];
         [self setDefaultSite:theSite];
     }

@@ -14,6 +14,7 @@
 @interface SettingViewController : UIViewController
 
 @property (nonatomic, retain) IBOutlet Button       *okButton;
+@property (retain, nonatomic) IBOutlet Button *helpButton;
 @property (nonatomic, retain) IBOutlet UILabel      *settingLabel;
 
 @property (nonatomic, retain) IBOutlet UIView       *httpsView;
@@ -39,4 +40,5 @@
 - (IBAction)sectionExpandedSwitchChanged:(UISwitch *)sender;
 - (IBAction)okButtonPressed:(id)sender;
 - (IBAction)homeTypeButtonPressed:(id)sender;
+- (IBAction)helpButtonPressed:(id)sender;
 @end
