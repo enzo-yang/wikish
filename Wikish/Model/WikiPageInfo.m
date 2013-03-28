@@ -16,7 +16,6 @@
 #import "WikiSection.h"
 #import "WikiApi.h"
 #import "AFNetworking.h"
-#import "MobileView.h"
 
 
 static NSString *const kRevidKey = @"revid";

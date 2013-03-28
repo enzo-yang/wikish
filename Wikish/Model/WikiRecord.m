@@ -13,7 +13,7 @@
 @synthesize title = _title;
 
 - (id)initWithLang:(NSString *)lang sublang:(NSString *)sublang title:(NSString *)title {
-    WikiSite *site = [[WikiSite alloc] initWithLang:lang sublang:sublang];
+    WikiSite *site = [[[WikiSite alloc] initWithLang:lang sublang:sublang] autorelease];
     return [self initWithSite:site title:title];
 }
 

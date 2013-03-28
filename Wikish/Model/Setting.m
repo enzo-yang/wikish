@@ -8,9 +8,12 @@
 
 #import "Setting.h"
 #import <UIKit/UIKit.h>
+#import "Constants.h"
+#import "GAI.h"
 
 #define kUserDefaultsUserAgentKey       @"UserAgent"
-#define kExpanedUserAgent               @"Wikish/1.0 (http://www.vegemal.net/; trm_tt@msn.com)"
+// #define kExpanedUserAgent               @"Wikish/1.0 (http://www.vegemal.net/; trm_tt@msn.com)"
+#define kExpanedUserAgent               @"Wikish/1.0 (http://divisoryang.github.com/; trm_tt@msn.com)"
 #define kShrinkedUserAgent              @"Mozilla/5.0 (iPhone; CPU iPhone OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Mobile/10A403"
 
 #define kUserDefaultsIsInitExpandedKey  @"is-initially-expaned"
@@ -90,7 +93,7 @@
     CGFloat darkness = [self lightnessMaskValue];
     darkness -= 0.04;
     if (darkness <= 0) {
-        darkness = 0.0f; return;
+        darkness = 0.0f; 
     }
     [self setLightnessMaskValue:darkness];
 }
@@ -98,7 +101,7 @@
     CGFloat darkness = [self lightnessMaskValue];
     darkness += 0.04;
     if (darkness >= 0.32) {
-        darkness = 0.32f; return;
+        darkness = 0.32f; 
     }
     [self setLightnessMaskValue:darkness];
 }
@@ -113,7 +116,8 @@
 
 + (void)registerUserAgent {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if ([defaults boolForKey:kUserDefaultsIsInitExpandedKey] == YES) {
+    BOOL isExpanded = [defaults boolForKey:kUserDefaultsIsInitExpandedKey];
+    if ( isExpanded ) {
         NSDictionary *dictionnary = @{kUserDefaultsUserAgentKey: kExpanedUserAgent};
         [defaults registerDefaults:dictionnary];
     } else {
@@ -121,6 +125,8 @@
         [defaults registerDefaults:dictionary];
     }
     [defaults synchronize];
+    
+    [[[GAI sharedInstance] defaultTracker] sendEventWithCategory:kGAUserHabit withAction:kGAIsExpanded withLabel:(isExpanded ? @"YES" : @"NO") withValue:@1];
 }
 
 @end

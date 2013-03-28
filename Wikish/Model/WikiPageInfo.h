@@ -10,7 +10,6 @@
 
 @protocol WikiPageInfoDelegate;
 @class WikiSite;
-@class MobileView;
 
 @interface WikiPageInfo : NSObject {
     WikiSite        *_site;

@@ -15,6 +15,7 @@
 #import "AutoPropertyRelease.h"
 #import "TableViewGestureRecognizer.h"
 #import "Button.h"
+#import "HelpViewController.h"
 
 
 
@@ -36,6 +37,7 @@
 
 - (void)dealloc {
     [AutoPropertyRelease releaseProperties:self thisClass:[SettingViewController class]];
+    [_helpButton release];
     [super dealloc];
 }
 
@@ -69,12 +71,17 @@
 }
 
 - (IBAction)okButtonPressed:(id)sender {
-    [self dismissModalViewControllerAnimated:YES];
+    // [self dismissModalViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)homeTypeButtonPressed:(id)sender {
     [Setting setHomePage:((UIButton *)sender).tag];
     [self _refreshHomeButtons];
+}
+
+- (IBAction)helpButtonPressed:(id)sender {
+    [self presentModalViewController:[[HelpViewController new] autorelease] animated:YES];
 }
 
 #pragma mark -
@@ -214,7 +221,10 @@
             if ([[_siteManager commonSites] count] == 1) {
                 [self gestureRecognizer:gestureRecognizer recoverRowAtIndexPath:indexPath];
             }
-            if (![_siteManager removeCommonSite:theSite]) return;
+            if (![_siteManager removeCommonSite:theSite]) {
+                [theSite release];
+                return;
+            }
             [self.commonSitesTable beginUpdates];
             [self.commonSitesTable deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
             [self.commonSitesTable endUpdates];
@@ -320,6 +330,13 @@
     self.okButton.layer.rasterizationScale = scale;
     self.okButton.layer.shouldRasterize = YES;
     
+    self.helpButton.layer.cornerRadius = 6.0f;
+    self.helpButton.layer.masksToBounds = YES;
+    [self.helpButton setBackgroundColor:DarkGreenColor() forState:UIControlStateNormal];
+    [self.helpButton setBackgroundColor:GetTableHighlightRowColor() forState:UIControlStateHighlighted];
+    self.helpButton.layer.rasterizationScale = scale;
+    self.helpButton.layer.shouldRasterize = YES;
+    
     for (Button *btn in self.homeButtons) {
         [btn setBackgroundColor:GetDarkColor() forState:UIControlStateNormal];
         [btn setBackgroundColor:DarkGreenColor() forState:UIControlStateSelected];
@@ -352,6 +369,7 @@
 
 - (void)_localizeTexts {
     [self.okButton setTitle:NSLocalizedString(@"OK", nil) forState:UIControlStateNormal];
+    [self.helpButton setTitle:NSLocalizedString(@"Help", nil) forState:UIControlStateNormal];
     self.settingLabel.text  = NSLocalizedString(@"Setting", nil);
     self.httpsLabel.text    = NSLocalizedString(@"Use HTTPS", nil);
     self.expanedLabel.text  = NSLocalizedString(@"Section Expanded", nil);
@@ -369,4 +387,8 @@
     ((Button*)[self.homeButtons objectAtIndex:index]).selected = YES;
 }
 
+- (void)viewDidUnload {
+    [self setHelpButton:nil];
+    [super viewDidUnload];
+}
 @end

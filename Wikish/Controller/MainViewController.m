@@ -28,6 +28,8 @@
 #import "SectionTableController.h"
 #import "FavouriteTableController.h"
 
+#import "GAI.h"
+
 #define kScrollViewDirectionNone    0
 #define kScrollViewDirectionUp      1
 #define kScrollViewDirectionDown    2
@@ -137,10 +139,13 @@
 - (void)_loadHomePage {
     if ([Setting homePage] == kHomePageTypeRecommend) {
         [self loadSite:[SiteManager sharedInstance].defaultSite title:@""];
+        [[[GAI sharedInstance] defaultTracker] sendEventWithCategory:kGAUserHabit withAction:kGAHomePage withLabel:@"Feature" withValue:@1];
     } else if ([Setting homePage] == kHomePageTypeHistory) {
         WikiRecord *record = [[WikiHistory sharedInstance] lastRecord];
         if (record) [self loadSite:record title:record.title];
+        [[[GAI sharedInstance] defaultTracker] sendEventWithCategory:kGAUserHabit withAction:kGAHomePage withLabel:@"Last" withValue:@1];
     } else {
+        [[[GAI sharedInstance] defaultTracker] sendEventWithCategory:kGAUserHabit withAction:kGAHomePage withLabel:@"Blank" withValue:@1];
         ;
     }
 }
@@ -151,6 +156,7 @@
     NSString *title = [theTitle urlDecodedString];
     WikiPageInfo *aPageInfo = [[[WikiPageInfo alloc] initWithSite:site title:title] autorelease];
     if (aPageInfo) {
+        [[[GAI sharedInstance] defaultTracker] sendEventWithCategory:kGAUserHabit withAction:kGALaunguage withLabel:site.name withValue:@1];
         self.pageInfo = aPageInfo;
         NSURLRequest *request = [NSURLRequest requestWithURL:[aPageInfo pageURL]];
         if (request) {
@@ -161,7 +167,7 @@
             }
             self.currentSite        = site;
             _canLoadThisRequest     = YES;
-            WikiRecord *record      = [[WikiRecord alloc] initWithSite:site title:title];
+            WikiRecord *record      = [[[WikiRecord alloc] initWithSite:site title:title] autorelease];
             [[WikiHistory sharedInstance] addRecord:record];
             
             [self.pageInfo loadPageInfo];
@@ -252,6 +258,7 @@
         });
         return NO;
     }
+    [[UIApplication sharedApplication] openURL:[request URL]];
     return NO;
 }
 
@@ -413,7 +420,8 @@
         return;
     }
     SettingViewController *svc = [[SettingViewController new] autorelease];
-    [self presentModalViewController:svc animated:YES];
+    // [self presentModalViewController:svc animated:YES];
+    [self.navigationController pushViewController:svc animated:YES];
     
 }
 
@@ -457,10 +465,6 @@
         f.origin.y += 300.0f;
         theViewShouldChangeFrame = self.bottomView;
     } else if (_viewStatus == kViewStatusLightness) {
-//        f = self.middleView.frame;
-//        f.origin.x += 260.0f;
-//        theViewShouldHide = self.rightView;
-//        theViewShouldChangeFrame = self.middleView;
         f = self.lightnessView.frame;
         f.origin.y += 100.0f;
         theViewShouldChangeFrame = self.lightnessView;

@@ -10,8 +10,7 @@
 #import "MainViewController.h"
 #import "TapDetectingWindow.h"
 #import "Setting.h"
-//#import "SiteManager.h"
-//#import "WikiSite.h"
+#import "GAI.h"
 
 #define kUserDefaultsIsFirstLaunch      @"is-first-launch"
 
@@ -25,7 +24,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-//    LOG( @"%@", [[SiteManager sharedInstance] defaultSite].name);
+    [GAI sharedInstance].trackUncaughtExceptions = YES;
+    [GAI sharedInstance].dispatchInterval = -1; // 手动控制
+    [[GAI sharedInstance] trackerWithTrackingId:@"UA-39546615-1"];
+    
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
     
     if ([self _isFirstLaunch]) [Setting useDefaultSetting];
     [Setting registerUserAgent];
@@ -33,12 +36,15 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
-    self.window.rootViewController = [[MainViewController new] autorelease];
+    UINavigationController *nav = [[[UINavigationController alloc] initWithRootViewController:[[MainViewController new] autorelease]] autorelease];
+    nav.navigationBarHidden = YES;
+    self.window.rootViewController = nav;
     
     return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
+    [[GAI sharedInstance] dispatch];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
