@@ -435,6 +435,16 @@
     self.lightnessMask.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:[Setting lightnessMaskValue]];
 }
 
+- (IBAction)browseBackPressed:(id)sender {
+    _canLoadThisRequest = YES;
+    [self.webView goBack];
+}
+
+- (IBAction)browseForwardPressed:(id)sender {
+    _canLoadThisRequest = YES;
+    [self.webView goForward];
+}
+
 - (void)_initializeTables {
     self.historyTable.backgroundColor = GetTableBackgourndColor();
     self.sectionTable.backgroundColor = GetTableBackgourndColor();

@@ -63,6 +63,8 @@ typedef enum {
 - (IBAction)settingBtnPressed:(id)sender;
 - (IBAction)lightnessUpBtnPressed:(id)sender;
 - (IBAction)lightnessDownBtnPressed:(id)sender;
+- (IBAction)browseBackPressed:(id)sender;
+- (IBAction)browseForwardPressed:(id)sender;
 
 - (void)scrollTo:(NSString *)anchorPoint;
 - (void)loadSite:(WikiSite *)site title:(NSString *)theTitle;
