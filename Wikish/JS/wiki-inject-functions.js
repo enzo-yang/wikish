@@ -41,10 +41,18 @@ function scroll_to_section( section_id ) {
   expand_section_of_id( section_id );
   $(document.getElementById( section_id )).goTo();
     
+    if (document.getElementById( section_id )) {
+        return 'YES';
+    }
+    return 'NO';
 }
  
 function scroll_to_expanded_section ( section_id ) {
     document.getElementById(section_id).scrollIntoView();
+    if (document.getElementById( section_id )) {
+        return 'YES';
+    }
+    return 'NO';
 }
 
 function section_not_expand_cnt() {

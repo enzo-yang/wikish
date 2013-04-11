@@ -51,6 +51,7 @@
     self = [super init];
     if (self) {
         _canLoadThisRequest = NO;
+        _pageInfos = [NSMutableDictionary new];
     }
     return self;
 }
@@ -109,6 +110,8 @@
     [_titleLabel release];
     [_lightnessView release];
     [_lightnessMask release];
+    
+    [_pageInfos release];
     [super dealloc];
 }
 
@@ -178,6 +181,19 @@
     }
 }
 
+- (WikiSite *)_siteFromURLString:(NSString *)absolute {
+    NSString *lang = [absolute stringByMatching:@"(?<=//).*(?=\\.m\\.wikipedia)" capture:0];
+    NSString *subLang = [absolute stringByMatching:@"(?<=wikipedia.org/).*(?=/)" capture:0];
+    LOG(@"%@, %@", lang, subLang);
+    WikiSite *site = [[SiteManager sharedInstance] siteOfLang:lang subLang:subLang];
+    if (!site) site = [[[WikiSite alloc] initWithLang:lang sublang:subLang] autorelease];
+    return site;
+}
+
+- (NSString *)_keyOfSite:(WikiSite *)site title:(NSString *)title {
+    return [NSString stringWithFormat:@"%@%@", site.name, title];
+}
+
 - (void)setPageInfo:(WikiPageInfo *)pageInfo {
     if (_pageInfo == pageInfo) return;
     if (_pageInfo) {
@@ -203,19 +219,15 @@
         [SVProgressHUD dismiss];
     }
     [self scrollViewDidScroll:self.webView.scrollView];
-//    if (_sectionFinished) return;
-//    if (3 > _jsInjectedCount++) {
-        NSString *js = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"wiki-inject-functions" ofType:@"js"] encoding:NSUTF8StringEncoding error:nil];
-        [self.webView stringByEvaluatingJavaScriptFromString:js];
-//    }
-//    [self.webView stringByEvaluatingJavaScriptFromString:@"toggle_all_section(true)"];
-//    LOG(@"toggle_all_sections(true)");
-    
+
+    NSString *js = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"wiki-inject-functions" ofType:@"js"] encoding:NSUTF8StringEncoding error:nil];
+    [self.webView stringByEvaluatingJavaScriptFromString:js];
     // 限制不能左右滚动 以及 头部offset 大于50
     
 }
 
 - (void)wikiPageInfoLoadSuccess:(WikiPageInfo *)wikiPage {
+    [_pageInfos setObject:wikiPage forKey:[self _keyOfSite:wikiPage.site title:wikiPage.title]];
     LOG(@"load success");
 }
 
@@ -235,6 +247,24 @@
     if ([self _isSameAsCurrentRequest:request]) return NO;
     
     NSString *absolute = [[request URL] absoluteString];
+    
+    // 前进后退
+    if (_isForwardOrBackward) {
+        _isForwardOrBackward = NO;
+        self.titleLabel.text = [[absolute lastPathComponent] urlDecodedString];
+        WikiSite *site = [self _siteFromURLString:absolute];
+        if (site) {
+            WikiPageInfo *info = [_pageInfos objectForKey:[self _keyOfSite:site title:self.titleLabel.text]];
+            if (!info) {
+                info = [[WikiPageInfo alloc] initWithSite:site title:self.titleLabel.text];
+            }
+            self.pageInfo = info;
+            
+        }
+        [self _hideHeadView:NO];
+        return YES;
+    }
+    
     // 如果是当前的语言
     NSRange range = [absolute rangeOfString:[NSString stringWithFormat:@"%@.m.wikipedia.org/wiki", _currentSite.lang]];
     if (range.length) {
@@ -247,12 +277,9 @@
     // 如果是其它语言
     range = [absolute rangeOfString:@"m.wikipedia.org/"];
     if (range.length) {
-        NSString *lang = [absolute stringByMatching:@"(?<=//).*(?=\\.m\\.wikipedia)" capture:0];
-        NSString *subLang = [absolute stringByMatching:@"(?<=wikipedia.org/).*(?=/)" capture:0];
         NSString *title = [absolute lastPathComponent];
-        LOG(@"%@, %@, %@", lang, subLang, title);
-        WikiSite *site = [[SiteManager sharedInstance] siteOfLang:lang subLang:subLang];
-        if (!site) site = [[[WikiSite alloc] initWithLang:lang sublang:subLang] autorelease];
+        LOG(@"title :%@", title);
+        WikiSite *site = [self _siteFromURLString:absolute];
         dispatch_async(dispatch_get_main_queue(), ^(){
             [self loadSite:site title:title];
         });
@@ -272,9 +299,6 @@
     }
     LOG(@"page finish load");
 }
-
-
-
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
     LOG(@"failed load web page, %@", webView.request);
@@ -337,10 +361,14 @@
 }
 
 - (void)scrollTo:(NSString *)anchorPoint {
+    NSString *result = nil;
     if ([Setting isLaunchTimeInitExpanded]) {
-        [self.webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"scroll_to_expanded_section(\"%@\")", anchorPoint]];
+        result = [self.webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"scroll_to_expanded_section(\"%@\")", anchorPoint]];
     } else {
-        [self.webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"scroll_to_section(\"%@\")", anchorPoint]];
+        result = [self.webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"scroll_to_section(\"%@\")", anchorPoint]];
+    }
+    if ([result isEqualToString:@"YES"]) {
+        [self _hideHeadView:YES];
     }
     [self _recoverNormalStatus];
 }
@@ -436,12 +464,12 @@
 }
 
 - (IBAction)browseBackPressed:(id)sender {
-    _canLoadThisRequest = YES;
+    _isForwardOrBackward = YES;
     [self.webView goBack];
 }
 
 - (IBAction)browseForwardPressed:(id)sender {
-    _canLoadThisRequest = YES;
+    _isForwardOrBackward = YES;
     [self.webView goForward];
 }
 

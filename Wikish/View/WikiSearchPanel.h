@@ -10,6 +10,8 @@
 #import "Button.h"
 #import "WikiOpenSearch.h"
 @interface WikiSearchPanel : UIView<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate> {
+    BOOL _shouldRemove;
+
     WikiOpenSearch *_openSearch;
 }
 @property (nonatomic, retain) IBOutlet UITextField  *textField;

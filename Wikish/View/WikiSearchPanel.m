@@ -41,6 +41,7 @@ NSString *const kNotificationMessageSearchKeyword = @"kNotificationMessageSearch
     
     [[NSNotificationCenter defaultCenter] addObserver:panel selector:@selector(_keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:panel selector:@selector(_keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:panel selector:@selector(_keyboardWillShow:) name:UIKeyboardWillChangeFrameNotification object:nil];
     [panel.textField becomeFirstResponder];
     
     
@@ -48,6 +49,7 @@ NSString *const kNotificationMessageSearchKeyword = @"kNotificationMessageSearch
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    _shouldRemove = NO;
     _openSearch = [WikiOpenSearch new];
     [_openSearch addObserver:self forKeyPath:@"results" options:NSKeyValueObservingOptionNew context:nil];
     CGAffineTransform transform = CGAffineTransformMakeRotation(M_PI);
@@ -91,6 +93,7 @@ NSString *const kNotificationMessageSearchKeyword = @"kNotificationMessageSearch
     if (text) {
         [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationMessageSearchKeyword object:nil userInfo:@{@"keyword" : text}];
     }
+    _shouldRemove = YES;
     [textField resignFirstResponder];
     return NO;
 }
@@ -131,7 +134,9 @@ NSString *const kNotificationMessageSearchKeyword = @"kNotificationMessageSearch
         self.frame = [WikiSearchPanel _panelOrgFrame:self];
         self.resultTable.hidden = YES;
     }completion:^(BOOL finished) {
-        [self removeFromSuperview];
+        if (_shouldRemove) {
+            [self removeFromSuperview];
+        }
     }];
 }
 
@@ -178,10 +183,12 @@ NSString *const kNotificationMessageSearchKeyword = @"kNotificationMessageSearch
         NSString *text = [_openSearch.results objectAtIndex:indexPath.row];
         [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationMessageSearchKeyword object:nil userInfo:@{@"keyword" : text}];
     }
+    _shouldRemove = YES;
     [self.textField resignFirstResponder];
 }
 
 - (void)hideKeyboard:(id)sender {
+    _shouldRemove = YES;
     [self.textField resignFirstResponder];
 }
 

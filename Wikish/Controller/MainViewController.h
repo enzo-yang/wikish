@@ -26,9 +26,12 @@ typedef enum {
     ViewStatus _viewStatus;
     
     BOOL        _canLoadThisRequest;
+    BOOL        _isForwardOrBackward;
     
     WikiPageInfo *_pageInfo;
     WikiSite     *_currentSite;
+    
+    NSMutableDictionary *_pageInfos;
     
     // layouts
     CGFloat     _lastWebViewOffset;
