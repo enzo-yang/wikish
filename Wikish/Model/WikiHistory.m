@@ -69,6 +69,12 @@
 
 - (void)addRecord:(WikiRecord *)record {
     @synchronized(self) {
+        if ([record.title isEqualToString:@""]) {
+            record = [[[WikiRecord alloc] initWithSite:record title:NSLocalizedString(@"Home_Page", nil)] autorelease];
+        }
+        if ([record.title hasPrefix:@"File:"]) {
+            return;
+        }
         [self _removeRecord:record];
         [_history insertObject:record atIndex:0];
     }

@@ -158,6 +158,9 @@
         cell.backgroundView = [[UIView new] autorelease];
         cell.backgroundView.backgroundColor = GetTableCellBackgroundColor();
         cell.textLabel.font = [UIFont systemFontOfSize:17.0f];
+        
+        cell.selectedBackgroundView = [[UIView new] autorelease];
+        cell.selectedBackgroundView.backgroundColor = GetTableHighlightRowColor();
     }
     cell.contentView.backgroundColor = GetTableBackgourndColor();
     cell.textLabel.backgroundColor = [UIColor clearColor];
@@ -168,6 +171,22 @@
     }
     cell.textLabel.text = site.name;
     return cell;
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (tableView == _commonSitesTable) {
+        [tableView deselectRowAtIndexPath:indexPath animated:NO];
+        NSUInteger defaultIndex = [_siteManager.commonSites indexOfObject:[_siteManager defaultSite]];
+        WikiSite *defaultSiteNew = [_siteManager.commonSites objectAtIndex:indexPath.row];
+        
+        [_siteManager setDefaultSite:defaultSiteNew];
+        
+        [_commonSitesTable beginUpdates];
+        [_commonSitesTable reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:defaultIndex inSection:indexPath.section], indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        [_commonSitesTable endUpdates];
+        
+    }
 }
 
 #pragma mark -
@@ -199,15 +218,9 @@
     UITableViewCell *cell = [gestureRecognizer.tableView cellForRowAtIndexPath:indexPath];
     if (gestureRecognizer.tableView == self.sitesTable) {
         WikiSite *theSite = [[_siteManager supportedSites] objectAtIndex:indexPath.row];
-        
-        /* if (gestureRecognizer.panState == TableViewCellPanStateLeft) {
-         [self.sitesTable beginUpdates];
-         [self.sitesTable deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-         [_siteManager removeSite:theSite];
-         [self.sitesTable endUpdates];
-         } else */
         if (gestureRecognizer.panState == TableViewCellPanStateRight) {
             [_siteManager addCommonSite:theSite];
+            [_siteManager setDefaultSite:theSite];
             [self.commonSitesTable reloadData];
             [UIView beginAnimations:nil context:nil];
             cell.contentView.frame = cell.contentView.bounds;

@@ -36,7 +36,7 @@
 
 #define kHandleDragThreshold        150
 
-@interface MainViewController ()<WikiPageInfoDelegate, UIWebViewDelegate, UIScrollViewDelegate, TapDetectingWindowDelegate>
+@interface MainViewController ()<WikiPageInfoDelegate, UIWebViewDelegate, UIScrollViewDelegate, TapDetectingWindowDelegate, UIGestureRecognizerDelegate>
 @property (nonatomic, retain) WikiPageInfo  *pageInfo;
 @property (nonatomic, retain) WikiSite      *currentSite;
 @end
@@ -64,19 +64,18 @@
     self.webView.scrollView.bounces = NO;
     self.webView.scrollView.delegate = self;
     
+    self.leftView.hidden = YES;
+    self.rightView.hidden = YES;
+    self.gestureMask.hidden = YES;
+    
+    [self _initializeTables];
+    [self _customizeAppearance];
     
     self.titleLabel.text = NSLocalizedString(@"Blank", nil);
     
-    [self _loadHomePage];
-
-    self.leftView.hidden = YES;
-    self.rightView.hidden = YES;
-    
-    [self _initializeTables];
-    
-    [self _customizeAppearance];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_loadPageFromNotification:) name:kNotificationMessageSearchKeyword object:nil];
     
+    [self _loadHomePage];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -237,11 +236,11 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     LOG(@"%@", request);
-    NSMutableURLRequest *mRequest = (NSMutableURLRequest *)request;
-    LOG(@"webview user agent: %@", [mRequest valueForHTTPHeaderField:@"User-Agent"]);
+    LOG(@"webview user agent: %@", [(NSMutableURLRequest *)request valueForHTTPHeaderField:@"User-Agent"]);
     if (_canLoadThisRequest) {
         _canLoadThisRequest = NO;
-        [SVProgressHUD showWithStatus:@"Loading" maskType:SVProgressHUDMaskTypeBlack];
+        [self _hideHeadView:NO];
+        [SVProgressHUD showWithStatus:@"Loading" maskType:SVProgressHUDMaskTypeClear];
         return YES;
     }
     if ([self _isSameAsCurrentRequest:request]) return NO;
@@ -249,10 +248,12 @@
     NSString *absolute = [[request URL] absoluteString];
     
     // 前进后退
-    if (_isForwardOrBackward) {
-        _isForwardOrBackward = NO;
+    if (UIWebViewNavigationTypeBackForward == navigationType) {
         self.titleLabel.text = [[absolute lastPathComponent] urlDecodedString];
         WikiSite *site = [self _siteFromURLString:absolute];
+        if ([self.titleLabel.text isEqualToString:site.sublang]) {
+            self.titleLabel.text = NSLocalizedString(@"Home_Page", nil);
+        }
         if (site) {
             WikiPageInfo *info = [_pageInfos objectForKey:[self _keyOfSite:site title:self.titleLabel.text]];
             if (!info) {
@@ -262,6 +263,7 @@
             
         }
         [self _hideHeadView:NO];
+        [SVProgressHUD showWithStatus:@"Loading" maskType:SVProgressHUDMaskTypeClear];
         return YES;
     }
     
@@ -287,10 +289,6 @@
     }
     [[UIApplication sharedApplication] openURL:[request URL]];
     return NO;
-}
-
-- (void)webViewDidStartLoad:(UIWebView *)webView {
-    
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
@@ -380,13 +378,6 @@
     return (range.length != 0);
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-
 - (IBAction)historyBtnPressed:(id)sender {
     if (_viewStatus != kViewStatusNormal) {
         [self _recoverNormalStatus];
@@ -394,12 +385,14 @@
         [self.historyTable reloadData];
         _viewStatus = kViewStatusHistory;
         self.leftView.hidden = NO;
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationDuration:0.3];
         CGRect f = self.middleView.frame;
         f.origin.x += 260.0f;
-        self.middleView.frame = f;
-        [UIView commitAnimations];
+        [UIView animateWithDuration:0.3 animations:^{
+            self.middleView.frame = f;
+        } completion:^(BOOL finished) {
+            self.gestureMask.hidden = NO;
+            NSLog(@"%@", self.gestureMask.superview);
+        }];
     }
 }
 
@@ -408,7 +401,6 @@
         [self _recoverNormalStatus];
         return;
     }
-    // [self.webView stringByEvaluatingJavaScriptFromString:@"toggle_all_section(true)"];
     [WikiSearchPanel showInView:self.view];
 }
 
@@ -464,13 +456,37 @@
 }
 
 - (IBAction)browseBackPressed:(id)sender {
-    _isForwardOrBackward = YES;
     [self.webView goBack];
 }
 
 - (IBAction)browseForwardPressed:(id)sender {
-    _isForwardOrBackward = YES;
     [self.webView goForward];
+}
+
+- (IBAction)dragMiddleViewBackGesture:(UIPanGestureRecognizer *)sender {
+    static float orgX = 0;
+    if (sender.state == UIGestureRecognizerStateBegan) {
+        orgX = CGRectGetMinX(self.middleView.frame);
+    } else if (sender.state == UIGestureRecognizerStateChanged) {
+        CGPoint translation = [sender translationInView:self.view];
+        if (translation.x < 0) {
+            CGRect f = self.middleView.frame;
+            f.origin.x = orgX + translation.x;
+            self.middleView.frame = f;
+        }
+    } else if (sender.state == UIGestureRecognizerStateEnded) {
+        [self _recoverNormalStatus];
+    }
+}
+
+- (IBAction)tapMiddleViewBackGesture:(UITapGestureRecognizer *)sender {
+    if (sender.state == UIGestureRecognizerStateRecognized) {
+        [self _recoverNormalStatus];
+    }
+}
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    return !gestureRecognizer.view.hidden;
 }
 
 - (void)_initializeTables {
@@ -493,9 +509,11 @@
     UIView *theViewShouldChangeFrame = nil;
     UIView *theViewShouldHide = nil;
     CGRect f;
+    CGFloat duration = 0.3f;
     if (_viewStatus == kViewStatusHistory) {
         f = self.middleView.frame;
-        f.origin.x -= 260.0f;
+        duration = 0.3 * (f.origin.x/10) / 26;
+        f.origin.x = 0;
         theViewShouldHide = self.leftView;
         theViewShouldChangeFrame = self.middleView;
     } else if (_viewStatus == kViewStatusSection) {
@@ -508,10 +526,11 @@
         theViewShouldChangeFrame = self.lightnessView;
     }
     
-    [UIView animateWithDuration:0.3 animations:^(){
+    [UIView animateWithDuration:duration animations:^(){
         theViewShouldChangeFrame.frame = f;
     }completion:^(BOOL finished) {
         if (theViewShouldHide) theViewShouldHide.hidden = YES;
+        self.gestureMask.hidden = YES;
     }];
     
     _viewStatus = kViewStatusNormal;

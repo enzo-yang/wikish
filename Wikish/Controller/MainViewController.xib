@@ -14,7 +14,9 @@
 			<string>IBProxyObject</string>
 			<string>IBUIButton</string>
 			<string>IBUILabel</string>
+			<string>IBUIPanGestureRecognizer</string>
 			<string>IBUITableView</string>
+			<string>IBUITapGestureRecognizer</string>
 			<string>IBUIView</string>
 			<string>IBUIWebView</string>
 		</array>
@@ -140,21 +142,6 @@
 								<bool key="IBUIScalesPageToFit">YES</bool>
 								<int key="IBUIDataDetectorTypes">1</int>
 								<bool key="IBUIDetectsPhoneNumbers">YES</bool>
-							</object>
-							<object class="IBUIView" id="658705855">
-								<reference key="NSNextResponder" ref="698221787"/>
-								<int key="NSvFlags">274</int>
-								<string key="NSFrameSize">{320, 504}</string>
-								<reference key="NSSuperview" ref="698221787"/>
-								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="105428804"/>
-								<string key="NSReuseIdentifierKey">_NS:9</string>
-								<object class="NSColor" key="IBUIBackgroundColor">
-									<int key="NSColorSpace">3</int>
-									<bytes key="NSWhite">MCAwLjAyAA</bytes>
-								</object>
-								<bool key="IBUIUserInteractionEnabled">NO</bool>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
 							<object class="IBUIView" id="187923460">
 								<reference key="NSNextResponder" ref="698221787"/>
@@ -524,6 +511,34 @@
 								</object>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
+							<object class="IBUIView" id="658705855">
+								<reference key="NSNextResponder" ref="698221787"/>
+								<int key="NSvFlags">274</int>
+								<string key="NSFrameSize">{320, 548}</string>
+								<reference key="NSSuperview" ref="698221787"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="105428804"/>
+								<string key="NSReuseIdentifierKey">_NS:9</string>
+								<object class="NSColor" key="IBUIBackgroundColor">
+									<int key="NSColorSpace">3</int>
+									<bytes key="NSWhite">MCAwLjAyAA</bytes>
+								</object>
+								<bool key="IBUIUserInteractionEnabled">NO</bool>
+								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+							</object>
+							<object class="IBUIView" id="817193977">
+								<reference key="NSNextResponder" ref="698221787"/>
+								<int key="NSvFlags">274</int>
+								<string key="NSFrameSize">{320, 548}</string>
+								<reference key="NSSuperview" ref="698221787"/>
+								<reference key="NSWindow"/>
+								<string key="NSReuseIdentifierKey">_NS:9</string>
+								<object class="NSColor" key="IBUIBackgroundColor">
+									<int key="NSColorSpace">3</int>
+									<bytes key="NSWhite">MCAwLjAyAA</bytes>
+								</object>
+								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+							</object>
 						</array>
 						<string key="NSFrameSize">{320, 548}</string>
 						<reference key="NSSuperview" ref="191373211"/>
@@ -549,6 +564,7 @@
 					<bytes key="NSWhite">MQA</bytes>
 					<reference key="NSCustomColorSpace" ref="806498963"/>
 				</object>
+				<array key="IBUIGestureRecognizers" id="0"/>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
 				<object class="IBUIScreenMetrics" key="IBUISimulatedDestinationMetrics">
 					<string key="IBUISimulatedSizeMetricsClass">IBUIScreenMetrics</string>
@@ -569,6 +585,8 @@
 				</object>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
+			<object class="IBUIPanGestureRecognizer" id="263970558"/>
+			<object class="IBUITapGestureRecognizer" id="433903816"/>
 		</array>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
 			<array class="NSMutableArray" key="connectionRecords">
@@ -677,6 +695,14 @@
 					<int key="connectionID">64</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">gestureMask</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="817193977"/>
+					</object>
+					<int key="connectionID">86</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">historyBtnPressed:</string>
 						<reference key="source" ref="452841025"/>
@@ -757,12 +783,64 @@
 					</object>
 					<int key="connectionID">70</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="263970558"/>
+						<reference key="destination" ref="372490531"/>
+					</object>
+					<int key="connectionID">79</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">dragMiddleViewBackGesture:</string>
+						<reference key="source" ref="263970558"/>
+						<reference key="destination" ref="372490531"/>
+					</object>
+					<int key="connectionID">80</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="433903816"/>
+						<reference key="destination" ref="372490531"/>
+					</object>
+					<int key="connectionID">83</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">tapMiddleViewBackGesture:</string>
+						<reference key="source" ref="433903816"/>
+						<reference key="destination" ref="372490531"/>
+					</object>
+					<int key="connectionID">84</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletCollectionConnection" key="connection">
+						<string key="label">gestureRecognizers</string>
+						<reference key="source" ref="817193977"/>
+						<reference key="destination" ref="263970558"/>
+						<string key="cachedDesigntimeCollectionClassName">NSArray</string>
+						<bool key="addsContentToExistingCollection">YES</bool>
+					</object>
+					<int key="connectionID">87</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletCollectionConnection" key="connection">
+						<string key="label">gestureRecognizers</string>
+						<reference key="source" ref="817193977"/>
+						<reference key="destination" ref="433903816"/>
+						<string key="cachedDesigntimeCollectionClassName">NSArray</string>
+						<bool key="addsContentToExistingCollection">YES</bool>
+					</object>
+					<int key="connectionID">88</int>
+				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
 					<object class="IBObjectRecord">
 						<int key="objectID">0</int>
-						<array key="object" id="0"/>
+						<reference key="object" ref="0"/>
 						<reference key="children" ref="1000"/>
 						<nil key="parent"/>
 					</object>
@@ -796,6 +874,7 @@
 							<reference ref="105428804"/>
 							<reference ref="658705855"/>
 							<reference ref="187923460"/>
+							<reference ref="817193977"/>
 						</array>
 						<reference key="parent" ref="191373211"/>
 					</object>
@@ -924,6 +1003,21 @@
 						<reference key="object" ref="382402916"/>
 						<reference key="parent" ref="442237807"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">76</int>
+						<reference key="object" ref="263970558"/>
+						<reference key="parent" ref="0"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">81</int>
+						<reference key="object" ref="433903816"/>
+						<reference key="parent" ref="0"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">85</int>
+						<reference key="object" ref="817193977"/>
+						<reference key="parent" ref="698221787"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -953,12 +1047,15 @@
 				<string key="59.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="65.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="67.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="76.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="81.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="85.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">70</int>
+			<int key="maxID">88</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -968,6 +1065,7 @@
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="browseBackPressed:">id</string>
 						<string key="browseForwardPressed:">id</string>
+						<string key="dragMiddleViewBackGesture:">UIPanGestureRecognizer</string>
 						<string key="historyBtnPressed:">id</string>
 						<string key="lightnessBtnPressed:">id</string>
 						<string key="lightnessDownBtnPressed:">id</string>
@@ -975,6 +1073,7 @@
 						<string key="searchBtnPressed:">id</string>
 						<string key="sectionBtnPressed:">id</string>
 						<string key="settingBtnPressed:">id</string>
+						<string key="tapMiddleViewBackGesture:">UITapGestureRecognizer</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="browseBackPressed:">
@@ -984,6 +1083,10 @@
 						<object class="IBActionInfo" key="browseForwardPressed:">
 							<string key="name">browseForwardPressed:</string>
 							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="dragMiddleViewBackGesture:">
+							<string key="name">dragMiddleViewBackGesture:</string>
+							<string key="candidateClassName">UIPanGestureRecognizer</string>
 						</object>
 						<object class="IBActionInfo" key="historyBtnPressed:">
 							<string key="name">historyBtnPressed:</string>
@@ -1013,10 +1116,15 @@
 							<string key="name">settingBtnPressed:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="tapMiddleViewBackGesture:">
+							<string key="name">tapMiddleViewBackGesture:</string>
+							<string key="candidateClassName">UITapGestureRecognizer</string>
+						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="bottomView">UIView</string>
 						<string key="favouriteTable">UITableView</string>
+						<string key="gestureMask">UIView</string>
 						<string key="headerView">UIView</string>
 						<string key="historyTable">UITableView</string>
 						<string key="leftView">UIView</string>
@@ -1036,6 +1144,10 @@
 						<object class="IBToOneOutletInfo" key="favouriteTable">
 							<string key="name">favouriteTable</string>
 							<string key="candidateClassName">UITableView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="gestureMask">
+							<string key="name">gestureMask</string>
+							<string key="candidateClassName">UIView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="headerView">
 							<string key="name">headerView</string>

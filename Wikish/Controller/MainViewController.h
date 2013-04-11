@@ -26,7 +26,6 @@ typedef enum {
     ViewStatus _viewStatus;
     
     BOOL        _canLoadThisRequest;
-    BOOL        _isForwardOrBackward;
     
     WikiPageInfo *_pageInfo;
     WikiSite     *_currentSite;
@@ -49,6 +48,7 @@ typedef enum {
 @property (retain, nonatomic) IBOutlet UILabel *titleLabel;
 @property (retain, nonatomic) IBOutlet UIView *lightnessView;
 @property (retain, nonatomic) IBOutlet UIView *lightnessMask;
+@property (retain, nonatomic) IBOutlet UIView *gestureMask;
 
 @property (retain, nonatomic) IBOutlet UITableView *historyTable;
 @property (retain, nonatomic) HistoryTableController *historyController;
@@ -68,6 +68,8 @@ typedef enum {
 - (IBAction)lightnessDownBtnPressed:(id)sender;
 - (IBAction)browseBackPressed:(id)sender;
 - (IBAction)browseForwardPressed:(id)sender;
+- (IBAction)dragMiddleViewBackGesture:(UIPanGestureRecognizer *)sender;
+- (IBAction)tapMiddleViewBackGesture:(UITapGestureRecognizer *)sender;
 
 - (void)scrollTo:(NSString *)anchorPoint;
 - (void)loadSite:(WikiSite *)site title:(NSString *)theTitle;
