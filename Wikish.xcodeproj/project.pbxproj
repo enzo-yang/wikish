@@ -15,6 +15,8 @@
 		C64ECDD216C2A9C2006D3767 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C64ECDD016C2A9C2006D3767 /* SettingViewController.m */; };
 		C64ECDD316C2A9C2006D3767 /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C64ECDD116C2A9C2006D3767 /* SettingViewController.xib */; };
 		C64ECDDC16C32A92006D3767 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C64ECDDE16C32A92006D3767 /* Localizable.strings */; };
+		C64FD07E1717E52E00AB7236 /* FirstLaunchHelpController.m in Sources */ = {isa = PBXBuildFile; fileRef = C64FD07C1717E52E00AB7236 /* FirstLaunchHelpController.m */; };
+		C64FD07F1717E52E00AB7236 /* FirstLaunchHelpController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C64FD07D1717E52E00AB7236 /* FirstLaunchHelpController.xib */; };
 		C67F8C661699A9BA004C9B3D /* AutoPropertyRelease.m in Sources */ = {isa = PBXBuildFile; fileRef = C67F8C651699A9BA004C9B3D /* AutoPropertyRelease.m */; };
 		C67F8C671699A9BA004C9B3D /* AutoPropertyRelease.m in Sources */ = {isa = PBXBuildFile; fileRef = C67F8C651699A9BA004C9B3D /* AutoPropertyRelease.m */; };
 		C6921E9F16FCB40800D18C22 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6921E9D16FCB40800D18C22 /* HelpViewController.m */; };
@@ -130,6 +132,9 @@
 		C64ECDE016C32AD1006D3767 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		C64ECDE116C32AD1006D3767 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		C64ECDE816C49A9C006D3767 /* Wikish-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Wikish-Info.plist"; sourceTree = "<group>"; };
+		C64FD07B1717E52E00AB7236 /* FirstLaunchHelpController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstLaunchHelpController.h; sourceTree = "<group>"; };
+		C64FD07C1717E52E00AB7236 /* FirstLaunchHelpController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstLaunchHelpController.m; sourceTree = "<group>"; };
+		C64FD07D1717E52E00AB7236 /* FirstLaunchHelpController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FirstLaunchHelpController.xib; sourceTree = "<group>"; };
 		C66C343616FAEC5E00DB3926 /* Macros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
 		C67F8C641699A9BA004C9B3D /* AutoPropertyRelease.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoPropertyRelease.h; sourceTree = "<group>"; };
 		C67F8C651699A9BA004C9B3D /* AutoPropertyRelease.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoPropertyRelease.m; sourceTree = "<group>"; };
@@ -558,6 +563,9 @@
 				C6921E9C16FCB40800D18C22 /* HelpViewController.h */,
 				C6921E9D16FCB40800D18C22 /* HelpViewController.m */,
 				C6921E9E16FCB40800D18C22 /* HelpViewController.xib */,
+				C64FD07B1717E52E00AB7236 /* FirstLaunchHelpController.h */,
+				C64FD07C1717E52E00AB7236 /* FirstLaunchHelpController.m */,
+				C64FD07D1717E52E00AB7236 /* FirstLaunchHelpController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -681,6 +689,7 @@
 				C6921EAE16FDB76D00D18C22 /* Default-568h@2x.png in Resources */,
 				C6921EB016FDBA5500D18C22 /* Default@2x.png in Resources */,
 				C6921EB216FDBB0700D18C22 /* Default.png in Resources */,
+				C64FD07F1717E52E00AB7236 /* FirstLaunchHelpController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -757,6 +766,7 @@
 				C6F9407216E36574005DBBD5 /* SVProgressHUD.m in Sources */,
 				C6EFA0E016E78637006FE551 /* Button.m in Sources */,
 				C6921E9F16FCB40800D18C22 /* HelpViewController.m in Sources */,
+				C64FD07E1717E52E00AB7236 /* FirstLaunchHelpController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

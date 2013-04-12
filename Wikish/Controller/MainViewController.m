@@ -391,7 +391,6 @@
             self.middleView.frame = f;
         } completion:^(BOOL finished) {
             self.gestureMask.hidden = NO;
-            NSLog(@"%@", self.gestureMask.superview);
         }];
     }
 }

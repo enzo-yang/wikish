@@ -15,6 +15,9 @@
 @property (nonatomic, retain) TableViewGestureRecognizer *recognizer;
 @end
 
+#define kLabelDeleteTag 23423
+#define kOffsetForCommit 150.0f
+
 @implementation HistoryTableController
 
 - (id)init {
@@ -42,7 +45,7 @@
 }
 
 - (CGFloat)gestureRecognizer:(TableViewGestureRecognizer *)gestureRecognizer lengthForCommitPanningRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 150.0f;
+    return kOffsetForCommit;
 }
 
 - (void)gestureRecognizer:(TableViewGestureRecognizer *)gestureRecognizer didEnterPanState:(TableViewCellPanState)state forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -59,6 +62,11 @@
     rv = rd-r; gv = gd-g; bv = bd-b;
     
     cell.contentView.backgroundColor = [UIColor colorWithRed:r+color_offset*rv green:g+color_offset*gv blue:b+color_offset*bv alpha:1];
+    if (fabs(left) > kOffsetForCommit) {
+        [cell.backgroundView viewWithTag:kLabelDeleteTag].hidden = NO;
+    } else {
+        [cell.backgroundView viewWithTag:kLabelDeleteTag].hidden = YES;
+    }
 }
 - (void)gestureRecognizer:(TableViewGestureRecognizer *)gestureRecognizer commitPanState:(TableViewCellPanState)state forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (state != TableViewCellPanStateLeft) return;
@@ -85,6 +93,20 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID] autorelease];
         cell.backgroundView = [[UIView new] autorelease];
         cell.backgroundView.backgroundColor = GetTableCellBackgroundColor();
+        
+        UILabel *labelDelete = [[[UILabel alloc] initWithFrame:cell.backgroundView.bounds] autorelease];
+        labelDelete.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        [labelDelete setTextAlignment:NSTextAlignmentRight];
+        [labelDelete setTextColor:[UIColor colorWithRed:1.0 green:0.2 blue:0.2 alpha:1]];
+        [labelDelete setBackgroundColor:[UIColor clearColor]];
+        [labelDelete setShadowOffset:CGSizeMake(0, 1)];
+        [labelDelete setShadowColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.3]];
+        [labelDelete setFont:[UIFont boldSystemFontOfSize:17.0f]];
+        labelDelete.text = NSLocalizedString(@"Delete", nil);
+        labelDelete.tag = kLabelDeleteTag;
+        [cell.backgroundView addSubview:labelDelete];
+        
+        
         cell.textLabel.font = [UIFont systemFontOfSize:17.0f];
         cell.textLabel.backgroundColor = [UIColor clearColor];
         cell.detailTextLabel.backgroundColor = [UIColor clearColor];
@@ -94,6 +116,7 @@
         
     }
     cell.contentView.backgroundColor    = GetTableBackgourndColor();
+    [cell.backgroundView viewWithTag:kLabelDeleteTag].hidden = YES;
     WikiRecord *record = [_history.history objectAtIndex:indexPath.row];
     cell.textLabel.text = record.title;
     cell.detailTextLabel.text = record.name;
