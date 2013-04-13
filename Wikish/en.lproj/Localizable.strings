@@ -31,4 +31,7 @@
 "Back" = "Back";
 
 "Delete" = "DELETE ";
+"Lightness Control" = "Lightness Control";
+"Copy Link" = "Copy Link";
+"link was copied" = "Link was copy into Pasteboard";
 

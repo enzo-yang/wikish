@@ -10,17 +10,22 @@
 		C603784216FCAC5000020AA0 /* ductionary-57.png in Resources */ = {isa = PBXBuildFile; fileRef = C603784116FCAC5000020AA0 /* ductionary-57.png */; };
 		C603784416FCAC7E00020AA0 /* ductionary-114.png in Resources */ = {isa = PBXBuildFile; fileRef = C603784316FCAC7E00020AA0 /* ductionary-114.png */; };
 		C615E21116BE23BE00506BE2 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C615E21016BE23BE00506BE2 /* QuartzCore.framework */; };
+		C630F64E171938CA00196A47 /* removing.png in Resources */ = {isa = PBXBuildFile; fileRef = C630F64D171938CA00196A47 /* removing.png */; };
+		C630F65017193A2500196A47 /* adding.png in Resources */ = {isa = PBXBuildFile; fileRef = C630F64F17193A2500196A47 /* adding.png */; };
+		C630F6521719410400196A47 /* section_jump.png in Resources */ = {isa = PBXBuildFile; fileRef = C630F6511719410400196A47 /* section_jump.png */; };
+		C630F6551719435300196A47 /* change-lang-tr.png in Resources */ = {isa = PBXBuildFile; fileRef = C630F6531719435300196A47 /* change-lang-tr.png */; };
+		C630F6561719435300196A47 /* change-lang-en.png in Resources */ = {isa = PBXBuildFile; fileRef = C630F6541719435300196A47 /* change-lang-en.png */; };
+		C630F659171949D200196A47 /* backward-64.png in Resources */ = {isa = PBXBuildFile; fileRef = C630F657171949D200196A47 /* backward-64.png */; };
+		C630F65A171949D200196A47 /* forward-64.png in Resources */ = {isa = PBXBuildFile; fileRef = C630F658171949D200196A47 /* forward-64.png */; };
 		C6471748169B28A4006ACC7A /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6471747169B28A4006ACC7A /* MobileCoreServices.framework */; };
 		C6471749169B28AC006ACC7A /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6471747169B28A4006ACC7A /* MobileCoreServices.framework */; };
 		C64ECDD216C2A9C2006D3767 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C64ECDD016C2A9C2006D3767 /* SettingViewController.m */; };
 		C64ECDD316C2A9C2006D3767 /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C64ECDD116C2A9C2006D3767 /* SettingViewController.xib */; };
 		C64ECDDC16C32A92006D3767 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C64ECDDE16C32A92006D3767 /* Localizable.strings */; };
-		C64FD07E1717E52E00AB7236 /* FirstLaunchHelpController.m in Sources */ = {isa = PBXBuildFile; fileRef = C64FD07C1717E52E00AB7236 /* FirstLaunchHelpController.m */; };
-		C64FD07F1717E52E00AB7236 /* FirstLaunchHelpController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C64FD07D1717E52E00AB7236 /* FirstLaunchHelpController.xib */; };
+		C64FD07E1717E52E00AB7236 /* HelpController.m in Sources */ = {isa = PBXBuildFile; fileRef = C64FD07C1717E52E00AB7236 /* HelpController.m */; };
+		C64FD07F1717E52E00AB7236 /* HelpController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C64FD07D1717E52E00AB7236 /* HelpController.xib */; };
 		C67F8C661699A9BA004C9B3D /* AutoPropertyRelease.m in Sources */ = {isa = PBXBuildFile; fileRef = C67F8C651699A9BA004C9B3D /* AutoPropertyRelease.m */; };
 		C67F8C671699A9BA004C9B3D /* AutoPropertyRelease.m in Sources */ = {isa = PBXBuildFile; fileRef = C67F8C651699A9BA004C9B3D /* AutoPropertyRelease.m */; };
-		C6921E9F16FCB40800D18C22 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6921E9D16FCB40800D18C22 /* HelpViewController.m */; };
-		C6921EA016FCB40800D18C22 /* HelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6921E9E16FCB40800D18C22 /* HelpViewController.xib */; };
 		C6921EA916FD917900D18C22 /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C6921EA716FD917900D18C22 /* libGoogleAnalytics.a */; };
 		C6921EAA16FD917900D18C22 /* libGoogleAnalytics_debug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C6921EA816FD917900D18C22 /* libGoogleAnalytics_debug.a */; };
 		C6921EAC16FD9A7800D18C22 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6921EAB16FD9A7800D18C22 /* CoreData.framework */; };
@@ -123,6 +128,13 @@
 		C603784316FCAC7E00020AA0 /* ductionary-114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ductionary-114.png"; sourceTree = "<group>"; };
 		C603784516FCACC800020AA0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		C615E21016BE23BE00506BE2 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		C630F64D171938CA00196A47 /* removing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = removing.png; sourceTree = "<group>"; };
+		C630F64F17193A2500196A47 /* adding.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = adding.png; sourceTree = "<group>"; };
+		C630F6511719410400196A47 /* section_jump.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = section_jump.png; sourceTree = "<group>"; };
+		C630F6531719435300196A47 /* change-lang-tr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "change-lang-tr.png"; sourceTree = "<group>"; };
+		C630F6541719435300196A47 /* change-lang-en.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "change-lang-en.png"; sourceTree = "<group>"; };
+		C630F657171949D200196A47 /* backward-64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backward-64.png"; sourceTree = "<group>"; };
+		C630F658171949D200196A47 /* forward-64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "forward-64.png"; sourceTree = "<group>"; };
 		C6471744169B24F7006ACC7A /* wiki-page-head-html.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "wiki-page-head-html.txt"; sourceTree = "<group>"; };
 		C6471747169B28A4006ACC7A /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		C64ECDCF16C2A9C2006D3767 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
@@ -132,15 +144,12 @@
 		C64ECDE016C32AD1006D3767 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		C64ECDE116C32AD1006D3767 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		C64ECDE816C49A9C006D3767 /* Wikish-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Wikish-Info.plist"; sourceTree = "<group>"; };
-		C64FD07B1717E52E00AB7236 /* FirstLaunchHelpController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstLaunchHelpController.h; sourceTree = "<group>"; };
-		C64FD07C1717E52E00AB7236 /* FirstLaunchHelpController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstLaunchHelpController.m; sourceTree = "<group>"; };
-		C64FD07D1717E52E00AB7236 /* FirstLaunchHelpController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FirstLaunchHelpController.xib; sourceTree = "<group>"; };
+		C64FD07B1717E52E00AB7236 /* HelpController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpController.h; sourceTree = "<group>"; };
+		C64FD07C1717E52E00AB7236 /* HelpController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpController.m; sourceTree = "<group>"; };
+		C64FD07D1717E52E00AB7236 /* HelpController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HelpController.xib; sourceTree = "<group>"; };
 		C66C343616FAEC5E00DB3926 /* Macros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
 		C67F8C641699A9BA004C9B3D /* AutoPropertyRelease.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoPropertyRelease.h; sourceTree = "<group>"; };
 		C67F8C651699A9BA004C9B3D /* AutoPropertyRelease.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoPropertyRelease.m; sourceTree = "<group>"; };
-		C6921E9C16FCB40800D18C22 /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpViewController.h; sourceTree = "<group>"; };
-		C6921E9D16FCB40800D18C22 /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpViewController.m; sourceTree = "<group>"; };
-		C6921E9E16FCB40800D18C22 /* HelpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HelpViewController.xib; sourceTree = "<group>"; };
 		C6921EA216FD917900D18C22 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
 		C6921EA316FD917900D18C22 /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
 		C6921EA416FD917900D18C22 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
@@ -301,6 +310,13 @@
 		C6471742169B24E3006ACC7A /* images */ = {
 			isa = PBXGroup;
 			children = (
+				C630F6531719435300196A47 /* change-lang-tr.png */,
+				C630F6541719435300196A47 /* change-lang-en.png */,
+				C630F64D171938CA00196A47 /* removing.png */,
+				C630F64F17193A2500196A47 /* adding.png */,
+				C630F6511719410400196A47 /* section_jump.png */,
+				C630F657171949D200196A47 /* backward-64.png */,
+				C630F658171949D200196A47 /* forward-64.png */,
 				C694256B16F9F1270094572E /* sun-4-58.png */,
 				C694256716F9EF710094572E /* sun-4-64.png */,
 				C6EFA0E116EB6B19006FE551 /* square-normal.png */,
@@ -560,12 +576,9 @@
 				C696DD6316E0D10B009A7A58 /* FavouriteTableController.m */,
 				C696DD6516E0D81D009A7A58 /* MainTableController.h */,
 				C696DD6616E0D81D009A7A58 /* MainTableController.m */,
-				C6921E9C16FCB40800D18C22 /* HelpViewController.h */,
-				C6921E9D16FCB40800D18C22 /* HelpViewController.m */,
-				C6921E9E16FCB40800D18C22 /* HelpViewController.xib */,
-				C64FD07B1717E52E00AB7236 /* FirstLaunchHelpController.h */,
-				C64FD07C1717E52E00AB7236 /* FirstLaunchHelpController.m */,
-				C64FD07D1717E52E00AB7236 /* FirstLaunchHelpController.xib */,
+				C64FD07B1717E52E00AB7236 /* HelpController.h */,
+				C64FD07C1717E52E00AB7236 /* HelpController.m */,
+				C64FD07D1717E52E00AB7236 /* HelpController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -685,11 +698,17 @@
 				C603784416FCAC7E00020AA0 /* ductionary-114.png in Resources */,
 				C694256816F9EF710094572E /* sun-4-64.png in Resources */,
 				C694256C16F9F1270094572E /* sun-4-58.png in Resources */,
-				C6921EA016FCB40800D18C22 /* HelpViewController.xib in Resources */,
 				C6921EAE16FDB76D00D18C22 /* Default-568h@2x.png in Resources */,
 				C6921EB016FDBA5500D18C22 /* Default@2x.png in Resources */,
 				C6921EB216FDBB0700D18C22 /* Default.png in Resources */,
-				C64FD07F1717E52E00AB7236 /* FirstLaunchHelpController.xib in Resources */,
+				C64FD07F1717E52E00AB7236 /* HelpController.xib in Resources */,
+				C630F64E171938CA00196A47 /* removing.png in Resources */,
+				C630F65017193A2500196A47 /* adding.png in Resources */,
+				C630F6521719410400196A47 /* section_jump.png in Resources */,
+				C630F6551719435300196A47 /* change-lang-tr.png in Resources */,
+				C630F6561719435300196A47 /* change-lang-en.png in Resources */,
+				C630F659171949D200196A47 /* backward-64.png in Resources */,
+				C630F65A171949D200196A47 /* forward-64.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -765,8 +784,7 @@
 				C6F9405916E20F17005DBBD5 /* Setting.m in Sources */,
 				C6F9407216E36574005DBBD5 /* SVProgressHUD.m in Sources */,
 				C6EFA0E016E78637006FE551 /* Button.m in Sources */,
-				C6921E9F16FCB40800D18C22 /* HelpViewController.m in Sources */,
-				C64FD07E1717E52E00AB7236 /* FirstLaunchHelpController.m in Sources */,
+				C64FD07E1717E52E00AB7236 /* HelpController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,7 +15,7 @@
 #import "AutoPropertyRelease.h"
 #import "TableViewGestureRecognizer.h"
 #import "Button.h"
-#import "HelpViewController.h"
+#import "HelpController.h"
 
 
 
@@ -81,7 +81,11 @@
 }
 
 - (IBAction)helpButtonPressed:(id)sender {
-    [self presentModalViewController:[[HelpViewController new] autorelease] animated:YES];
+    HelpController *hCtrl = [[HelpController new] autorelease];
+    hCtrl.okBlock = ^{
+        [hCtrl dismissModalViewControllerAnimated:YES];
+    };
+    [self presentModalViewController:hCtrl animated:YES];
 }
 
 #pragma mark -

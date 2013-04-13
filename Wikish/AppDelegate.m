@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "MainViewController.h"
+#import "HelpController.h"
 #import "TapDetectingWindow.h"
 #import "Setting.h"
 #import "GAI.h"
@@ -29,14 +30,25 @@
     [[GAI sharedInstance] trackerWithTrackingId:@"UA-39546615-1"];
     
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
-    
-    if ([self _isFirstLaunch]) [Setting useDefaultSetting];
+    BOOL isFirstLaunch = [self _isFirstLaunch];
+    if (isFirstLaunch) [Setting useDefaultSetting];
     [Setting registerUserAgent];
     self.window = [[[TapDetectingWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
-    UINavigationController *nav = [[[UINavigationController alloc] initWithRootViewController:[[MainViewController new] autorelease]] autorelease];
+    UINavigationController *nav = nil;
+    if (isFirstLaunch) {
+        HelpController *hCtrl = [[HelpController new] autorelease];
+        MainViewController *mainCtrl = [[MainViewController new] autorelease];
+        nav = [[[UINavigationController alloc] initWithRootViewController:hCtrl] autorelease];
+        hCtrl.okBlock = ^{
+            [nav pushViewController:mainCtrl animated:YES];
+        };
+        
+    } else {
+        nav = [[[UINavigationController alloc] initWithRootViewController:[[MainViewController new] autorelease]] autorelease];
+    }
     nav.navigationBarHidden = YES;
     self.window.rootViewController = nav;
     

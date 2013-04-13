@@ -36,7 +36,7 @@
 
 #define kHandleDragThreshold        150
 
-@interface MainViewController ()<WikiPageInfoDelegate, UIWebViewDelegate, UIScrollViewDelegate, TapDetectingWindowDelegate, UIGestureRecognizerDelegate>
+@interface MainViewController ()<WikiPageInfoDelegate, UIWebViewDelegate, UIScrollViewDelegate, TapDetectingWindowDelegate, UIGestureRecognizerDelegate, UIActionSheetDelegate>
 @property (nonatomic, retain) WikiPageInfo  *pageInfo;
 @property (nonatomic, retain) WikiSite      *currentSite;
 @end
@@ -418,30 +418,37 @@
     }
 }
 
-- (IBAction)lightnessBtnPressed:(id)sender {
-    if (_viewStatus != kViewStatusNormal) {
-        [self _recoverNormalStatus];
-    } else {
-        _viewStatus = kViewStatusLightness;
-        self.lightnessView.hidden = NO;
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationDuration:0.3];
-        CGRect f = self.lightnessView.frame;
-        f.origin.y -= 100.0f;
-        self.lightnessView.frame = f;
-        [UIView commitAnimations];
-    }
-}
-
 - (IBAction)settingBtnPressed:(id)sender {
     if (_viewStatus != kViewStatusNormal) {
         [self _recoverNormalStatus];
         return;
     }
     SettingViewController *svc = [[SettingViewController new] autorelease];
-    // [self presentModalViewController:svc animated:YES];
     [self.navigationController pushViewController:svc animated:YES];
     
+}
+
+- (IBAction)moreActionBtnPressed:(id)sender {
+    if (_viewStatus != kViewStatusNormal) {
+        [self _recoverNormalStatus];
+        return;
+    }
+    
+    UIActionSheet *sheet = [[[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Lightness Control", nil), NSLocalizedString(@"Copy Link", nil), nil] autorelease];
+    [sheet showInView:self.view];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        _viewStatus = kViewStatusLightness;
+        [self _showLightnessView];
+    } else if (buttonIndex == 1) {
+        UIPasteboard *pb = [UIPasteboard generalPasteboard];
+        pb.string = [[self.pageInfo pageURL] absoluteString];
+        [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"link was copied", nil)];
+    } else {
+        NSLog(@"cancel");
+    }
 }
 
 - (IBAction)lightnessUpBtnPressed:(id)sender {
@@ -452,6 +459,24 @@
 - (IBAction)lightnessDownBtnPressed:(id)sender {
     [Setting lightnessDown];
     self.lightnessMask.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:[Setting lightnessMaskValue]];
+}
+
+- (void)_showLightnessView {
+    self.lightnessView.center = CGPointMake(CGRectGetWidth(self.view.bounds)/2, CGRectGetHeight(self.view.bounds)/2);
+    self.lightnessView.alpha = 0.0f;
+    [self.view addSubview:self.lightnessView];
+    [UIView animateWithDuration:0.3f animations:^{
+        self.lightnessView.alpha = 1.0f;
+    }];
+    
+}
+
+- (void)_hideLightnessView {
+    [UIView animateWithDuration:0.3f animations:^{
+        self.lightnessView.alpha = 0.0f;
+    } completion:^(BOOL finished) {
+        [self.lightnessView removeFromSuperview];
+    }];
 }
 
 - (IBAction)browseBackPressed:(id)sender {
@@ -509,20 +534,22 @@
     UIView *theViewShouldHide = nil;
     CGRect f;
     CGFloat duration = 0.3f;
-    if (_viewStatus == kViewStatusHistory) {
+    ViewStatus viewStatus = _viewStatus;
+    _viewStatus = kViewStatusNormal;
+    
+    if (viewStatus == kViewStatusHistory) {
         f = self.middleView.frame;
         duration = 0.3 * (f.origin.x/10) / 26;
         f.origin.x = 0;
         theViewShouldHide = self.leftView;
         theViewShouldChangeFrame = self.middleView;
-    } else if (_viewStatus == kViewStatusSection) {
+    } else if (viewStatus == kViewStatusSection) {
         f = self.bottomView.frame;
         f.origin.y += 300.0f;
         theViewShouldChangeFrame = self.bottomView;
-    } else if (_viewStatus == kViewStatusLightness) {
-        f = self.lightnessView.frame;
-        f.origin.y += 100.0f;
-        theViewShouldChangeFrame = self.lightnessView;
+    } else if (viewStatus == kViewStatusLightness) {
+        [self _hideLightnessView];
+        return;
     }
     
     [UIView animateWithDuration:duration animations:^(){
@@ -532,7 +559,7 @@
         self.gestureMask.hidden = YES;
     }];
     
-    _viewStatus = kViewStatusNormal;
+
 }
 
 - (NSInteger)_analyseScrollDirection:(UIScrollView *)scrollView {
@@ -585,6 +612,8 @@
     self.middleView.layer.masksToBounds = NO;
     
     self.lightnessMask.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:[Setting lightnessMaskValue]];
+    
+    self.lightnessView.layer.cornerRadius = 8.0f;
 }
 - (void)viewDidUnload {
     [self setTitleLabel:nil];

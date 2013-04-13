@@ -62,14 +62,15 @@ typedef enum {
 - (IBAction)historyBtnPressed:(id)sender;
 - (IBAction)searchBtnPressed:(id)sender;
 - (IBAction)sectionBtnPressed:(id)sender;
-- (IBAction)lightnessBtnPressed:(id)sender;
 - (IBAction)settingBtnPressed:(id)sender;
+- (IBAction)moreActionBtnPressed:(id)sender;
 - (IBAction)lightnessUpBtnPressed:(id)sender;
 - (IBAction)lightnessDownBtnPressed:(id)sender;
 - (IBAction)browseBackPressed:(id)sender;
 - (IBAction)browseForwardPressed:(id)sender;
 - (IBAction)dragMiddleViewBackGesture:(UIPanGestureRecognizer *)sender;
 - (IBAction)tapMiddleViewBackGesture:(UITapGestureRecognizer *)sender;
+
 
 - (void)scrollTo:(NSString *)anchorPoint;
 - (void)loadSite:(WikiSite *)site title:(NSString *)theTitle;
