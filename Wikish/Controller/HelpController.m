@@ -25,7 +25,7 @@
         CGFloat scrollerHeight = CGRectGetHeight(self.scroller.bounds);
         
         self.scroller.contentSize = CGSizeMake(scrollerWidth * 3, scrollerHeight);
-        self.page1.bounds = CGRectMake(0, 0, scrollerWidth, scrollerHeight);
+        self.page1.frame = CGRectMake(0, 0, scrollerWidth, scrollerHeight);
         
         self.page2.frame = CGRectMake(scrollerWidth, 0, scrollerWidth, scrollerHeight);
         [self.scroller addSubview:self.page2];

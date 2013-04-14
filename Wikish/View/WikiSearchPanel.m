@@ -209,11 +209,11 @@ NSString *const kNotificationMessageSearchKeyword = @"kNotificationMessageSearch
 //    self.langBtn.layer.rasterizationScale = [UIScreen mainScreen].scale;
 //    self.langBtn.layer.shouldRasterize = YES;
     
-    UIImage *noramlImage = [[UIImage imageNamed:@"square-normal.png"] stretchableImageWithLeftCapWidth:24 topCapHeight:24];
-    UIImage *highlightImage = [[UIImage imageNamed:@"square-highlight.png"] stretchableImageWithLeftCapWidth:24 topCapHeight:24];
-    [self.cancelBtn setBackgroundImage:noramlImage forState:UIControlStateNormal];
-    [self.cancelBtn setBackgroundImage:highlightImage forState:UIControlStateHighlighted];
-    [self.cancelBtn setTitle:NSLocalizedString(@"Cancel", nil) forState:UIControlStateNormal];
+//    UIImage *noramlImage = [[UIImage imageNamed:@"square-normal.png"] stretchableImageWithLeftCapWidth:24 topCapHeight:24];
+//    UIImage *highlightImage = [[UIImage imageNamed:@"square-highlight.png"] stretchableImageWithLeftCapWidth:24 topCapHeight:24];
+//    [self.cancelBtn setBackgroundImage:noramlImage forState:UIControlStateNormal];
+//    [self.cancelBtn setBackgroundImage:highlightImage forState:UIControlStateHighlighted];
+//    [self.cancelBtn setTitle:NSLocalizedString(@"Cancel", nil) forState:UIControlStateNormal];
     
 }
 

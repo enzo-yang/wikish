@@ -139,6 +139,9 @@
         cell.backgroundView = [UIView new];
         cell.backgroundView.backgroundColor = GetTableCellBackgroundColor();
         cell.textLabel.font = [UIFont systemFontOfSize:17.0f];
+        
+        cell.selectedBackgroundView = [UIView new];
+        cell.selectedBackgroundView.backgroundColor = GetTableHighlightRowColor();
     }
     cell.contentView.backgroundColor = GetTableBackgourndColor();
     cell.textLabel.backgroundColor = [UIColor clearColor];
@@ -184,6 +187,13 @@
         [_commonSitesTable reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:defaultIndex inSection:indexPath.section], indexPath] withRowAnimation:UITableViewRowAnimationNone];
         [_commonSitesTable endUpdates];
         
+    } else if (tableView == _sitesTable) {
+        [tableView deselectRowAtIndexPath:indexPath animated:NO];
+        WikiSite *site = [_siteManager.supportedSites objectAtIndex:indexPath.row];
+        [_siteManager addCommonSite:site];
+        [_siteManager setDefaultSite:site];
+        
+        [_commonSitesTable reloadData];
     }
 }
 
