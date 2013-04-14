@@ -56,6 +56,8 @@ typedef enum {
 @property (retain, nonatomic) SectionTableController *sectionController;
 @property (retain, nonatomic) IBOutlet UITableView *favouriteTable;
 @property (retain, nonatomic) FavouriteTableController *favouriteController;
+@property (retain, nonatomic) IBOutlet UIButton *backwardButton;
+@property (retain, nonatomic) IBOutlet UIButton *forewardButton;
 
 @property (readonly, nonatomic) WikiPageInfo *pageInfo;
 

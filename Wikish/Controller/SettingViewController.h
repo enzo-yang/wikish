@@ -14,7 +14,7 @@
 @interface SettingViewController : UIViewController
 
 @property (nonatomic, retain) IBOutlet Button       *okButton;
-@property (retain, nonatomic) IBOutlet Button *helpButton;
+@property (retain, nonatomic) IBOutlet UIButton *helpButton;
 @property (nonatomic, retain) IBOutlet UILabel      *settingLabel;
 
 @property (nonatomic, retain) IBOutlet UIView       *httpsView;

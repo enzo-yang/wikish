@@ -347,13 +347,6 @@
     self.okButton.layer.rasterizationScale = scale;
     self.okButton.layer.shouldRasterize = YES;
     
-    self.helpButton.layer.cornerRadius = 6.0f;
-    self.helpButton.layer.masksToBounds = YES;
-    [self.helpButton setBackgroundColor:DarkGreenColor() forState:UIControlStateNormal];
-    [self.helpButton setBackgroundColor:GetTableHighlightRowColor() forState:UIControlStateHighlighted];
-    self.helpButton.layer.rasterizationScale = scale;
-    self.helpButton.layer.shouldRasterize = YES;
-    
     for (Button *btn in self.homeButtons) {
         [btn setBackgroundColor:GetDarkColor() forState:UIControlStateNormal];
         [btn setBackgroundColor:DarkGreenColor() forState:UIControlStateSelected];

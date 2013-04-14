@@ -76,6 +76,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_loadPageFromNotification:) name:kNotificationMessageSearchKeyword object:nil];
     
     [self _loadHomePage];
+    [self _updateBackwardForwardButton];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -111,6 +112,8 @@
     [_lightnessMask release];
     
     [_pageInfos release];
+    [_backwardButton release];
+    [_forewardButton release];
     [super dealloc];
 }
 
@@ -295,6 +298,7 @@
     if ([SVProgressHUD isVisible]) {
         [SVProgressHUD dismiss];
     }
+    [self _updateBackwardForwardButton];
     LOG(@"page finish load");
 }
 
@@ -594,6 +598,20 @@
     }
 }
 
+- (void)_updateBackwardForwardButton {
+    if ([self.webView canGoBack]) {
+        self.backwardButton.enabled = YES;
+    } else {
+        self.backwardButton.enabled = NO;
+    }
+    
+    if ([self.webView canGoForward]) {
+        self.forewardButton.enabled = YES;
+    } else {
+        self.forewardButton.enabled = NO;
+    }
+}
+
 - (void)_customizeAppearance {
     
     CGRect shadowRect = CGRectMake(0, 0, 2, CGRectGetHeight(self.middleView.frame));
@@ -619,6 +637,8 @@
     [self setTitleLabel:nil];
     [self setLightnessView:nil];
     [self setLightnessMask:nil];
+    [self setBackwardButton:nil];
+    [self setForewardButton:nil];
     [super viewDidUnload];
 }
 @end
