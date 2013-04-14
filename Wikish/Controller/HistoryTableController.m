@@ -12,7 +12,7 @@
 #import "TableViewGestureRecognizer.h"
 
 @interface HistoryTableController()<TableViewGesturePanningRowDelegate>
-@property (nonatomic, retain) TableViewGestureRecognizer *recognizer;
+@property (nonatomic, strong) TableViewGestureRecognizer *recognizer;
 @end
 
 #define kLabelDeleteTag 23423
@@ -23,16 +23,12 @@
 - (id)init {
     self = [super init];
     if (self) {
-        _history = [[WikiHistory sharedInstance] retain];
+        _history = [WikiHistory sharedInstance];
     }
     return self;
 }
 
 
-- (void)dealloc {
-    [_history release]; _history = nil;
-    [super dealloc];
-}
 
 - (void)setTableView:(UITableView *)table andMainController:(MainViewController *)controller {
     [super setTableView:table andMainController:controller];
@@ -90,11 +86,11 @@
     static NSString *cellID = @"cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
     if (!cell) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID] autorelease];
-        cell.backgroundView = [[UIView new] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID];
+        cell.backgroundView = [UIView new];
         cell.backgroundView.backgroundColor = GetTableCellBackgroundColor();
         
-        UILabel *labelDelete = [[[UILabel alloc] initWithFrame:cell.backgroundView.bounds] autorelease];
+        UILabel *labelDelete = [[UILabel alloc] initWithFrame:cell.backgroundView.bounds];
         labelDelete.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         [labelDelete setTextAlignment:NSTextAlignmentRight];
         [labelDelete setTextColor:[UIColor colorWithRed:1.0 green:0.2 blue:0.2 alpha:1]];
@@ -111,7 +107,7 @@
         cell.textLabel.backgroundColor = [UIColor clearColor];
         cell.detailTextLabel.backgroundColor = [UIColor clearColor];
         
-        cell.selectedBackgroundView = [[UIView new] autorelease];
+        cell.selectedBackgroundView = [UIView new];
         cell.selectedBackgroundView.backgroundColor = GetTableHighlightRowColor();
         
     }

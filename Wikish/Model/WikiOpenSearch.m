@@ -22,8 +22,8 @@
 
 @interface WikiOpenSearch()
 
-@property (nonatomic, retain) NSMutableArray *operations;
-@property (nonatomic, retain) NSString          *lastIncompleteKeyword;
+@property (nonatomic, strong) NSMutableArray *operations;
+@property (nonatomic, strong) NSString          *lastIncompleteKeyword;
 
 @end
 
@@ -32,9 +32,9 @@
 - (id)init {
     self = [super init];
     if (self) {
-        _site = [[[SiteManager sharedInstance] defaultSite] retain];
-        self.operations = [[NSMutableArray new] autorelease];
-        self.results = [[NSArray new] autorelease];
+        _site = [[SiteManager sharedInstance] defaultSite];
+        self.operations = [NSMutableArray new];
+        self.results = [NSArray new];
         self.lastIncompleteKeyword = @"";
         _searchCnt = 0;
         _currentTag = -1;
@@ -44,11 +44,7 @@
 
 - (void)dealloc {
     [self _cancelAllOperations];
-    self.operations = nil;
     
-    [_site release];
-    self.results = nil;
-    [super dealloc];
 }
 
 - (void)request:(NSString *)incompleteKeyword {
@@ -81,8 +77,7 @@
     WikiSite *site = [[SiteManager sharedInstance] defaultSite];
     if (![site sameAs:_site]) {
         [self _cancelAllOperations];
-        [_site release];
-        _site = [site retain];
+        _site = site;
         
         if ([self.results count] != 0) self.results = @[];
         [self request:self.lastIncompleteKeyword];

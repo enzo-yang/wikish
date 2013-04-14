@@ -13,28 +13,28 @@
 
 @interface SettingViewController : UIViewController
 
-@property (nonatomic, retain) IBOutlet Button       *okButton;
-@property (retain, nonatomic) IBOutlet UIButton *helpButton;
-@property (nonatomic, retain) IBOutlet UILabel      *settingLabel;
+@property (nonatomic, weak) IBOutlet Button       *okButton;
+@property (nonatomic, weak) IBOutlet UIButton *helpButton;
+@property (nonatomic, weak) IBOutlet UILabel      *settingLabel;
 
-@property (nonatomic, retain) IBOutlet UIView       *httpsView;
-@property (nonatomic, retain) IBOutlet UILabel      *httpsLabel;
-@property (nonatomic, retain) IBOutlet UISwitch     *httpsSwitch;
+@property (nonatomic, weak) IBOutlet UIView       *httpsView;
+@property (nonatomic, weak) IBOutlet UILabel      *httpsLabel;
+@property (nonatomic, weak) IBOutlet UISwitch     *httpsSwitch;
 
-@property (nonatomic, retain) IBOutlet UIView       *expanedView;
-@property (nonatomic, retain) IBOutlet UILabel      *expanedLabel;
-@property (nonatomic, retain) IBOutlet UISwitch     *expanedSwitch;
+@property (nonatomic, weak) IBOutlet UIView       *expanedView;
+@property (nonatomic, weak) IBOutlet UILabel      *expanedLabel;
+@property (nonatomic, weak) IBOutlet UISwitch     *expanedSwitch;
 
-@property (nonatomic, retain) IBOutlet UIView       *homeView;
-@property (nonatomic, retain) IBOutlet UILabel      *homeLabel;
-@property (nonatomic, retain) IBOutletCollection(Button) NSArray *homeButtons;
+@property (nonatomic, weak) IBOutlet UIView       *homeView;
+@property (nonatomic, weak) IBOutlet UILabel      *homeLabel;
+@property (nonatomic, strong) IBOutletCollection(Button) NSArray *homeButtons;
 
 
-@property (nonatomic, retain) IBOutlet UITableView  *sitesTable;
-@property (nonatomic, retain) IBOutlet UITableView  *commonSitesTable;
+@property (nonatomic, weak) IBOutlet UITableView  *sitesTable;
+@property (nonatomic, weak) IBOutlet UITableView  *commonSitesTable;
 
-@property (nonatomic, retain) TableViewGestureRecognizer *sitesGestureRecognizer;
-@property (nonatomic, retain) TableViewGestureRecognizer *commonSitesGestureRecognizer;
+@property (nonatomic, strong) TableViewGestureRecognizer *sitesGestureRecognizer;
+@property (nonatomic, strong) TableViewGestureRecognizer *commonSitesGestureRecognizer;
 
 - (IBAction)useHttpsSwitchChanged:(UISwitch *)sender;
 - (IBAction)sectionExpandedSwitchChanged:(UISwitch *)sender;

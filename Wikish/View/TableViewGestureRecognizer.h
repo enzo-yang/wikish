@@ -23,8 +23,8 @@ typedef enum {
 @interface TableViewGestureRecognizer : NSObject<UITableViewDelegate>
 
 @property (nonatomic, assign)           TableViewCellPanState panState;
-@property (nonatomic, retain)           NSIndexPath *theIndexPath;
-@property (nonatomic, assign, readonly) UITableView *tableView;
+@property (nonatomic, strong)           NSIndexPath *theIndexPath;
+@property (nonatomic, weak, readonly) UITableView *tableView;
 @property (nonatomic, assign)           TableViewCellBlock blockSide;
 
 

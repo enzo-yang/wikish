@@ -18,12 +18,12 @@ CGFloat const TableViewCommitPanningRowDefaultLength = 80;
 
 @interface TableViewGestureRecognizer() <UIGestureRecognizerDelegate>
 
-@property (nonatomic, assign) id<TableViewGesturePanningRowDelegate>   delegate;
-@property (nonatomic, assign) id<UITableViewDelegate>               tableViewDelegate;
-@property (nonatomic, assign) UITableView                           *tableView;
-@property (nonatomic, retain) UIPanGestureRecognizer                *panRecognizer;
+@property (nonatomic, weak) id<TableViewGesturePanningRowDelegate>   delegate;
+@property (nonatomic, weak) id<UITableViewDelegate>               tableViewDelegate;
+@property (nonatomic, weak) UITableView                           *tableView;
+@property (nonatomic, strong) UIPanGestureRecognizer                *panRecognizer;
 @property (nonatomic, assign) TableViewGestureRecognizerState       state;
-@property (nonatomic, retain) UIImage                               *cellSnapshot;
+@property (nonatomic, strong) UIImage                               *cellSnapshot;
 @end
 
 @implementation TableViewGestureRecognizer
@@ -81,7 +81,7 @@ CGFloat const TableViewCommitPanningRowDefaultLength = 80;
         
         NSIndexPath *indexPath = self.theIndexPath;
         if (!indexPath) return;
-        [[indexPath retain] autorelease];
+        // [[indexPath retain] autorelease];
         
         // Removes addingIndexPath before updating then tableView will be able
         // to determine correct table row height
@@ -175,15 +175,10 @@ CGFloat const TableViewCommitPanningRowDefaultLength = 80;
     [tableView addGestureRecognizer:pan];
     pan.delegate = recognizer;
     recognizer.panRecognizer = pan;
-    [pan release];
     
-    return [recognizer autorelease];
+    return recognizer;
 }
 
-- (void)dealloc {
-    self.theIndexPath = nil;
-    [super dealloc];
-}
 
 @end
 

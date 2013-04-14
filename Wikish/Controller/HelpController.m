@@ -14,8 +14,6 @@
 
 @implementation HelpController
 
-
-
 - (void)viewDidLoad {
     self.scroller.contentSize = CGSizeMake(CGRectGetWidth(self.scroller.bounds) * 3, CGRectGetHeight(self.scroller.bounds));
     [self.scroller addSubview:self.page1];
@@ -35,7 +33,7 @@
         self.page3.frame = CGRectMake(scrollerWidth * 2, 0, scrollerWidth, scrollerHeight);
         [self.scroller addSubview:self.page3];
         
-        self.pageControl = [[[StyledPageControl alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.view.bounds) - 20, scrollerWidth, 10)] autorelease];
+        self.pageControl = [[StyledPageControl alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.view.bounds) - 20, scrollerWidth, 10)];
         self.pageControl.diameter = 8.0f;
         self.pageControl.coreNormalColor = [UIColor colorWithRed:0.7 green:0.7 blue:0.7 alpha:1.0f];
         self.pageControl.coreSelectedColor = [UIColor colorWithRed:0.85 green:0.85 blue:0.85 alpha:1.0f];
@@ -44,14 +42,6 @@
     }
 }
 
-- (void)dealloc {
-    [_scroller release];
-    [_page1 release];
-    [_page2 release];
-    [_page3 release];
-    [_pageControl release];
-    [super dealloc];
-}
 - (void)viewDidUnload {
     [self setScroller:nil];
     [self setPage1:nil];

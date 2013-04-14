@@ -63,13 +63,6 @@ NSString *const kNotificationMessageSearchKeyword = @"kNotificationMessageSearch
     [_openSearch removeObserver:self forKeyPath:@"results"];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
-    [_openSearch release];
-    self.textField = nil;
-    self.resultTable = nil;
-    self.textPlatform = nil;
-    [_langBtn release];
-    [_cancelBtn release];
-    [super dealloc];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
@@ -148,7 +141,7 @@ NSString *const kNotificationMessageSearchKeyword = @"kNotificationMessageSearch
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    UIView *v = [[[UIView alloc] init] autorelease];
+    UIView *v = [[UIView alloc] init];
     v.backgroundColor = [UIColor clearColor];
     return v;
 }
@@ -161,7 +154,7 @@ NSString *const kNotificationMessageSearchKeyword = @"kNotificationMessageSearch
     static NSString *cellID = @"c";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
     if (!cell) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
         cell.textLabel.font = [UIFont systemFontOfSize:17.0f];
         CGAffineTransform transform = CGAffineTransformMakeRotation(M_PI);
         cell.transform = transform;

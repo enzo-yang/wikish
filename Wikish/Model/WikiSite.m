@@ -51,7 +51,6 @@ static NSString *const kSubLangKey   = @"sub-lang";
         _sublang = [sublang copy];
         
         if (![self _isSiteValid]) {
-            [self release];
             self = nil;
         }
     }
@@ -72,7 +71,6 @@ static NSString *const kSubLangKey   = @"sub-lang";
 
 - (void)dealloc {
     [self _clean];
-    [super dealloc];
 }
 
 - (NSString *)briefName {
@@ -101,9 +99,9 @@ static NSString *const kSubLangKey   = @"sub-lang";
 }
 
 - (void)_clean {
-    [_name release];    _name = nil;
-    [_lang release];    _lang = nil;
-    [_sublang release];  _sublang = nil;
+        _name = nil;
+        _lang = nil;
+      _sublang = nil;
 }
 
 - (BOOL)_isSiteValid {

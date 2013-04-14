@@ -27,7 +27,7 @@ typedef enum {
     
     BOOL        _canLoadThisRequest;
     
-    WikiPageInfo *_pageInfo;
+    WikiPageInfo * _pageInfo;
     WikiSite     *_currentSite;
     
     NSMutableDictionary *_pageInfos;
@@ -39,27 +39,27 @@ typedef enum {
     CGFloat     _webViewDragOrgY;
     BOOL        _headViewHided;
 }
-@property (retain, nonatomic) IBOutlet UIWebView *webView;
-@property (retain, nonatomic) IBOutlet UIView *leftView;
-@property (retain, nonatomic) IBOutlet UIView *middleView;
-@property (retain, nonatomic) IBOutlet UIView *rightView;
-@property (retain, nonatomic) IBOutlet UIView *bottomView;
-@property (retain, nonatomic) IBOutlet UIView *headerView;
-@property (retain, nonatomic) IBOutlet UILabel *titleLabel;
-@property (retain, nonatomic) IBOutlet UIView *lightnessView;
-@property (retain, nonatomic) IBOutlet UIView *lightnessMask;
-@property (retain, nonatomic) IBOutlet UIView *gestureMask;
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
+@property (weak, nonatomic) IBOutlet UIView *leftView;
+@property (weak, nonatomic) IBOutlet UIView *middleView;
+@property (weak, nonatomic) IBOutlet UIView *bottomView;
+@property (weak, nonatomic) IBOutlet UIView *headerView;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UIView *lightnessMask;
+@property (weak, nonatomic) IBOutlet UIView *gestureMask;
 
-@property (retain, nonatomic) IBOutlet UITableView *historyTable;
-@property (retain, nonatomic) HistoryTableController *historyController;
-@property (retain, nonatomic) IBOutlet UITableView *sectionTable;
-@property (retain, nonatomic) SectionTableController *sectionController;
-@property (retain, nonatomic) IBOutlet UITableView *favouriteTable;
-@property (retain, nonatomic) FavouriteTableController *favouriteController;
-@property (retain, nonatomic) IBOutlet UIButton *backwardButton;
-@property (retain, nonatomic) IBOutlet UIButton *forewardButton;
+@property (strong, nonatomic) IBOutlet UIView *lightnessView;
 
-@property (readonly, nonatomic) WikiPageInfo *pageInfo;
+@property (weak, nonatomic) IBOutlet UITableView *historyTable;
+@property (strong, nonatomic) HistoryTableController *historyController;
+@property (weak, nonatomic) IBOutlet UITableView *sectionTable;
+@property (strong, nonatomic) SectionTableController *sectionController;
+
+
+@property (weak, nonatomic) IBOutlet UIButton *backwardButton;
+@property (weak, nonatomic) IBOutlet UIButton *forewardButton;
+
+@property (strong, readonly, nonatomic) WikiPageInfo *pageInfo;
 
 - (IBAction)historyBtnPressed:(id)sender;
 - (IBAction)searchBtnPressed:(id)sender;

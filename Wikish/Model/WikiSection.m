@@ -7,7 +7,6 @@
 //
 
 #import "WikiSection.h"
-#import "AutoPropertyRelease.h"
 
 @implementation WikiSection
 
@@ -24,7 +23,6 @@
         self.index = [dict objectForKey:@"number"];
         
         if (!self.line || !self.anchor) {
-            [self release];
             self = nil;
         }
     }
@@ -48,11 +46,6 @@
     [aCoder encodeObject:self.line forKey:@"line"];
     [aCoder encodeObject:self.anchor forKey:@"anchor"];
     [aCoder encodeObject:self.index forKey:@"index"];
-}
-
-- (void)dealloc {
-    [AutoPropertyRelease releaseProperties:self thisClass:[WikiSection class]];
-    [super dealloc];
 }
 
 @end

@@ -30,13 +30,13 @@
     static NSString *cellID = @"cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
     if (!cell) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID] autorelease];
-        cell.backgroundView = [[UIView new] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+        cell.backgroundView = [UIView new];
         cell.backgroundView.backgroundColor = GetTableCellBackgroundColor();
         cell.contentView.backgroundColor    = GetTableBackgourndColor();
         cell.textLabel.font = [UIFont systemFontOfSize:17.0f];
         
-        cell.selectedBackgroundView = [[UIView new] autorelease];
+        cell.selectedBackgroundView = [UIView new];
         cell.selectedBackgroundView.backgroundColor = GetTableHighlightRowColor();
     }
     WikiSection *section = [self.mainController.pageInfo.sections objectAtIndex:indexPath.row];

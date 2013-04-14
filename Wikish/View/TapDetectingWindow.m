@@ -13,9 +13,7 @@
 @synthesize controllerThatObserves;
 
 - (void)dealloc {
-    self.viewToObserve = nil;
     self.controllerThatObserves = nil;
-    [super dealloc];
 }
 
 - (void)forwardTap:(id)touch {

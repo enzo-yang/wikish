@@ -11,8 +11,8 @@
 
 @interface MainTableController : NSObject<UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, retain) UITableView *table;
-@property (nonatomic, assign) MainViewController *mainController;
+@property (nonatomic, strong) UITableView *table;
+@property (nonatomic, weak) MainViewController *mainController;
 
 - (void)setTableView:(UITableView *)table andMainController:(MainViewController *)controller;
 

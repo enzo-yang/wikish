@@ -37,7 +37,7 @@
 - (id)init {
     self = [super init];
     if (self) {
-        _history = [[self _historyFromFile] retain];
+        _history = [self _historyFromFile];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_appWillResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
     }
     return self;
@@ -45,7 +45,7 @@
 
 - (NSMutableArray *)_historyFromFile {
     NSMutableArray *history = (NSMutableArray *)[FileUtil deserializeObjectAtPath:kHistoryPath];
-    if (!history) history = [[NSMutableArray new] autorelease];
+    if (!history) history = [NSMutableArray new];
     return history;
 }
 
@@ -70,7 +70,7 @@
 - (void)addRecord:(WikiRecord *)record {
     @synchronized(self) {
         if ([record.title isEqualToString:@""]) {
-            record = [[[WikiRecord alloc] initWithSite:record title:NSLocalizedString(@"Home_Page", nil)] autorelease];
+            record = [[WikiRecord alloc] initWithSite:record title:NSLocalizedString(@"Home_Page", nil)];
         }
         if ([record.title hasPrefix:@"File:"]) {
             return;

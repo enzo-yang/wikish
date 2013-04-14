@@ -14,11 +14,11 @@
 
     WikiOpenSearch *_openSearch;
 }
-@property (nonatomic, retain) IBOutlet UITextField  *textField;
-@property (nonatomic, retain) IBOutlet UITableView  *resultTable;
-@property (nonatomic, retain) IBOutlet UIView       *textPlatform;
-@property (retain, nonatomic) IBOutlet UIButton *langBtn;
-@property (retain, nonatomic) IBOutlet UIButton *cancelBtn;
+@property (nonatomic, strong) IBOutlet UITextField  *textField;
+@property (nonatomic, strong) IBOutlet UITableView  *resultTable;
+@property (nonatomic, strong) IBOutlet UIView       *textPlatform;
+@property (strong, nonatomic) IBOutlet UIButton *langBtn;
+@property (strong, nonatomic) IBOutlet UIButton *cancelBtn;
 + (void)showInView:(UIView *)view;
 
 - (IBAction)hideKeyboard:(id)sender;

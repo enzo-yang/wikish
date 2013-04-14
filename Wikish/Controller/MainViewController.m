@@ -26,7 +26,6 @@
 
 #import "HistoryTableController.h"
 #import "SectionTableController.h"
-#import "FavouriteTableController.h"
 
 #import "GAI.h"
 
@@ -37,8 +36,8 @@
 #define kHandleDragThreshold        150
 
 @interface MainViewController ()<WikiPageInfoDelegate, UIWebViewDelegate, UIScrollViewDelegate, TapDetectingWindowDelegate, UIGestureRecognizerDelegate, UIActionSheetDelegate>
-@property (nonatomic, retain) WikiPageInfo  *pageInfo;
-@property (nonatomic, retain) WikiSite      *currentSite;
+@property (strong, readwrite, nonatomic) WikiPageInfo  *pageInfo;
+@property (nonatomic, strong) WikiSite      *currentSite;
 @end
 
 @implementation MainViewController
@@ -65,7 +64,6 @@
     self.webView.scrollView.delegate = self;
     
     self.leftView.hidden = YES;
-    self.rightView.hidden = YES;
     self.gestureMask.hidden = YES;
     
     [self _initializeTables];
@@ -105,16 +103,6 @@
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self _windowEndDetectWebViewTap];
-    [_webView release];
-    // TODO(enzo)
-    [_titleLabel release];
-    [_lightnessView release];
-    [_lightnessMask release];
-    
-    [_pageInfos release];
-    [_backwardButton release];
-    [_forewardButton release];
-    [super dealloc];
 }
 
 - (void)_windowBeginDetectWebViewTap {
@@ -159,7 +147,7 @@
     if (_viewStatus != kViewStatusNormal) [self _recoverNormalStatus];
     
     NSString *title = [theTitle urlDecodedString];
-    WikiPageInfo *aPageInfo = [[[WikiPageInfo alloc] initWithSite:site title:title] autorelease];
+    WikiPageInfo *aPageInfo = [[WikiPageInfo alloc] initWithSite:site title:title];
     if (aPageInfo) {
         [[[GAI sharedInstance] defaultTracker] sendEventWithCategory:kGAUserHabit withAction:kGALaunguage withLabel:site.name withValue:@1];
         self.pageInfo = aPageInfo;
@@ -172,7 +160,7 @@
             }
             self.currentSite        = site;
             _canLoadThisRequest     = YES;
-            WikiRecord *record      = [[[WikiRecord alloc] initWithSite:site title:title] autorelease];
+            WikiRecord *record      = [[WikiRecord alloc] initWithSite:site title:title];
             [[WikiHistory sharedInstance] addRecord:record];
             
             [self.pageInfo loadPageInfo];
@@ -188,7 +176,7 @@
     NSString *subLang = [absolute stringByMatching:@"(?<=wikipedia.org/).*(?=/)" capture:0];
     LOG(@"%@, %@", lang, subLang);
     WikiSite *site = [[SiteManager sharedInstance] siteOfLang:lang subLang:subLang];
-    if (!site) site = [[[WikiSite alloc] initWithLang:lang sublang:subLang] autorelease];
+    if (!site) site = [[WikiSite alloc] initWithLang:lang sublang:subLang];
     return site;
 }
 
@@ -200,11 +188,9 @@
     if (_pageInfo == pageInfo) return;
     if (_pageInfo) {
         _pageInfo.delegate = nil;
-        [_pageInfo release];
     }
     if (pageInfo) {
         pageInfo.delegate = self;
-        [pageInfo retain];
     }
     _pageInfo = pageInfo;
     
@@ -427,7 +413,7 @@
         [self _recoverNormalStatus];
         return;
     }
-    SettingViewController *svc = [[SettingViewController new] autorelease];
+    SettingViewController *svc = [SettingViewController new];
     [self.navigationController pushViewController:svc animated:YES];
     
 }
@@ -438,7 +424,7 @@
         return;
     }
     
-    UIActionSheet *sheet = [[[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Lightness Control", nil), NSLocalizedString(@"Copy Link", nil), nil] autorelease];
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Lightness Control", nil), NSLocalizedString(@"Copy Link", nil), nil];
     [sheet showInView:self.view];
 }
 
@@ -520,16 +506,12 @@
 - (void)_initializeTables {
     self.historyTable.backgroundColor = GetTableBackgourndColor();
     self.sectionTable.backgroundColor = GetTableBackgourndColor();
-    self.favouriteTable.backgroundColor = GetTableBackgourndColor();
     
-    self.historyController = [[HistoryTableController new] autorelease];
+    self.historyController = [HistoryTableController new];
     [self.historyController setTableView:self.historyTable andMainController:self];
     
-    self.sectionController = [[SectionTableController new] autorelease];
+    self.sectionController = [SectionTableController new];
     [self.sectionController setTableView:self.sectionTable andMainController:self];
-    
-    self.favouriteController = [[FavouriteTableController new] autorelease];
-    [self.favouriteController setTableView:self.favouriteTable andMainController:self];
     
 }
 
@@ -615,7 +597,7 @@
 - (void)_customizeAppearance {
     
     CGRect shadowRect = CGRectMake(0, 0, 2, CGRectGetHeight(self.middleView.frame));
-    UIView *shadowView = [[[UIView alloc] initWithFrame:shadowRect] autorelease];
+    UIView *shadowView = [[UIView alloc] initWithFrame:shadowRect];
     shadowView.layer.shadowOpacity = 1;
     shadowView.layer.shadowOffset = CGSizeZero;
     shadowView.layer.shadowColor = [UIColor blackColor].CGColor;
@@ -634,11 +616,11 @@
     self.lightnessView.layer.cornerRadius = 8.0f;
 }
 - (void)viewDidUnload {
-    [self setTitleLabel:nil];
-    [self setLightnessView:nil];
-    [self setLightnessMask:nil];
-    [self setBackwardButton:nil];
-    [self setForewardButton:nil];
+    self.lightnessView = nil;
+    self.historyController = nil;
+    self.sectionController = nil;
+    self.forewardButton = nil;
+    self.backwardButton = nil;
     [super viewDidUnload];
 }
 @end

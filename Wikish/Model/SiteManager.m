@@ -21,8 +21,8 @@ static NSString *const kDefaultSiteKey      = @"default-site";
 
 @interface SiteManager()
 
-@property (nonatomic, retain) NSMutableArray *sites;
-@property (nonatomic, retain) NSMutableArray *commonSites;
+@property (nonatomic, strong) NSMutableArray *sites;
+@property (nonatomic, strong) NSMutableArray *commonSites;
 
 @end
 
@@ -48,11 +48,6 @@ static NSString *const kDefaultSiteKey      = @"default-site";
     return self;
 }
 
-- (void)dealloc {
-    self.sites = nil;
-    self.commonSites = nil;
-    [super dealloc];
-}
 
 - (NSArray *)supportedSites {
     return _sites;
@@ -86,7 +81,7 @@ static NSString *const kDefaultSiteKey      = @"default-site";
     NSString *lang = [[NSLocale preferredLanguages] objectAtIndex:0];
     site = [self siteOfLang:lang];
     if (site == nil) {
-        site = [[[WikiSite alloc] initWithName:lang lang:lang sublang:@"wiki"] autorelease];
+        site = [[WikiSite alloc] initWithName:lang lang:lang sublang:@"wiki"];
     }
     
     [self _setDefaultSite:site];
@@ -129,7 +124,6 @@ static NSString *const kDefaultSiteKey      = @"default-site";
         theSite = [commonSites objectAtIndex:index];
         [self setDefaultSite:theSite];
     }
-    // TODO(enzo) notify
     return theSite;
 }
 
@@ -156,7 +150,6 @@ static NSString *const kDefaultSiteKey      = @"default-site";
 - (BOOL)removeCommonSite:(WikiSite *)site {
     if (!_commonSites) return NO;
     if (![self isCommonSite:site] || [_commonSites count] == 1) {
-        // TODO(enzo) notify
         return NO;
     }
     for (WikiSite *aSite in _commonSites) {
@@ -174,7 +167,6 @@ static NSString *const kDefaultSiteKey      = @"default-site";
 
 - (void)addSite:(WikiSite *)site {
     if ([self hasSite:site]) {
-        // TODO(enzo) Notify
         return;
     }
     [_sites addObject:site];
@@ -232,14 +224,12 @@ static NSString *const kDefaultSiteKey      = @"default-site";
 - (void)_addSitesFromSystem {
     NSArray *langCodes = [NSLocale preferredLanguages];
     for (NSString *langCode in langCodes) {
-        langCode = [langCode substringToIndex:2];
-        if ([self siteOfLang:langCode]) continue;
-        NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:langCode];
-        NSString *langName = [locale displayNameForKey:NSLocaleIdentifier value:langCode];
-        WikiSite *site = [[WikiSite alloc] initWithName:langName lang:langCode sublang:@"wiki"];
+        NSString *shotLangCode = [langCode substringToIndex:2];
+        if ([self siteOfLang:shotLangCode]) continue;
+        NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:shotLangCode];
+        NSString *langName = [locale displayNameForKey:NSLocaleIdentifier value:shotLangCode];
+        WikiSite *site = [[WikiSite alloc] initWithName:langName lang:shotLangCode sublang:@"wiki"];
         [self addSite:site];
-        [locale release];
-        [site release];
     }
 }
 
@@ -275,18 +265,17 @@ static NSString *const kDefaultSiteKey      = @"default-site";
 
 - (NSMutableArray *)_dictsToSites:(NSArray *)dicts {
     if (!dicts) return nil;
-    NSMutableArray *sites = [[NSMutableArray new] autorelease];
+    NSMutableArray *sites = [NSMutableArray new];
     for (NSDictionary *dict in dicts) {
         WikiSite *site = [[WikiSite alloc] initWithDictionary:dict];
         if (site) [sites addObject:site];
-        [site release];
     }
     return sites;
 }
 
 - (NSMutableArray *)_sitesToDicts:(NSArray *)sites {
     if (!sites) return nil;
-    NSMutableArray *dicts = [[NSMutableArray new] autorelease];
+    NSMutableArray *dicts = [NSMutableArray new];
     for (WikiSite *site in sites) {
         NSDictionary *dict = [site toDictionary];
         [dicts addObject:dict];

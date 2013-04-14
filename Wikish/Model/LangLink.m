@@ -7,7 +7,6 @@
 //
 
 #import "LangLink.h"
-#import "AutoPropertyRelease.h"
 
 @implementation LangLink
 
@@ -20,7 +19,6 @@
         self.title = [dict objectForKey:@"*"];
         
         if (!self.lang || !self.title) {
-            [self release];
             self = nil;
         }
     }
@@ -42,9 +40,5 @@
     [aCoder encodeObject:self.title forKey:@"title"];
 }
 
-- (void)dealloc {
-    [AutoPropertyRelease releaseProperties:self thisClass:[LangLink class]];
-    [super dealloc];
-}
 
 @end

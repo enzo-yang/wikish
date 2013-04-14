@@ -26,10 +26,10 @@
     #import <UIKit/UIKit.h>
 #endif
 
-#if !__has_feature(objc_arc)
-#error AFNetworking must be built with ARC.
-// You can turn on ARC for only AFNetworking files by adding -fobjc-arc to the build phase for each of its files.
-#endif
+//#if !__has_feature(objc_arc)
+//#error AFNetworking must be built with ARC.
+//// You can turn on ARC for only AFNetworking files by adding -fobjc-arc to the build phase for each of its files.
+//#endif
 
 typedef enum {
     AFOperationPausedState      = -1,

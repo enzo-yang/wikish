@@ -12,9 +12,6 @@
 
 @interface WikiApi : NSObject
 
-//+ (NSString *)contentApiOfSite:(WikiSite *)site keyword:(NSString *)keyword;
-//+ (NSString *)headerApiOfSite:(WikiSite *)site keyword:(NSString *)keyword;
-
 + (NSString *)infoApiOfSite:(WikiSite *)site title:(NSString *)title;
 + (NSString *)pageURLStringOfSite:(WikiSite *)site title:(NSString *)title;
 + (NSString *)openSearchApiOfSite:(WikiSite *)site keyword:(NSString *)incompleteKeyword;

@@ -13,7 +13,7 @@
 @synthesize title = _title;
 
 - (id)initWithLang:(NSString *)lang sublang:(NSString *)sublang title:(NSString *)title {
-    WikiSite *site = [[[WikiSite alloc] initWithLang:lang sublang:sublang] autorelease];
+    WikiSite *site = [[WikiSite alloc] initWithLang:lang sublang:sublang];
     return [self initWithSite:site title:title];
 }
 
@@ -23,7 +23,6 @@
         if (title) {
             _title = [title copy];
         } else {
-            [self release];
             self = nil;
         }
     }
@@ -35,7 +34,6 @@
     if (self) {
         _title = [[aDecoder decodeObject] copy];
         if (!_title) {
-            [self release];
             self = nil;
         }
     }
@@ -53,10 +51,6 @@
     return record;
 }
 
-- (void)dealloc {
-    [_title release];
-    [super dealloc];
-}
 
 - (BOOL)isEqual:(id)object {
     if ([object isKindOfClass:[WikiRecord class]]) {

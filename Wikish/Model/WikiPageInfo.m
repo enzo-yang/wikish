@@ -51,9 +51,6 @@ static NSString *const kSectionsKey = @"sections";
 - (void)dealloc {
     self.delegate = nil;
     [self _cleanInfos];
-    [_site release];
-    [_title release];
-    [super dealloc];
 }
 
 - (void)loadPageInfo {
@@ -117,8 +114,8 @@ static NSString *const kSectionsKey = @"sections";
     
     [self _cleanInfos];
     _revid = [revid copy];
-    _sections = [sections retain];
-    _langLinks = [langlinks retain];
+    _sections = sections;
+    _langLinks = langlinks;
     
     [self _loadContentSuccess];
 }
@@ -132,7 +129,7 @@ static NSString *const kSectionsKey = @"sections";
 
 
 - (NSMutableArray *)_extractWebLangLinks:(NSDictionary *)dict {
-    NSMutableArray *langlinks = [[NSMutableArray new] autorelease];
+    NSMutableArray *langlinks = [NSMutableArray new];
     NSArray *rawLangLinks = [dict objectForKey:@"langlinks"];
     if (![rawLangLinks isKindOfClass:[NSArray class]]) return langlinks;
     
@@ -141,7 +138,7 @@ static NSString *const kSectionsKey = @"sections";
     for (WikiSite *site in supportedSites) {
         for (NSDictionary *langDict in rawLangLinks) {
             if ([site.lang isEqualToString:[langDict objectForKey:@"lang"]]) {
-                LangLink *langlink = [[[LangLink alloc] initWithDict:langDict] autorelease];
+                LangLink *langlink = [[LangLink alloc] initWithDict:langDict];
                 if (langlink) [langlinks addObject:langlink];
             }
         }
@@ -151,12 +148,12 @@ static NSString *const kSectionsKey = @"sections";
 }
 
 - (NSMutableArray *)_extractWebSections:(NSDictionary *)dict {
-    NSMutableArray *sections = [[NSMutableArray new] autorelease];
+    NSMutableArray *sections = [NSMutableArray new];
     NSArray *rawSections = [dict objectForKey:@"sections"];
     if (![rawSections isKindOfClass:[NSArray class]]) return sections;
     
     for (NSDictionary *rawSection in rawSections) {
-        WikiSection *section = [[[WikiSection alloc] initWithDict:rawSection] autorelease];
+        WikiSection *section = [[WikiSection alloc] initWithDict:rawSection];
         if (section) [sections addObject:section];
 //        NSInteger nIndex = [sections indexOfObject:section];
 //        int i = nIndex-1;
@@ -187,9 +184,9 @@ static NSString *const kSectionsKey = @"sections";
 }
 
 - (void)_cleanInfos {
-    [_revid release]; _revid = nil;
-    [_sections release]; _sections = nil;
-    [_langLinks release]; _langLinks = nil;
+     _revid = nil;
+     _sections = nil;
+     _langLinks = nil;
 }
 
 @end

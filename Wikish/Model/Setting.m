@@ -65,7 +65,6 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Notice", nil) message:NSLocalizedString(@"Setting Needs Reboot App", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"I know", nil) otherButtonTitles:nil];
             [alert show];
-            [alert release];
         });
     }
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];

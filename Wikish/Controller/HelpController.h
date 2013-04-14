@@ -10,11 +10,11 @@
 #import "StyledPageControl.h"
 
 @interface HelpController : UIViewController
-@property (retain, nonatomic) IBOutlet UIScrollView *scroller;
-@property (retain, nonatomic) IBOutlet UIView *page1;
-@property (retain, nonatomic) IBOutlet UIView *page2;
-@property (retain, nonatomic) IBOutlet UIView *page3;
-@property (retain, nonatomic) IBOutlet StyledPageControl *pageControl;
+@property (weak, nonatomic) IBOutlet UIScrollView *scroller;
+@property (strong, nonatomic) IBOutlet UIView *page1;
+@property (strong, nonatomic) IBOutlet UIView *page2;
+@property (strong, nonatomic) IBOutlet UIView *page3;
+@property (strong, nonatomic) StyledPageControl *pageControl;
 
 @property (copy, nonatomic) void (^okBlock)(void);
 

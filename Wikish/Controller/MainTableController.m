@@ -18,12 +18,6 @@
     self.table.dataSource = self;
 }
 
-- (void)dealloc {
-    self.table = nil;
-    self.mainController = nil;
-    [super dealloc];
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 0;
 }

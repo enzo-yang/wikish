@@ -24,8 +24,6 @@
 		C64ECDDC16C32A92006D3767 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C64ECDDE16C32A92006D3767 /* Localizable.strings */; };
 		C64FD07E1717E52E00AB7236 /* HelpController.m in Sources */ = {isa = PBXBuildFile; fileRef = C64FD07C1717E52E00AB7236 /* HelpController.m */; };
 		C64FD07F1717E52E00AB7236 /* HelpController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C64FD07D1717E52E00AB7236 /* HelpController.xib */; };
-		C67F8C661699A9BA004C9B3D /* AutoPropertyRelease.m in Sources */ = {isa = PBXBuildFile; fileRef = C67F8C651699A9BA004C9B3D /* AutoPropertyRelease.m */; };
-		C67F8C671699A9BA004C9B3D /* AutoPropertyRelease.m in Sources */ = {isa = PBXBuildFile; fileRef = C67F8C651699A9BA004C9B3D /* AutoPropertyRelease.m */; };
 		C6921EA916FD917900D18C22 /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C6921EA716FD917900D18C22 /* libGoogleAnalytics.a */; };
 		C6921EAA16FD917900D18C22 /* libGoogleAnalytics_debug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C6921EA816FD917900D18C22 /* libGoogleAnalytics_debug.a */; };
 		C6921EAC16FD9A7800D18C22 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6921EAB16FD9A7800D18C22 /* CoreData.framework */; };
@@ -37,7 +35,6 @@
 		C696DD5B16E0CD8A009A7A58 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = C696DD5A16E0CD8A009A7A58 /* Constants.m */; };
 		C696DD5E16E0D0C8009A7A58 /* HistoryTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = C696DD5D16E0D0C8009A7A58 /* HistoryTableController.m */; };
 		C696DD6116E0D0E2009A7A58 /* SectionTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = C696DD6016E0D0E2009A7A58 /* SectionTableController.m */; };
-		C696DD6416E0D10B009A7A58 /* FavouriteTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = C696DD6316E0D10B009A7A58 /* FavouriteTableController.m */; };
 		C696DD6716E0D81E009A7A58 /* MainTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = C696DD6616E0D81D009A7A58 /* MainTableController.m */; };
 		C69BB0E616566AA0002A1873 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C69BB0D416566AA0002A1873 /* AFHTTPClient.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		C69BB0E716566AA0002A1873 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = C69BB0D616566AA0002A1873 /* AFHTTPRequestOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -97,10 +94,8 @@
 		C69EE4A616DFB6A30074AF3D /* WikiSearchPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = C69EE4A216DFB6A30074AF3D /* WikiSearchPanel.xib */; };
 		C6D7672316AC3CE400CFC99A /* wiki-inject-functions.js in Resources */ = {isa = PBXBuildFile; fileRef = C6D7672016AC326A00CFC99A /* wiki-inject-functions.js */; };
 		C6D7672416AC3CE500CFC99A /* wiki-inject-functions.js in Resources */ = {isa = PBXBuildFile; fileRef = C6D7672016AC326A00CFC99A /* wiki-inject-functions.js */; };
-		C6D7684616AEF59600CFC99A /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = C6D7684516AEF59600CFC99A /* RegexKitLite.m */; };
 		C6D7684816AEF5B000CFC99A /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C6D7684716AEF5AF00CFC99A /* libicucore.dylib */; };
 		C6D7AB561652836500508B14 /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = C6D7AB521652836500508B14 /* CHANGELOG.md */; };
-		C6D7AB571652836500508B14 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = C6D7AB541652836500508B14 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C6D7AB581652836500508B14 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C6D7AB551652836500508B14 /* README.md */; };
 		C6D7AB601652874900508B14 /* FileUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = C6D7AB5F1652874900508B14 /* FileUtil.m */; };
 		C6D7AB631652959600508B14 /* AppUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = C6D7AB621652959600508B14 /* AppUtil.m */; };
@@ -123,7 +118,9 @@
 		C6F9407216E36574005DBBD5 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = C6F9407016E36574005DBBD5 /* SVProgressHUD.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		C6FFF8E11719795300A4631B /* more.png in Resources */ = {isa = PBXBuildFile; fileRef = C6FFF8E01719795300A4631B /* more.png */; };
 		C6FFF8E31719834000A4631B /* help-6-64.png in Resources */ = {isa = PBXBuildFile; fileRef = C6FFF8E21719834000A4631B /* help-6-64.png */; };
-		C6FFF8E61719BFDC00A4631B /* StyledPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = C6FFF8E51719BFDC00A4631B /* StyledPageControl.m */; };
+		C6FFF8E61719BFDC00A4631B /* StyledPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = C6FFF8E51719BFDC00A4631B /* StyledPageControl.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C6FFF8E7171A57B200A4631B /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = C6D7AB541652836500508B14 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C6FFF8E8171A57BB00A4631B /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = C6D7684516AEF59600CFC99A /* RegexKitLite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -171,8 +168,6 @@
 		C696DD5D16E0D0C8009A7A58 /* HistoryTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryTableController.m; sourceTree = "<group>"; };
 		C696DD5F16E0D0E2009A7A58 /* SectionTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SectionTableController.h; sourceTree = "<group>"; };
 		C696DD6016E0D0E2009A7A58 /* SectionTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SectionTableController.m; sourceTree = "<group>"; };
-		C696DD6216E0D10B009A7A58 /* FavouriteTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavouriteTableController.h; sourceTree = "<group>"; };
-		C696DD6316E0D10B009A7A58 /* FavouriteTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavouriteTableController.m; sourceTree = "<group>"; };
 		C696DD6516E0D81D009A7A58 /* MainTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTableController.h; sourceTree = "<group>"; };
 		C696DD6616E0D81D009A7A58 /* MainTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTableController.m; sourceTree = "<group>"; };
 		C69BB0D316566AA0002A1873 /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
@@ -583,8 +578,6 @@
 				C696DD5D16E0D0C8009A7A58 /* HistoryTableController.m */,
 				C696DD5F16E0D0E2009A7A58 /* SectionTableController.h */,
 				C696DD6016E0D0E2009A7A58 /* SectionTableController.m */,
-				C696DD6216E0D10B009A7A58 /* FavouriteTableController.h */,
-				C696DD6316E0D10B009A7A58 /* FavouriteTableController.m */,
 				C696DD6516E0D81D009A7A58 /* MainTableController.h */,
 				C696DD6616E0D81D009A7A58 /* MainTableController.m */,
 				C64FD07B1717E52E00AB7236 /* HelpController.h */,
@@ -749,7 +742,6 @@
 				C69BB12716568C88002A1873 /* JSONKit.m in Sources */,
 				C69BB1341658C4B1002A1873 /* WikishFileUtil.m in Sources */,
 				C69BB1381658C8E2002A1873 /* NSString+Wikish.m in Sources */,
-				C67F8C671699A9BA004C9B3D /* AutoPropertyRelease.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -760,7 +752,6 @@
 				C69DB26D160EC07700B484FF /* main.m in Sources */,
 				C69DB271160EC07700B484FF /* AppDelegate.m in Sources */,
 				C6D94D88164DE0C100587E0C /* MainViewController.m in Sources */,
-				C6D7AB571652836500508B14 /* JSONKit.m in Sources */,
 				C6D7AB601652874900508B14 /* FileUtil.m in Sources */,
 				C6D7AB631652959600508B14 /* AppUtil.m in Sources */,
 				C69BB0E616566AA0002A1873 /* AFHTTPClient.m in Sources */,
@@ -774,8 +765,6 @@
 				C69BB0EE16566AA0002A1873 /* UIImageView+AFNetworking.m in Sources */,
 				C69BB1331658C4B1002A1873 /* WikishFileUtil.m in Sources */,
 				C69BB1371658C8E2002A1873 /* NSString+Wikish.m in Sources */,
-				C67F8C661699A9BA004C9B3D /* AutoPropertyRelease.m in Sources */,
-				C6D7684616AEF59600CFC99A /* RegexKitLite.m in Sources */,
 				C64ECDD216C2A9C2006D3767 /* SettingViewController.m in Sources */,
 				C69EE49116DFB4EE0074AF3D /* LangLink.m in Sources */,
 				C69EE49316DFB4EE0074AF3D /* SiteManager.m in Sources */,
@@ -792,13 +781,14 @@
 				C696DD5B16E0CD8A009A7A58 /* Constants.m in Sources */,
 				C696DD5E16E0D0C8009A7A58 /* HistoryTableController.m in Sources */,
 				C696DD6116E0D0E2009A7A58 /* SectionTableController.m in Sources */,
-				C696DD6416E0D10B009A7A58 /* FavouriteTableController.m in Sources */,
 				C696DD6716E0D81E009A7A58 /* MainTableController.m in Sources */,
 				C6F9405916E20F17005DBBD5 /* Setting.m in Sources */,
 				C6F9407216E36574005DBBD5 /* SVProgressHUD.m in Sources */,
 				C6EFA0E016E78637006FE551 /* Button.m in Sources */,
 				C64FD07E1717E52E00AB7236 /* HelpController.m in Sources */,
 				C6FFF8E61719BFDC00A4631B /* StyledPageControl.m in Sources */,
+				C6FFF8E7171A57B200A4631B /* JSONKit.m in Sources */,
+				C6FFF8E8171A57BB00A4631B /* RegexKitLite.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -926,6 +916,7 @@
 		C69DB27B160EC07700B484FF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Wikish/Wikish-Prefix.pch";
 				INFOPLIST_FILE = "Wikish/Wikish-Info.plist";
@@ -934,6 +925,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/GoogleAnalytic\"",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -942,6 +934,7 @@
 		C69DB27C160EC07700B484FF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Wikish/Wikish-Prefix.pch";
 				INFOPLIST_FILE = "Wikish/Wikish-Info.plist";
@@ -950,6 +943,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/GoogleAnalytic\"",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

@@ -16,7 +16,7 @@
     WikiSite *_site;
 }
 
-@property (nonatomic, retain) NSArray *results;
+@property (nonatomic, strong) NSArray *results;
 - (void)request:(NSString *)incompleteKeyword;
 - (void)updateSite;
 

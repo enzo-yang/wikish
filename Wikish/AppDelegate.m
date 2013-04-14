@@ -17,11 +17,6 @@
 
 @implementation AppDelegate
 
-- (void)dealloc
-{
-    [_window release];
-    [super dealloc];
-}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -33,21 +28,21 @@
     BOOL isFirstLaunch = [self _isFirstLaunch];
     if (isFirstLaunch) [Setting useDefaultSetting];
     [Setting registerUserAgent];
-    self.window = [[[TapDetectingWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+    self.window = [[TapDetectingWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
     UINavigationController *nav = nil;
     if (isFirstLaunch) {
-        HelpController *hCtrl = [[HelpController new] autorelease];
-        MainViewController *mainCtrl = [[MainViewController new] autorelease];
-        nav = [[[UINavigationController alloc] initWithRootViewController:hCtrl] autorelease];
+        HelpController *hCtrl = [HelpController new];
+        MainViewController *mainCtrl = [MainViewController new];
+        nav = [[UINavigationController alloc] initWithRootViewController:hCtrl];
         hCtrl.okBlock = ^{
             [nav pushViewController:mainCtrl animated:YES];
         };
         
     } else {
-        nav = [[[UINavigationController alloc] initWithRootViewController:[[MainViewController new] autorelease]] autorelease];
+        nav = [[UINavigationController alloc] initWithRootViewController:[MainViewController new]];
     }
     nav.navigationBarHidden = YES;
     self.window.rootViewController = nav;

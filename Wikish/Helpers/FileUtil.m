@@ -15,7 +15,7 @@
     @synchronized(self) {
         if (path == nil) {
             NSArray *pathArray = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-            path = [[pathArray objectAtIndex:0] retain];
+            path = [pathArray objectAtIndex:0];
         }
     }
     return path;
@@ -26,7 +26,7 @@
     @synchronized(self) {
         if (path == nil) {
             NSArray *pathArray = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
-            path = [[pathArray objectAtIndex:0] retain];
+            path = [pathArray objectAtIndex:0];
         }
     }
     return path;
@@ -37,7 +37,7 @@
     @synchronized(self) {
         if (path == nil) {
             NSArray *pathArray = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-            path = [[pathArray objectAtIndex:0] retain];
+            path = [pathArray objectAtIndex:0];
         }
     }
     return path;

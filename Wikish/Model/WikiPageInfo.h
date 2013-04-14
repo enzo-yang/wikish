@@ -19,7 +19,7 @@
     NSNumber        *_revid;
     
     
-    id<WikiPageInfoDelegate> _delegate;
+    id<WikiPageInfoDelegate> __weak _delegate;
 }
 
 - (id)initWithSite:(WikiSite *)site title:(NSString *)title;
@@ -31,7 +31,7 @@
 @property (nonatomic, readonly) NSArray *langLinks;
 @property (nonatomic, readonly) NSNumber *revid;
 
-@property (nonatomic, assign) id<WikiPageInfoDelegate> delegate;
+@property (nonatomic, weak) id<WikiPageInfoDelegate> delegate;
 
 // Fetch page info from Internet
 - (void)loadPageInfo;

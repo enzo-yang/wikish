@@ -12,7 +12,6 @@
 #import "Setting.h"
 #import "SiteManager.h"
 #import "WikiSite.h"
-#import "AutoPropertyRelease.h"
 #import "TableViewGestureRecognizer.h"
 #import "Button.h"
 #import "HelpController.h"
@@ -21,7 +20,7 @@
 
 @interface SettingViewController ()<UITableViewDataSource, UITableViewDelegate, TableViewGesturePanningRowDelegate>
 
-@property (nonatomic, assign) SiteManager *siteManager;
+@property (nonatomic, weak) SiteManager *siteManager;
 
 @end
 
@@ -35,11 +34,6 @@
     return self;
 }
 
-- (void)dealloc {
-    [AutoPropertyRelease releaseProperties:self thisClass:[SettingViewController class]];
-    [_helpButton release];
-    [super dealloc];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -71,7 +65,6 @@
 }
 
 - (IBAction)okButtonPressed:(id)sender {
-    // [self dismissModalViewControllerAnimated:YES];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -81,9 +74,10 @@
 }
 
 - (IBAction)helpButtonPressed:(id)sender {
-    HelpController *hCtrl = [[HelpController new] autorelease];
+    HelpController *hCtrl = [HelpController new];
+    HelpController * __weak wHCtrl = hCtrl;
     hCtrl.okBlock = ^{
-        [hCtrl dismissModalViewControllerAnimated:YES];
+        [wHCtrl dismissModalViewControllerAnimated:YES];
     };
     [self presentModalViewController:hCtrl animated:YES];
 }
@@ -92,9 +86,9 @@
 #pragma mark UITableViewDelegate
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView *headerView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 30)] autorelease];
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 30)];
     [headerView setBackgroundColor:DarkGreenColor()];
-    UILabel *label = [[[UILabel alloc] initWithFrame:headerView.bounds] autorelease];
+    UILabel *label = [[UILabel alloc] initWithFrame:headerView.bounds];
     label.backgroundColor = [UIColor clearColor];
     label.textColor = [UIColor whiteColor];
     label.font = [UIFont boldSystemFontOfSize:17.0f];
@@ -141,8 +135,8 @@
     static NSString *cid = @"left";
     UITableViewCell *cell = [_sitesTable dequeueReusableCellWithIdentifier:cid];
     if (!cell) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cid] autorelease];
-        cell.backgroundView = [[UIView new] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cid];
+        cell.backgroundView = [UIView new];
         cell.backgroundView.backgroundColor = GetTableCellBackgroundColor();
         cell.textLabel.font = [UIFont systemFontOfSize:17.0f];
     }
@@ -158,12 +152,12 @@
     static NSString *cid = @"right";
     UITableViewCell *cell = [_commonSitesTable dequeueReusableCellWithIdentifier:cid];
     if (!cell) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cid] autorelease];
-        cell.backgroundView = [[UIView new] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cid];
+        cell.backgroundView = [UIView new];
         cell.backgroundView.backgroundColor = GetTableCellBackgroundColor();
         cell.textLabel.font = [UIFont systemFontOfSize:17.0f];
         
-        cell.selectedBackgroundView = [[UIView new] autorelease];
+        cell.selectedBackgroundView = [UIView new];
         cell.selectedBackgroundView.backgroundColor = GetTableHighlightRowColor();
     }
     cell.contentView.backgroundColor = GetTableBackgourndColor();
@@ -233,13 +227,12 @@
         }
         
     } else {
-        WikiSite *theSite = [[[_siteManager commonSites] objectAtIndex:indexPath.row] retain];
+        WikiSite *theSite = [[_siteManager commonSites] objectAtIndex:indexPath.row];
         if (gestureRecognizer.panState == TableViewCellPanStateLeft) {
             if ([[_siteManager commonSites] count] == 1) {
                 [self gestureRecognizer:gestureRecognizer recoverRowAtIndexPath:indexPath];
             }
             if (![_siteManager removeCommonSite:theSite]) {
-                [theSite release];
                 return;
             }
             [self.commonSitesTable beginUpdates];
@@ -254,7 +247,6 @@
             cell.contentView.backgroundColor = GetTableHighlightRowColor();
             [UIView commitAnimations];
         }
-        [theSite release];
     }
 }
 
@@ -397,8 +389,4 @@
     ((Button*)[self.homeButtons objectAtIndex:index]).selected = YES;
 }
 
-- (void)viewDidUnload {
-    [self setHelpButton:nil];
-    [super viewDidUnload];
-}
 @end

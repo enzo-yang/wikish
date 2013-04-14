@@ -9,9 +9,9 @@
 #import "Button.h"
 
 @interface Button()
-@property (nonatomic, retain) UIColor *highlightColor;
-@property (nonatomic, retain) UIColor *selectedColor;
-@property (nonatomic, retain) UIColor *normalColor;
+@property (nonatomic, strong) UIColor *highlightColor;
+@property (nonatomic, strong) UIColor *selectedColor;
+@property (nonatomic, strong) UIColor *normalColor;
 @end
 
 @implementation Button
@@ -31,10 +31,6 @@
     [self removeObserver:self forKeyPath:@"highlighted"];
     [self removeObserver:self forKeyPath:@"selected"];
     [self removeObserver:self forKeyPath:@"enabled"];
-    self.normalColor = nil;
-    self.selectedColor = nil;
-    self.highlightColor = nil;
-    [super dealloc];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
