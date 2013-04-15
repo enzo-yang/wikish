@@ -17,6 +17,26 @@
 #import "HelpController.h"
 
 
+@interface BottomLineContentView : UIView
+@end
+
+@implementation BottomLineContentView
+
+- (void)drawRect:(CGRect)rect {
+    CGContextRef c = UIGraphicsGetCurrentContext();
+    
+    CGFloat lineColor[4] = {0.9f, 0.9f, 0.9f, 1.0f};
+    CGContextSetStrokeColor(c, lineColor);
+    CGContextSetShouldAntialias(c, false);
+    CGContextSetLineWidth(c, 0.5);
+    CGContextBeginPath(c);
+    CGContextMoveToPoint(c, 1.0f, CGRectGetHeight(self.bounds));
+    CGContextAddLineToPoint(c, CGRectGetWidth(self.bounds) - 1.0f, CGRectGetHeight(self.bounds));
+    CGContextStrokePath(c);
+}
+
+@end
+
 
 @interface SettingViewController ()<UITableViewDataSource, UITableViewDelegate, TableViewGesturePanningRowDelegate>
 
@@ -47,8 +67,8 @@
     
     [self _refreshHomeButtons];
     
-    self.sitesTable.backgroundColor = GetTableBackgourndColor();
-    self.commonSitesTable.backgroundColor = GetTableBackgourndColor();
+//    self.sitesTable.backgroundColor = GetTableBackgourndColor();
+//    self.commonSitesTable.backgroundColor = GetTableBackgourndColor();
     
     self.sitesGestureRecognizer = [self.sitesTable enableGestureTableViewWithDelegate:self];
     self.sitesGestureRecognizer.blockSide = TableViewCellBlockLeft;
@@ -142,6 +162,13 @@
         
         cell.selectedBackgroundView = [UIView new];
         cell.selectedBackgroundView.backgroundColor = GetTableHighlightRowColor();
+        
+        BottomLineContentView *blcv = [[BottomLineContentView alloc] initWithFrame:cell.contentView.bounds];
+        blcv.backgroundColor = [UIColor clearColor];
+        blcv.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        // [cell.contentView insertSubview:blcv atIndex:0];
+        [cell.contentView addSubview:blcv];
+        
     }
 //    cell.contentView.backgroundColor = GetTableBackgourndColor();
     cell.contentView.backgroundColor = [UIColor whiteColor];
@@ -163,6 +190,12 @@
         
         cell.selectedBackgroundView = [UIView new];
         cell.selectedBackgroundView.backgroundColor = GetTableHighlightRowColor();
+        
+        BottomLineContentView *blcv = [[BottomLineContentView alloc] initWithFrame:cell.contentView.bounds];
+        blcv.backgroundColor = [UIColor clearColor];
+        blcv.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        // [cell.contentView insertSubview:blcv atIndex:0];
+        [cell.contentView addSubview:blcv];
     }
 //    cell.contentView.backgroundColor = GetTableBackgourndColor();
     cell.contentView.backgroundColor = [UIColor whiteColor];
@@ -234,7 +267,7 @@
             [self.commonSitesTable reloadData];
             [UIView beginAnimations:nil context:nil];
             cell.contentView.frame = cell.contentView.bounds;
-            cell.contentView.backgroundColor = GetTableBackgourndColor();
+            cell.contentView.backgroundColor = [UIColor whiteColor];//GetTableBackgourndColor();
             [UIView commitAnimations];
         }
         
@@ -266,7 +299,7 @@
     UITableViewCell *cell = [gestureRecognizer.tableView cellForRowAtIndexPath:indexPath];
     if (gestureRecognizer.tableView == self.sitesTable) {
         [UIView beginAnimations:nil context:nil];
-        cell.contentView.backgroundColor = GetTableBackgourndColor();
+        cell.contentView.backgroundColor =  [UIColor whiteColor];// GetTableBackgourndColor();
         [UIView commitAnimations];
     } else {
         WikiSite *defaultSite = [_siteManager defaultSite];
@@ -275,7 +308,7 @@
         if ([defaultSite sameAs:theSite]) {
             cell.contentView.backgroundColor = GetTableHighlightRowColor();
         } else {
-            cell.contentView.backgroundColor = GetTableBackgourndColor();
+            cell.contentView.backgroundColor = [UIColor whiteColor];// GetTableBackgourndColor();
         }
         [UIView commitAnimations];
     }
