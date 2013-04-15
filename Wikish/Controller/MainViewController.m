@@ -402,7 +402,7 @@
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:0.3];
         CGRect f = self.bottomView.frame;
-        f.origin.y -= 300.0f;
+        f.origin.y -= 200.0f;
         self.bottomView.frame = f;
         [UIView commitAnimations];
     }
@@ -531,7 +531,7 @@
         theViewShouldChangeFrame = self.middleView;
     } else if (viewStatus == kViewStatusSection) {
         f = self.bottomView.frame;
-        f.origin.y += 300.0f;
+        f.origin.y += 200.0f;
         theViewShouldChangeFrame = self.bottomView;
     } else if (viewStatus == kViewStatusLightness) {
         [self _hideLightnessView];

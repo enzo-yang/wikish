@@ -156,8 +156,13 @@ NSString *const kNotificationMessageSearchKeyword = @"kNotificationMessageSearch
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
         cell.textLabel.font = [UIFont systemFontOfSize:17.0f];
+        
+        cell.selectedBackgroundView = [UIView new];
+        cell.selectedBackgroundView.backgroundColor = GetTableHighlightRowColor();
+        
         CGAffineTransform transform = CGAffineTransformMakeRotation(M_PI);
         cell.transform = transform;
+        
     }
     NSString *text = @"";
     if ([_openSearch.results count] > indexPath.row) {
