@@ -390,11 +390,11 @@
     self.okButton.layer.rasterizationScale = scale;
     self.okButton.layer.shouldRasterize = YES;
     
-    for (Button *btn in self.homeButtons) {
-        [btn setBackgroundColor:GetDarkColor() forState:UIControlStateNormal];
-        [btn setBackgroundColor:DarkGreenColor() forState:UIControlStateSelected];
-        [btn setBackgroundColor:GetTableHighlightRowColor() forState:UIControlStateHighlighted];
-    }
+//    for (Button *btn in self.homeButtons) {
+//        [btn setBackgroundColor:GetDarkColor() forState:UIControlStateNormal];
+//        [btn setBackgroundColor:DarkGreenColor() forState:UIControlStateSelected];
+//        [btn setBackgroundColor:GetTableHighlightRowColor() forState:UIControlStateHighlighted];
+//    }
     
 //    Button *leftBtn = [self.homeButtons objectAtIndex:0];
 //    maskPath = [UIBezierPath bezierPathWithRoundedRect:leftBtn.bounds
