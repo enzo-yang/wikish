@@ -8,7 +8,6 @@
 // setting
 "use-https" = "0";
 
-"OK" = "OK";
 "Setting" = "Setting";
 "Use HTTPS" = "  Use HTTPS";
 "Section Expanded" = "  Section Expanded";
@@ -27,8 +26,6 @@
 "Cancel" = "Cancel";
 "Home_Page" = "Home Page";
 
-"Help" = "Help";
-"Back" = "Back";
 
 "Delete" = "DELETE ";
 "Lightness Control" = "Lightness Control";

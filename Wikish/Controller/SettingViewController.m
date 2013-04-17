@@ -66,14 +66,12 @@
     // expanded
     [self.expanedSwitch setOn:[Setting isInitExpanded] animated:NO];
     
-    [self _refreshHomeButtons];
+    [self _createHomeSegment];
     
 //    self.sitesTable.backgroundColor = GetTableBackgourndColor();
 //    self.commonSitesTable.backgroundColor = GetTableBackgourndColor();
     
-    HMSegmentedControl *segment = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"blank", @"feature", @"last"]];
-    segment.frame = self.homePageSwitchPlatform.bounds;
-    [self.homePageSwitchPlatform addSubview:segment];
+    
     
     self.sitesGestureRecognizer = [self.sitesTable enableGestureTableViewWithDelegate:self];
     self.sitesGestureRecognizer.blockSide = TableViewCellBlockLeft;
@@ -93,10 +91,6 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (IBAction)homeTypeButtonPressed:(id)sender {
-    [Setting setHomePage:((UIButton *)sender).tag];
-    [self _refreshHomeButtons];
-}
 
 - (IBAction)helpButtonPressed:(id)sender {
     HelpController *hCtrl = [HelpController new];
@@ -112,10 +106,10 @@
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 30)];
-    [headerView setBackgroundColor:DarkGreenColor()];
+    [headerView setBackgroundColor:[UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:1.0]];
     UILabel *label = [[UILabel alloc] initWithFrame:headerView.bounds];
     label.backgroundColor = [UIColor clearColor];
-    label.textColor = [UIColor whiteColor];
+    label.textColor = [UIColor colorWithRed:0.85 green:0.85 blue:0.85 alpha:1.0]; //[UIColor whiteColor];
     label.font = [UIFont boldSystemFontOfSize:17.0f];
     [headerView addSubview:label];
     
@@ -166,7 +160,7 @@
         cell.textLabel.font = [UIFont systemFontOfSize:17.0f];
         
         cell.selectedBackgroundView = [UIView new];
-        cell.selectedBackgroundView.backgroundColor = GetTableHighlightRowColor();
+        cell.selectedBackgroundView.backgroundColor = GetHighlightColor();
         
         BottomLineContentView *blcv = [[BottomLineContentView alloc] initWithFrame:cell.contentView.bounds];
         blcv.backgroundColor = [UIColor clearColor];
@@ -192,7 +186,7 @@
         cell.textLabel.font = [UIFont systemFontOfSize:17.0f];
         
         cell.selectedBackgroundView = [UIView new];
-        cell.selectedBackgroundView.backgroundColor = GetTableHighlightRowColor();
+        cell.selectedBackgroundView.backgroundColor = GetHighlightColor();
         
         BottomLineContentView *blcv = [[BottomLineContentView alloc] initWithFrame:cell.contentView.bounds];
         blcv.backgroundColor = [UIColor clearColor];
@@ -205,7 +199,7 @@
     
     WikiSite *site = [[_siteManager commonSites] objectAtIndex:indexPath.row];
     if ([site sameAs:[_siteManager defaultSite]]) {
-        cell.contentView.backgroundColor = GetTableHighlightRowColor();
+        cell.contentView.backgroundColor = GetHighlightColor();
         cell.textLabel.textColor = [UIColor whiteColor];
     }
     cell.textLabel.text = site.name;
@@ -248,9 +242,9 @@
     CGFloat rv, gv, bv; // rgb 变化权值
     [GetTableBackgourndColor() getRed:&r green:&g blue:&b alpha:NULL];
     if (left > 0) { // 偏绿
-        [GetTableHighlightRowColor() getRed:&rd green:&gd blue:&bd alpha:NULL];
+        [GetHighlightColor() getRed:&rd green:&gd blue:&bd alpha:NULL];
     } else { // 偏红
-        [[UIColor redColor] getRed:&rd green:&gd blue:&bd alpha:NULL];
+        rd = 1.0f, gd = 0.3f, bd = 0.3f;
     }
     rv = rd-r; gv = gd-g; bv = bd-b;
     
@@ -275,6 +269,9 @@
         WikiSite *theSite = [[_siteManager commonSites] objectAtIndex:indexPath.row];
         if (gestureRecognizer.panState == TableViewCellPanStateLeft) {
             if ([[_siteManager commonSites] count] == 1) {
+                [UIView beginAnimations:nil context:nil];
+                cell.contentView.frame = cell.contentView.bounds;
+                [UIView commitAnimations];
                 [self gestureRecognizer:gestureRecognizer recoverRowAtIndexPath:indexPath];
             }
             if (![_siteManager removeCommonSite:theSite]) {
@@ -287,8 +284,7 @@
         } else if (gestureRecognizer.panState == TableViewCellPanStateRight) {
             NSIndexPath *indexPath = [self.commonSitesTable indexPathForSelectedRow];
             if (indexPath) {
-                [self.commonSitesTable deselectRowAtIndexPath:indexPath animated:YES];
-                return;
+                [self.commonSitesTable deselectRowAtIndexPath:indexPath animated:NO];
             } else {
                 [self _unhighlightDefaultSite];
             }
@@ -296,8 +292,6 @@
             [self _highlightDefaultSite];
             [UIView beginAnimations:nil context:nil];
             cell.contentView.frame = cell.contentView.bounds;
-//            cell.contentView.backgroundColor = GetTableHighlightRowColor();
-//            cell.textLabel.textColor = [UIColor whiteColor];
             [UIView commitAnimations];
         }
     }
@@ -314,7 +308,7 @@
         WikiSite *theSite = [[_siteManager commonSites] objectAtIndex:indexPath.row];
         [UIView beginAnimations:nil context:nil];
         if ([defaultSite sameAs:theSite]) {
-            cell.contentView.backgroundColor = GetTableHighlightRowColor();
+            cell.contentView.backgroundColor = GetHighlightColor();
         } else {
             cell.contentView.backgroundColor = [UIColor whiteColor];// GetTableBackgourndColor();
         }
@@ -331,7 +325,7 @@
     if (index == [_siteManager commonSites].count) return;
     UITableViewCell *cell = [self.commonSitesTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
     [UIView beginAnimations:nil context:nil];
-    cell.contentView.backgroundColor = GetTableHighlightRowColor();
+    cell.contentView.backgroundColor = GetHighlightColor();
     cell.textLabel.textColor = [UIColor whiteColor];
     [UIView commitAnimations];
 }
@@ -377,23 +371,30 @@
 }
 
 - (void)_localizeTexts {
-    [self.okButton setTitle:NSLocalizedString(@"OK", nil) forState:UIControlStateNormal];
-    [self.helpButton setTitle:NSLocalizedString(@"Help", nil) forState:UIControlStateNormal];
     self.settingLabel.text  = NSLocalizedString(@"Setting", nil);
     self.httpsLabel.text    = NSLocalizedString(@"Use HTTPS", nil);
     self.expanedLabel.text  = NSLocalizedString(@"Section Expanded", nil);
     self.homeLabel.text     = NSLocalizedString(@"Home Page", nil);
-    [(UIButton *)[self.homeButtons objectAtIndex:0] setTitle:NSLocalizedString(@"Blank", nil) forState:UIControlStateNormal];
-    [(UIButton *)[self.homeButtons objectAtIndex:1] setTitle:NSLocalizedString(@"Extract", nil) forState:UIControlStateNormal];
-    [(UIButton *)[self.homeButtons objectAtIndex:2] setTitle:NSLocalizedString(@"Last", nil) forState:UIControlStateNormal];
+
 }
 
-- (void)_refreshHomeButtons {
+- (void)_createHomeSegment {
+    HMSegmentedControl *segment = [[HMSegmentedControl alloc] initWithSectionTitles:@[NSLocalizedString(@"Blank", nil), NSLocalizedString(@"Extract", nil), NSLocalizedString(@"Last", nil)]];
+    segment.frame = self.homePageSwitchPlatform.bounds;
+    segment.height = CGRectGetHeight(segment.frame);
+    segment.selectionIndicatorColor = GetHighlightColor();
+    segment.textColor = [UIColor darkGrayColor];
+    segment.layer.borderWidth = 0.5;
+    segment.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    
     NSInteger index = (NSInteger)[Setting homePage];
-    for (Button *btn in self.homeButtons) {
-        btn.selected = NO;
-    }
-    ((Button*)[self.homeButtons objectAtIndex:index]).selected = YES;
+    segment.selectedIndex = index;
+    
+    segment.indexChangeBlock = ^(NSUInteger index) {
+        [Setting setHomePage:index];
+    };
+    
+    [self.homePageSwitchPlatform addSubview:segment];
 }
 
 - (void)viewDidUnload {

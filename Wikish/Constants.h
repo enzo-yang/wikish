@@ -22,9 +22,7 @@ extern NSString *const kNotificationMessageSearchKeyword;
 
 UIColor *GetTableBackgourndColor();
 UIColor *GetTableCellBackgroundColor();
-UIColor *DarkGreenColor();
 UIColor *SeperatorColor();
-UIColor *GetTableHighlightRowColor();
-UIColor *GetDarkColor();
+UIColor *GetHighlightColor();
 
 #endif

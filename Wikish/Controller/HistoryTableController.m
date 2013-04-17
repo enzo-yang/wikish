@@ -50,11 +50,11 @@
     CGFloat color_offset = fabsf(left)/160.0f;
     if (color_offset > 1.0f) color_offset = 1.0f;
     CGFloat r, g, b; // 正常状态的颜色 rgb
-    CGFloat rd, gd, bd; // 目的状态颜色
+    CGFloat rd = 1.0f, gd = 0.3f, bd = 0.3f; // 目的状态颜色
     CGFloat rv, gv, bv; // rgb 变化权值
     [GetTableBackgourndColor() getRed:&r green:&g blue:&b alpha:NULL];
     
-    [[UIColor redColor] getRed:&rd green:&gd blue:&bd alpha:NULL];
+    // [[UIColor redColor] getRed:&rd green:&gd blue:&bd alpha:NULL];
     rv = rd-r; gv = gd-g; bv = bd-b;
     
     cell.contentView.backgroundColor = [UIColor colorWithRed:r+color_offset*rv green:g+color_offset*gv blue:b+color_offset*bv alpha:1];
@@ -93,10 +93,10 @@
         UILabel *labelDelete = [[UILabel alloc] initWithFrame:cell.backgroundView.bounds];
         labelDelete.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         [labelDelete setTextAlignment:NSTextAlignmentRight];
-        [labelDelete setTextColor:[UIColor colorWithRed:1.0 green:0.2 blue:0.2 alpha:1]];
+        [labelDelete setTextColor:[UIColor colorWithRed:1.0 green:0.3 blue:0.3 alpha:1]];
         [labelDelete setBackgroundColor:[UIColor clearColor]];
         [labelDelete setShadowOffset:CGSizeMake(0, 1)];
-        [labelDelete setShadowColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.3]];
+        [labelDelete setShadowColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2]];
         [labelDelete setFont:[UIFont boldSystemFontOfSize:17.0f]];
         labelDelete.text = NSLocalizedString(@"Delete", nil);
         labelDelete.tag = kLabelDeleteTag;
@@ -108,7 +108,7 @@
         cell.detailTextLabel.backgroundColor = [UIColor clearColor];
         
         cell.selectedBackgroundView = [UIView new];
-        cell.selectedBackgroundView.backgroundColor = GetTableHighlightRowColor();
+        cell.selectedBackgroundView.backgroundColor = GetHighlightColor();
         
     }
     cell.contentView.backgroundColor    = GetTableBackgourndColor();

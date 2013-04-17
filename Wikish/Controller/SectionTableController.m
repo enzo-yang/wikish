@@ -37,7 +37,7 @@
         cell.textLabel.font = [UIFont systemFontOfSize:17.0f];
         
         cell.selectedBackgroundView = [UIView new];
-        cell.selectedBackgroundView.backgroundColor = GetTableHighlightRowColor();
+        cell.selectedBackgroundView.backgroundColor = GetHighlightColor();
     }
     WikiSection *section = [self.mainController.pageInfo.sections objectAtIndex:indexPath.row];
     NSString *text = [NSString stringWithFormat:@"%@ %@", section.index, section.line];

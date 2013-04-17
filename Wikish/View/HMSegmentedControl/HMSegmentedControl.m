@@ -41,9 +41,9 @@
 
 - (void)setDefaults {
     // self.font = [UIFont fontWithName:@"STHeitiSC-Light" size:18.0f];
-    self.font = [UIFont systemFontOfSize:15.0f];
-    self.textColor = [UIColor whiteColor];
-    self.backgroundColor = [UIColor blackColor];
+    self.font = [UIFont boldSystemFontOfSize:14.0f];
+    self.textColor = [UIColor blackColor];
+    self.backgroundColor = [UIColor whiteColor];
     self.selectionIndicatorColor = [UIColor colorWithRed:52.0f/255.0f green:181.0f/255.0f blue:229.0f/255.0f alpha:1.0f];
     
     self.selectedIndex = 0;
@@ -80,6 +80,24 @@
                   lineBreakMode:NSLineBreakByClipping
                       alignment:NSTextAlignmentCenter];
 #endif
+        if (idx != self.sectionTitles.count - 1) {
+            CGContextRef c = UIGraphicsGetCurrentContext();
+            
+            CGContextSaveGState(c);
+            CGContextSetStrokeColorWithColor(c, [UIColor lightGrayColor].CGColor);
+            CGContextSetShouldAntialias(c, false);
+            CGContextSetLineWidth(c, 0.5);
+            
+            CGPoint beginPoint = CGPointMake(self.segmentWidth * (idx + 1)-1, self.selectionIndicatorHeight + 5);
+            CGPoint endPoint = CGPointMake(self.segmentWidth * (idx + 1)-1, self.height - 5);
+            
+            CGContextBeginPath(c);
+            CGContextMoveToPoint(c, beginPoint.x, beginPoint.y);
+            CGContextAddLineToPoint(c, endPoint.x, endPoint.y);
+            CGContextStrokePath(c);
+            
+            CGContextRestoreGState(c);
+        }
         
         self.selectedSegmentLayer.frame = [self frameForSelectionIndicator];
         self.selectedSegmentLayer.backgroundColor = self.selectionIndicatorColor.CGColor;
@@ -89,7 +107,8 @@
 }
 
 - (CGRect)frameForSelectionIndicator {
-    CGFloat stringWidth = [[self.sectionTitles objectAtIndex:self.selectedIndex] sizeWithFont:self.font].width;
+    // CGFloat stringWidth = [[self.sectionTitles objectAtIndex:self.selectedIndex] sizeWithFont:self.font].width;
+    CGFloat stringWidth = self.segmentWidth - self.segmentEdgeInset.left - self.segmentEdgeInset.right;
     
     if (self.selectionIndicatorMode == HMSelectionIndicatorResizesToStringWidth) {
         CGFloat widthTillEndOfSelectedIndex = (self.segmentWidth * self.selectedIndex) + self.segmentWidth;

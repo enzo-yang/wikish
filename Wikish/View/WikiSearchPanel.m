@@ -56,7 +56,6 @@ NSString *const kNotificationMessageSearchKeyword = @"kNotificationMessageSearch
     self.resultTable.transform = transform;
     
     [self _updateLanguageButton];
-    [self _customizeAppearance];
 }
 
 - (void)dealloc {
@@ -67,7 +66,6 @@ NSString *const kNotificationMessageSearchKeyword = @"kNotificationMessageSearch
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if ([keyPath isEqualToString:@"results"]) {
-        // LOG(@"result changed, %@", _openSearch.results);
         self.resultTable.hidden = NO;
         [self.resultTable reloadData];
     }
@@ -75,7 +73,6 @@ NSString *const kNotificationMessageSearchKeyword = @"kNotificationMessageSearch
 
 - (IBAction)textChanged:(id)sender {
     if (self.textField.markedTextRange == nil) {
-        // LOG(@"%@", self.textField.text);
         if (self.textField.text && self.textField.text.length > 0)
             [_openSearch request:self.textField.text];
     }
@@ -109,7 +106,6 @@ NSString *const kNotificationMessageSearchKeyword = @"kNotificationMessageSearch
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:duration];
     self.frame = theBounds;
-    // self.resultTable.alpha = 1;
     [UIView commitAnimations];
 }
 
@@ -158,7 +154,7 @@ NSString *const kNotificationMessageSearchKeyword = @"kNotificationMessageSearch
         cell.textLabel.font = [UIFont systemFontOfSize:17.0f];
         
         cell.selectedBackgroundView = [UIView new];
-        cell.selectedBackgroundView.backgroundColor = GetTableHighlightRowColor();
+        cell.selectedBackgroundView.backgroundColor = GetHighlightColor();
         
         CGAffineTransform transform = CGAffineTransformMakeRotation(M_PI);
         cell.transform = transform;
@@ -199,27 +195,6 @@ NSString *const kNotificationMessageSearchKeyword = @"kNotificationMessageSearch
 - (void)_updateLanguageButton {
     WikiSite *site = [[SiteManager sharedInstance] defaultSite];
     [self.langBtn setTitle:[site briefName] forState:UIControlStateNormal];
-}
-
-- (void)_customizeAppearance {
-    self.textPlatform.backgroundColor = GetDarkColor();
-    
-//    [self.langBtn setBackgroundColor:GetDarkColor() forState:UIControlStateNormal];
-//    [self.langBtn setBackgroundColor:DarkGreenColor() forState:UIControlStateSelected];
-//    [self.langBtn setBackgroundColor:GetTableHighlightRowColor() forState:UIControlStateHighlighted];
-//
-//    self.langBtn.layer.borderWidth = 2;
-//    self.langBtn.layer.borderColor = [UIColor whiteColor].CGColor;
-//    self.langBtn.layer.cornerRadius = 4;
-//    self.langBtn.layer.rasterizationScale = [UIScreen mainScreen].scale;
-//    self.langBtn.layer.shouldRasterize = YES;
-    
-//    UIImage *noramlImage = [[UIImage imageNamed:@"square-normal.png"] stretchableImageWithLeftCapWidth:24 topCapHeight:24];
-//    UIImage *highlightImage = [[UIImage imageNamed:@"square-highlight.png"] stretchableImageWithLeftCapWidth:24 topCapHeight:24];
-//    [self.cancelBtn setBackgroundImage:noramlImage forState:UIControlStateNormal];
-//    [self.cancelBtn setBackgroundImage:highlightImage forState:UIControlStateHighlighted];
-//    [self.cancelBtn setTitle:NSLocalizedString(@"Cancel", nil) forState:UIControlStateNormal];
-    
 }
 
 

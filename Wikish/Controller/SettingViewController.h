@@ -27,9 +27,7 @@
 
 @property (nonatomic, weak) IBOutlet UIView       *homeView;
 @property (nonatomic, weak) IBOutlet UILabel      *homeLabel;
-@property (nonatomic, strong) IBOutletCollection(Button) NSArray *homeButtons;
-
-@property (weak, nonatomic) IBOutlet UIView *homePageSwitchPlatform;
+@property (weak, nonatomic) IBOutlet UIView       *homePageSwitchPlatform;
 
 @property (nonatomic, weak) IBOutlet UITableView  *sitesTable;
 @property (nonatomic, weak) IBOutlet UITableView  *commonSitesTable;
@@ -40,6 +38,5 @@
 - (IBAction)useHttpsSwitchChanged:(UISwitch *)sender;
 - (IBAction)sectionExpandedSwitchChanged:(UISwitch *)sender;
 - (IBAction)okButtonPressed:(id)sender;
-- (IBAction)homeTypeButtonPressed:(id)sender;
 - (IBAction)helpButtonPressed:(id)sender;
 @end

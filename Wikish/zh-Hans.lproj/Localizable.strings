@@ -8,7 +8,6 @@
 // setting
 "use-https" = "1";
 
-"OK" = "完成";
 "Setting" = "设置";
 "Use HTTPS" = "  使用 https";
 "Section Expanded" = "  段落默认展开";
@@ -27,8 +26,6 @@
 "Cancel" = "取消";
 "Home_Page" = "首页";
 
-"Help" = "帮助";
-"Back" = "返回";
 
 "Delete" = "删除 ";
 "Lightness Control" = "亮度调节";
