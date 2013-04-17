@@ -13,7 +13,7 @@
 
 @interface SettingViewController : UIViewController
 
-@property (nonatomic, weak) IBOutlet Button       *okButton;
+@property (nonatomic, weak) IBOutlet UIButton       *okButton;
 @property (nonatomic, weak) IBOutlet UIButton *helpButton;
 @property (nonatomic, weak) IBOutlet UILabel      *settingLabel;
 
@@ -29,6 +29,7 @@
 @property (nonatomic, weak) IBOutlet UILabel      *homeLabel;
 @property (nonatomic, strong) IBOutletCollection(Button) NSArray *homeButtons;
 
+@property (weak, nonatomic) IBOutlet UIView *homePageSwitchPlatform;
 
 @property (nonatomic, weak) IBOutlet UITableView  *sitesTable;
 @property (nonatomic, weak) IBOutlet UITableView  *commonSitesTable;

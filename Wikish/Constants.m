@@ -38,7 +38,7 @@ UIColor *DarkGreenColor() {
 }
 
 UIColor *GetTableHighlightRowColor() {
-    return [UIColor colorWithRed:0.7767f green:0.7775f blue:0.8337f alpha:1.0f];
+    return [UIColor colorWithRed:0.5020f green:0.6784f blue:0.1882f alpha:1.0f];
 }
 
 UIColor *GetDarkColor() {

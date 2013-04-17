@@ -38,6 +38,10 @@
 		C64ECDDC16C32A92006D3767 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C64ECDDE16C32A92006D3767 /* Localizable.strings */; };
 		C64FD07E1717E52E00AB7236 /* HelpController.m in Sources */ = {isa = PBXBuildFile; fileRef = C64FD07C1717E52E00AB7236 /* HelpController.m */; };
 		C64FD07F1717E52E00AB7236 /* HelpController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C64FD07D1717E52E00AB7236 /* HelpController.xib */; };
+		C65D1167171EA3DE00CE7499 /* back_button.png in Resources */ = {isa = PBXBuildFile; fileRef = C65D1166171EA3DE00CE7499 /* back_button.png */; };
+		C65D116F171ED47200CE7499 /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = C65D116E171ED47200CE7499 /* button.png */; };
+		C65D1173171ED6B200CE7499 /* button_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = C65D1172171ED6B200CE7499 /* button_selected.png */; };
+		C65D1177171EDC3D00CE7499 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = C65D1176171EDC3D00CE7499 /* HMSegmentedControl.m */; };
 		C6921EA916FD917900D18C22 /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C6921EA716FD917900D18C22 /* libGoogleAnalytics.a */; };
 		C6921EAA16FD917900D18C22 /* libGoogleAnalytics_debug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C6921EA816FD917900D18C22 /* libGoogleAnalytics_debug.a */; };
 		C6921EAC16FD9A7800D18C22 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6921EAB16FD9A7800D18C22 /* CoreData.framework */; };
@@ -141,7 +145,6 @@
 		C6FFF910171B04EC00A4631B /* change-lang-en.png in Resources */ = {isa = PBXBuildFile; fileRef = C6FFF90E171B04EC00A4631B /* change-lang-en.png */; };
 		C6FFF912171C682900A4631B /* bar_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = C6FFF911171C682900A4631B /* bar_bg.png */; };
 		C6FFF914171C693100A4631B /* bar_bg2.png in Resources */ = {isa = PBXBuildFile; fileRef = C6FFF913171C693100A4631B /* bar_bg2.png */; };
-		C6FFF916171DBBAF00A4631B /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = C6FFF915171DBBAF00A4631B /* button.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -182,6 +185,11 @@
 		C64FD07B1717E52E00AB7236 /* HelpController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpController.h; sourceTree = "<group>"; };
 		C64FD07C1717E52E00AB7236 /* HelpController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpController.m; sourceTree = "<group>"; };
 		C64FD07D1717E52E00AB7236 /* HelpController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HelpController.xib; sourceTree = "<group>"; };
+		C65D1166171EA3DE00CE7499 /* back_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back_button.png; sourceTree = "<group>"; };
+		C65D116E171ED47200CE7499 /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.png; sourceTree = "<group>"; };
+		C65D1172171ED6B200CE7499 /* button_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_selected.png; sourceTree = "<group>"; };
+		C65D1175171EDC3D00CE7499 /* HMSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSegmentedControl.h; sourceTree = "<group>"; };
+		C65D1176171EDC3D00CE7499 /* HMSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSegmentedControl.m; sourceTree = "<group>"; };
 		C66C343616FAEC5E00DB3926 /* Macros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
 		C67F8C641699A9BA004C9B3D /* AutoPropertyRelease.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoPropertyRelease.h; sourceTree = "<group>"; };
 		C67F8C651699A9BA004C9B3D /* AutoPropertyRelease.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoPropertyRelease.m; sourceTree = "<group>"; };
@@ -314,7 +322,6 @@
 		C6FFF90E171B04EC00A4631B /* change-lang-en.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "change-lang-en.png"; sourceTree = "<group>"; };
 		C6FFF911171C682900A4631B /* bar_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bar_bg.png; sourceTree = "<group>"; };
 		C6FFF913171C693100A4631B /* bar_bg2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bar_bg2.png; sourceTree = "<group>"; };
-		C6FFF915171DBBAF00A4631B /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -354,7 +361,9 @@
 		C6471742169B24E3006ACC7A /* images */ = {
 			isa = PBXGroup;
 			children = (
-				C6FFF915171DBBAF00A4631B /* button.png */,
+				C65D1172171ED6B200CE7499 /* button_selected.png */,
+				C65D116E171ED47200CE7499 /* button.png */,
+				C65D1166171EA3DE00CE7499 /* back_button.png */,
 				C642B66D171D7C4100DA5491 /* bar_bg_input.png */,
 				C642B66B171D793600DA5491 /* bar_bg15_down.png */,
 				C642B667171D773E00DA5491 /* bar_bg15_up.png */,
@@ -398,6 +407,15 @@
 				C6F9406316E33456005DBBD5 /* list-view-64.png */,
 			);
 			path = images;
+			sourceTree = "<group>";
+		};
+		C65D1174171EDC3D00CE7499 /* HMSegmentedControl */ = {
+			isa = PBXGroup;
+			children = (
+				C65D1175171EDC3D00CE7499 /* HMSegmentedControl.h */,
+				C65D1176171EDC3D00CE7499 /* HMSegmentedControl.m */,
+			);
+			path = HMSegmentedControl;
 			sourceTree = "<group>";
 		};
 		C6921EA116FD917900D18C22 /* GoogleAnalytic */ = {
@@ -566,6 +584,7 @@
 		C69EE49B16DFB6A30074AF3D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C65D1174171EDC3D00CE7499 /* HMSegmentedControl */,
 				C6F9406D16E36574005DBBD5 /* SVProgressHUD */,
 				C69EE49C16DFB6A30074AF3D /* TableViewGestureRecognizer.h */,
 				C69EE49D16DFB6A30074AF3D /* TableViewGestureRecognizer.m */,
@@ -798,7 +817,9 @@
 				C642B668171D773E00DA5491 /* bar_bg15_up.png in Resources */,
 				C642B66C171D793600DA5491 /* bar_bg15_down.png in Resources */,
 				C642B66E171D7C4100DA5491 /* bar_bg_input.png in Resources */,
-				C6FFF916171DBBAF00A4631B /* button.png in Resources */,
+				C65D1167171EA3DE00CE7499 /* back_button.png in Resources */,
+				C65D116F171ED47200CE7499 /* button.png in Resources */,
+				C65D1173171ED6B200CE7499 /* button_selected.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -873,6 +894,7 @@
 				C6FFF8E61719BFDC00A4631B /* StyledPageControl.m in Sources */,
 				C6FFF8E7171A57B200A4631B /* JSONKit.m in Sources */,
 				C6FFF8E8171A57BB00A4631B /* RegexKitLite.m in Sources */,
+				C65D1177171EDC3D00CE7499 /* HMSegmentedControl.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

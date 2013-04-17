@@ -15,6 +15,7 @@
 #import "TableViewGestureRecognizer.h"
 #import "Button.h"
 #import "HelpController.h"
+#import "HMSegmentedControl.h"
 
 
 @interface BottomLineContentView : UIView
@@ -69,6 +70,10 @@
     
 //    self.sitesTable.backgroundColor = GetTableBackgourndColor();
 //    self.commonSitesTable.backgroundColor = GetTableBackgourndColor();
+    
+    HMSegmentedControl *segment = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"blank", @"feature", @"last"]];
+    segment.frame = self.homePageSwitchPlatform.bounds;
+    [self.homePageSwitchPlatform addSubview:segment];
     
     self.sitesGestureRecognizer = [self.sitesTable enableGestureTableViewWithDelegate:self];
     self.sitesGestureRecognizer.blockSide = TableViewCellBlockLeft;
@@ -166,11 +171,9 @@
         BottomLineContentView *blcv = [[BottomLineContentView alloc] initWithFrame:cell.contentView.bounds];
         blcv.backgroundColor = [UIColor clearColor];
         blcv.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        // [cell.contentView insertSubview:blcv atIndex:0];
         [cell.contentView addSubview:blcv];
         
     }
-//    cell.contentView.backgroundColor = GetTableBackgourndColor();
     cell.contentView.backgroundColor = [UIColor whiteColor];
     cell.textLabel.backgroundColor = [UIColor clearColor];
     
@@ -194,16 +197,16 @@
         BottomLineContentView *blcv = [[BottomLineContentView alloc] initWithFrame:cell.contentView.bounds];
         blcv.backgroundColor = [UIColor clearColor];
         blcv.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        // [cell.contentView insertSubview:blcv atIndex:0];
         [cell.contentView addSubview:blcv];
     }
-//    cell.contentView.backgroundColor = GetTableBackgourndColor();
     cell.contentView.backgroundColor = [UIColor whiteColor];
     cell.textLabel.backgroundColor = [UIColor clearColor];
+    cell.textLabel.textColor = [UIColor blackColor];
     
     WikiSite *site = [[_siteManager commonSites] objectAtIndex:indexPath.row];
     if ([site sameAs:[_siteManager defaultSite]]) {
         cell.contentView.backgroundColor = GetTableHighlightRowColor();
+        cell.textLabel.textColor = [UIColor whiteColor];
     }
     cell.textLabel.text = site.name;
     return cell;
@@ -212,15 +215,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (tableView == _commonSitesTable) {
-        [tableView deselectRowAtIndexPath:indexPath animated:NO];
         NSUInteger defaultIndex = [_siteManager.commonSites indexOfObject:[_siteManager defaultSite]];
-        WikiSite *defaultSiteNew = [_siteManager.commonSites objectAtIndex:indexPath.row];
-        
-        [_siteManager setDefaultSite:defaultSiteNew];
-        
-        [_commonSitesTable beginUpdates];
-        [_commonSitesTable reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:defaultIndex inSection:indexPath.section], indexPath] withRowAnimation:UITableViewRowAnimationNone];
-        [_commonSitesTable endUpdates];
+        if (defaultIndex != indexPath.row) {
+            [self _unhighlightDefaultSite];
+            WikiSite *defaultSiteNew = [_siteManager.commonSites objectAtIndex:indexPath.row];
+            [_siteManager setDefaultSite:defaultSiteNew];
+        }
         
     } else if (tableView == _sitesTable) {
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
@@ -285,11 +285,19 @@
             [self.commonSitesTable endUpdates];
             [self _highlightDefaultSite];
         } else if (gestureRecognizer.panState == TableViewCellPanStateRight) {
-            [self _unhighlightDefaultSite];
+            NSIndexPath *indexPath = [self.commonSitesTable indexPathForSelectedRow];
+            if (indexPath) {
+                [self.commonSitesTable deselectRowAtIndexPath:indexPath animated:YES];
+                return;
+            } else {
+                [self _unhighlightDefaultSite];
+            }
             [_siteManager setDefaultSite:theSite];
+            [self _highlightDefaultSite];
             [UIView beginAnimations:nil context:nil];
             cell.contentView.frame = cell.contentView.bounds;
-            cell.contentView.backgroundColor = GetTableHighlightRowColor();
+//            cell.contentView.backgroundColor = GetTableHighlightRowColor();
+//            cell.textLabel.textColor = [UIColor whiteColor];
             [UIView commitAnimations];
         }
     }
@@ -324,6 +332,7 @@
     UITableViewCell *cell = [self.commonSitesTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
     [UIView beginAnimations:nil context:nil];
     cell.contentView.backgroundColor = GetTableHighlightRowColor();
+    cell.textLabel.textColor = [UIColor whiteColor];
     [UIView commitAnimations];
 }
 
@@ -336,87 +345,34 @@
     if (index == [_siteManager commonSites].count) return;
     UITableViewCell *cell = [self.commonSitesTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
     [UIView beginAnimations:nil context:nil];
-    cell.contentView.backgroundColor = GetTableBackgourndColor();
+    cell.contentView.backgroundColor = [UIColor whiteColor];
+    cell.textLabel.textColor = [UIColor blackColor];
     [UIView commitAnimations];
 }
 
 - (void)_customizeSettingAppearance {
     CGFloat scale = [[UIScreen mainScreen] scale];
-    
-//    self.view.backgroundColor = [UIColor colorWithRed:0.7 green:0.7 blue:0.75 alpha:1];
-    
-    [self.httpsSwitch setOnTintColor:GetTableHighlightRowColor()];
-    [self.expanedSwitch setOnTintColor:GetTableHighlightRowColor()];
+    CGFloat borderWidth = 0.5;
+    if (scale == 1.0f) borderWidth = 1;
+
+    [self.httpsSwitch setOnTintColor:[UIColor whiteColor]];
+    [self.expanedSwitch setOnTintColor:[UIColor whiteColor]];
     
     self.sitesTable.layer.borderColor = SeperatorColor().CGColor;
-    self.sitesTable.layer.borderWidth = 0.5;
+    self.sitesTable.layer.borderWidth = borderWidth;
     
     self.commonSitesTable.layer.borderColor = SeperatorColor().CGColor;
-    self.commonSitesTable.layer.borderWidth = 0.5;
+    self.commonSitesTable.layer.borderWidth = borderWidth;
     
-//    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:self.httpsView.bounds
-//                                                   byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight
-//                                                         cornerRadii:CGSizeMake(6.0, 6.0)];
-//    CAShapeLayer *maskLayer = [CAShapeLayer layer];
-//    maskLayer.frame = self.httpsView.bounds;
-//    maskLayer.path = maskPath.CGPath;
-//    self.httpsView.layer.mask = maskLayer;
     self.httpsView.layer.borderColor = SeperatorColor().CGColor;
-    self.httpsView.layer.borderWidth = 0.5f;
-//    self.httpsView.layer.rasterizationScale = scale;
-//    self.httpsView.layer.shouldRasterize = YES;
-    
+    self.httpsView.layer.borderWidth = borderWidth;
+
     self.expanedView.layer.borderColor = SeperatorColor().CGColor;
-    self.expanedView.layer.borderWidth = 0.5f;
-//    self.expanedView.layer.rasterizationScale = scale;
-//    self.expanedView.layer.shouldRasterize = YES;
+    self.expanedView.layer.borderWidth = borderWidth;
     
-//    maskPath = [UIBezierPath bezierPathWithRoundedRect:self.homeView.bounds
-//                                                   byRoundingCorners:UIRectCornerBottomLeft | UIRectCornerBottomRight
-//                                                         cornerRadii:CGSizeMake(6.0, 6.0)];
-//    maskLayer = [CAShapeLayer layer];
-//    maskLayer.frame = self.homeView.bounds;
-//    maskLayer.path = maskPath.CGPath;
-//    self.homeView.layer.mask = maskLayer;
     self.homeView.layer.borderColor = SeperatorColor().CGColor;
-    self.homeView.layer.borderWidth = 0.5f;
-//    self.homeView.layer.rasterizationScale = scale;
-//    self.homeView.layer.shouldRasterize = YES;
-    
-    self.okButton.layer.cornerRadius = 6.0f;
-    self.okButton.layer.masksToBounds = YES;
-    [self.okButton setBackgroundColor:DarkGreenColor() forState:UIControlStateNormal];
-    [self.okButton setBackgroundColor:GetTableHighlightRowColor() forState:UIControlStateHighlighted];
-    self.okButton.layer.rasterizationScale = scale;
-    self.okButton.layer.shouldRasterize = YES;
-    
-//    for (Button *btn in self.homeButtons) {
-//        [btn setBackgroundColor:GetDarkColor() forState:UIControlStateNormal];
-//        [btn setBackgroundColor:DarkGreenColor() forState:UIControlStateSelected];
-//        [btn setBackgroundColor:GetTableHighlightRowColor() forState:UIControlStateHighlighted];
-//    }
-    
-//    Button *leftBtn = [self.homeButtons objectAtIndex:0];
-//    maskPath = [UIBezierPath bezierPathWithRoundedRect:leftBtn.bounds
-//                                     byRoundingCorners:UIRectCornerBottomLeft | UIRectCornerTopLeft
-//                                           cornerRadii:CGSizeMake(4.0, 4.0)];
-//    maskLayer = [CAShapeLayer layer];
-//    maskLayer.frame = leftBtn.bounds;
-//    maskLayer.path = maskPath.CGPath;
-//    leftBtn.layer.mask = maskLayer;
-//    leftBtn.layer.rasterizationScale = scale;
-//    leftBtn.layer.shouldRasterize = YES;
-//    
-//    Button *rightBtn = [self.homeButtons lastObject];
-//    maskPath = [UIBezierPath bezierPathWithRoundedRect:rightBtn.bounds
-//                                     byRoundingCorners:UIRectCornerBottomRight | UIRectCornerTopRight
-//                                           cornerRadii:CGSizeMake(4.0, 4.0)];
-//    maskLayer = [CAShapeLayer layer];
-//    maskLayer.frame = leftBtn.bounds;
-//    maskLayer.path = maskPath.CGPath;
-//    rightBtn.layer.mask = maskLayer;
-//    rightBtn.layer.rasterizationScale = scale;
-//    rightBtn.layer.shouldRasterize = YES;
+    self.homeView.layer.borderWidth = borderWidth;
+
     
 }
 
@@ -440,4 +396,8 @@
     ((Button*)[self.homeButtons objectAtIndex:index]).selected = YES;
 }
 
+- (void)viewDidUnload {
+    [self setHomePageSwitchPlatform:nil];
+    [super viewDidUnload];
+}
 @end
