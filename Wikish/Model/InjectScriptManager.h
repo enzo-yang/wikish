@@ -13,6 +13,4 @@
 + (NSString *)script;
 + (void)launched;
 
-
-
 @end

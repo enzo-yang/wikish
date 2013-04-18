@@ -311,16 +311,16 @@
 		C6471742169B24E3006ACC7A /* images */ = {
 			isa = PBXGroup;
 			children = (
-				C6686B80172027BE008FFDCD /* btn_switch_language.png */,
-				C6686B7E17202706008FFDCD /* btn_keyboard_down.png */,
-				C6686B6C1720177B008FFDCD /* search_bar_bg.png */,
 				C6686B6817201681008FFDCD /* intro_removing.png */,
 				C6686B6917201681008FFDCD /* intro_adding.png */,
 				C6686B661720147A008FFDCD /* intro_section_jump.png */,
-				C6686B61171FBD45008FFDCD /* bar_bg.png */,
-				C65D1166171EA3DE00CE7499 /* btn_back.png */,
 				C6FFF90D171B04EC00A4631B /* intro_change_lang.png */,
 				C6FFF8E9171A812900A4631B /* intro_ok_btn.png */,
+				C6686B80172027BE008FFDCD /* btn_switch_language.png */,
+				C6686B7E17202706008FFDCD /* btn_keyboard_down.png */,
+				C6686B6C1720177B008FFDCD /* search_bar_bg.png */,
+				C6686B61171FBD45008FFDCD /* bar_bg.png */,
+				C65D1166171EA3DE00CE7499 /* btn_back.png */,
 				C6FFF8E21719834000A4631B /* btn_help.png */,
 				C6FFF8E01719795300A4631B /* btn_more.png */,
 				C630F657171949D200196A47 /* btn_backward.png */,

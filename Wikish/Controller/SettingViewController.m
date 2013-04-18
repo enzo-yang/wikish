@@ -381,6 +381,7 @@
 - (void)_createHomeSegment {
     HMSegmentedControl *segment = [[HMSegmentedControl alloc] initWithSectionTitles:@[NSLocalizedString(@"Blank", nil), NSLocalizedString(@"Extract", nil), NSLocalizedString(@"Last", nil)]];
     segment.frame = self.homePageSwitchPlatform.bounds;
+    segment.selectionIndicatorHeight = 0;
     segment.height = CGRectGetHeight(segment.frame);
     segment.selectionIndicatorColor = GetHighlightColor();
     segment.textColor = [UIColor darkGrayColor];

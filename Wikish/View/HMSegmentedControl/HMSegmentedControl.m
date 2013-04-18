@@ -11,7 +11,6 @@
 
 @interface HMSegmentedControl ()
 
-@property (nonatomic, strong) CALayer *selectedSegmentLayer;
 @property (nonatomic, readwrite) CGFloat segmentWidth;
 
 @end
@@ -40,19 +39,16 @@
 }
 
 - (void)setDefaults {
-    // self.font = [UIFont fontWithName:@"STHeitiSC-Light" size:18.0f];
     self.font = [UIFont boldSystemFontOfSize:14.0f];
     self.textColor = [UIColor blackColor];
     self.backgroundColor = [UIColor whiteColor];
     self.selectionIndicatorColor = [UIColor colorWithRed:52.0f/255.0f green:181.0f/255.0f blue:229.0f/255.0f alpha:1.0f];
-    
+    self.seperatorColor = [UIColor lightGrayColor];
     self.selectedIndex = 0;
     self.segmentEdgeInset = UIEdgeInsetsMake(0, 5, 0, 5);
     self.height = 32.0f;
     self.selectionIndicatorHeight = 5.0f;
-    self.selectionIndicatorMode = HMSelectionIndicatorResizesToStringWidth;
-    
-    self.selectedSegmentLayer = [CALayer layer];
+
 }
 
 #pragma mark - Drawing
@@ -67,7 +63,21 @@
     [self.sectionTitles enumerateObjectsUsingBlock:^(id titleString, NSUInteger idx, BOOL *stop) {
         CGFloat stringHeight = [titleString sizeWithFont:self.font].height;
         CGFloat y = ((self.height - self.selectionIndicatorHeight) / 2) + (self.selectionIndicatorHeight - stringHeight / 2);
-        CGRect rect = CGRectMake(self.segmentWidth * idx, y, self.segmentWidth, stringHeight);
+        CGRect rect = CGRectZero;
+        
+        if (self.selectedIndex == idx) {
+            [self.selectionIndicatorColor set];
+            rect = CGRectMake(self.segmentWidth * idx, 0, self.segmentWidth, self.height);
+            rect = CGRectInset(rect, 1, 1);
+            UIRectFill(rect);
+            [[UIColor whiteColor] set];
+        } else {
+            [self.textColor set];
+        }
+        
+        
+        
+        rect = CGRectMake(self.segmentWidth * idx, y, self.segmentWidth, stringHeight);
         
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
         [titleString drawInRect:rect
@@ -80,16 +90,16 @@
                   lineBreakMode:NSLineBreakByClipping
                       alignment:NSTextAlignmentCenter];
 #endif
-        if (idx != self.sectionTitles.count - 1) {
+        if (idx != self.sectionTitles.count - 1 && (idx + 1) != _selectedIndex && idx != _selectedIndex) {
             CGContextRef c = UIGraphicsGetCurrentContext();
             
             CGContextSaveGState(c);
-            CGContextSetStrokeColorWithColor(c, [UIColor lightGrayColor].CGColor);
+            CGContextSetStrokeColorWithColor(c, self.seperatorColor.CGColor);
             CGContextSetShouldAntialias(c, false);
             CGContextSetLineWidth(c, 0.5);
             
-            CGPoint beginPoint = CGPointMake(self.segmentWidth * (idx + 1)-1, self.selectionIndicatorHeight + 5);
-            CGPoint endPoint = CGPointMake(self.segmentWidth * (idx + 1)-1, self.height - 5);
+            CGPoint beginPoint = CGPointMake(self.segmentWidth * (idx + 1), self.selectionIndicatorHeight + 4);
+            CGPoint endPoint = CGPointMake(self.segmentWidth * (idx + 1), self.height - 4);
             
             CGContextBeginPath(c);
             CGContextMoveToPoint(c, beginPoint.x, beginPoint.y);
@@ -99,26 +109,7 @@
             CGContextRestoreGState(c);
         }
         
-        self.selectedSegmentLayer.frame = [self frameForSelectionIndicator];
-        self.selectedSegmentLayer.backgroundColor = self.selectionIndicatorColor.CGColor;
-        [self.layer addSublayer:self.selectedSegmentLayer];
-
     }];
-}
-
-- (CGRect)frameForSelectionIndicator {
-    // CGFloat stringWidth = [[self.sectionTitles objectAtIndex:self.selectedIndex] sizeWithFont:self.font].width;
-    CGFloat stringWidth = self.segmentWidth - self.segmentEdgeInset.left - self.segmentEdgeInset.right;
-    
-    if (self.selectionIndicatorMode == HMSelectionIndicatorResizesToStringWidth) {
-        CGFloat widthTillEndOfSelectedIndex = (self.segmentWidth * self.selectedIndex) + self.segmentWidth;
-        CGFloat widthTillBeforeSelectedIndex = (self.segmentWidth * self.selectedIndex);
-        
-        CGFloat x = ((widthTillEndOfSelectedIndex - widthTillBeforeSelectedIndex) / 2) + (widthTillBeforeSelectedIndex - stringWidth / 2);
-        return CGRectMake(x, 0.0, stringWidth, self.selectionIndicatorHeight);
-    } else {
-        return CGRectMake(self.segmentWidth * self.selectedIndex, 0.0, self.segmentWidth, self.selectionIndicatorHeight);
-    }
 }
 
 - (void)updateSegmentsRects {
@@ -171,26 +162,20 @@
     _selectedIndex = index;
 
     if (animated) {
-        // Restore CALayer animations
-        self.selectedSegmentLayer.actions = nil;
-        
-        [CATransaction begin];
-        [CATransaction setAnimationDuration:0.15f];
-        [CATransaction setCompletionBlock:^{
-            if (self.superview)
-                [self sendActionsForControlEvents:UIControlEventValueChanged];
-            
-            if (self.indexChangeBlock)
-                self.indexChangeBlock(index);
-        }];
-        self.selectedSegmentLayer.frame = [self frameForSelectionIndicator];
-        [CATransaction commit];
+        [self setNeedsDisplay];
+        [UIView transitionWithView:self duration:0.2
+                           options:UIViewAnimationOptionTransitionCrossDissolve
+                        animations:^{
+                            [self.layer displayIfNeeded];
+                        } completion:^(BOOL finished) {
+                            if (self.superview)
+                                [self sendActionsForControlEvents:UIControlEventValueChanged];
+                            
+                            if (self.indexChangeBlock)
+                                self.indexChangeBlock(index);
+                        }];
     } else {
-        // Disable CALayer animations
-        NSMutableDictionary *newActions = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[NSNull null], @"position", [NSNull null], @"bounds", nil];
-        self.selectedSegmentLayer.actions = newActions;
-        
-        self.selectedSegmentLayer.frame = [self frameForSelectionIndicator];
+        [self setNeedsDisplay];
         
         if (self.superview)
             [self sendActionsForControlEvents:UIControlEventValueChanged];

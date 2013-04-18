@@ -8,11 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-enum HMSelectionIndicatorMode {
-    HMSelectionIndicatorResizesToStringWidth = 0, // Indicator width will only be as big as the text width
-    HMSelectionIndicatorFillsSegment = 1 // Indicator width will fill the whole segment
-};
-
 @interface HMSegmentedControl : UIControl
 
 @property (nonatomic, strong) NSArray *sectionTitles;
@@ -22,7 +17,7 @@ enum HMSelectionIndicatorMode {
 @property (nonatomic, strong) UIColor *textColor; // default is [UIColor blackColor]
 @property (nonatomic, strong) UIColor *backgroundColor; // default is [UIColor whiteColor]
 @property (nonatomic, strong) UIColor *selectionIndicatorColor; // default is 52, 181, 229
-@property (nonatomic, assign) enum HMSelectionIndicatorMode selectionIndicatorMode; // Default is HMSelectionIndicatorResizesToStringWidth
+@property (nonatomic, strong) UIColor *seperatorColor; // default is light gray color
 
 @property (nonatomic, assign) NSInteger selectedIndex;
 @property (nonatomic, readwrite) CGFloat height; // default is 32.0

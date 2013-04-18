@@ -37,6 +37,9 @@
 
 #define kHandleDragThreshold        150
 
+#define kNormalAnimationDuration    0.3f
+#define kBottomBarHeight            44.0f
+
 @interface MainViewController ()<WikiPageInfoDelegate, UIWebViewDelegate, UIScrollViewDelegate, TapDetectingWindowDelegate, UIGestureRecognizerDelegate, UIActionSheetDelegate>
 @property (strong, readwrite, nonatomic) WikiPageInfo  *pageInfo;
 @property (nonatomic, strong) WikiSite      *currentSite;
@@ -368,8 +371,8 @@
         _viewStatus = kViewStatusHistory;
         self.leftView.hidden = NO;
         CGRect f = self.middleView.frame;
-        f.origin.x += 260.0f;
-        [UIView animateWithDuration:0.3 animations:^{
+        f.origin.x += CGRectGetWidth(self.leftView.bounds);
+        [UIView animateWithDuration:kNormalAnimationDuration animations:^{
             self.middleView.frame = f;
         } completion:^(BOOL finished) {
             self.gestureMask.hidden = NO;
@@ -392,9 +395,9 @@
         [self.sectionTable reloadData];
         _viewStatus = kViewStatusSection;
         [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationDuration:0.3];
+        [UIView setAnimationDuration:kNormalAnimationDuration];
         CGRect f = self.bottomView.frame;
-        f.origin.y -= 230.0f;
+        f.origin.y -= (CGRectGetHeight(self.bottomView.frame) - kBottomBarHeight);
         self.bottomView.frame = f;
         [UIView commitAnimations];
     }
@@ -429,7 +432,7 @@
         pb.string = [[self.pageInfo pageURL] absoluteString];
         [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"link was copied", nil)];
     } else {
-        NSLog(@"cancel");
+        LOG(@"cancel");
     }
 }
 
@@ -447,14 +450,14 @@
     self.lightnessView.center = CGPointMake(CGRectGetWidth(self.view.bounds)/2, CGRectGetHeight(self.view.bounds)/2);
     self.lightnessView.alpha = 0.0f;
     [self.view addSubview:self.lightnessView];
-    [UIView animateWithDuration:0.3f animations:^{
+    [UIView animateWithDuration:kNormalAnimationDuration animations:^{
         self.lightnessView.alpha = 1.0f;
     }];
     
 }
 
 - (void)_hideLightnessView {
-    [UIView animateWithDuration:0.3f animations:^{
+    [UIView animateWithDuration:kNormalAnimationDuration animations:^{
         self.lightnessView.alpha = 0.0f;
     } completion:^(BOOL finished) {
         [self.lightnessView removeFromSuperview];
@@ -511,19 +514,19 @@
     UIView *theViewShouldChangeFrame = nil;
     UIView *theViewShouldHide = nil;
     CGRect f;
-    CGFloat duration = 0.3f;
+    CGFloat duration = kNormalAnimationDuration;
     ViewStatus viewStatus = _viewStatus;
     _viewStatus = kViewStatusNormal;
     
     if (viewStatus == kViewStatusHistory) {
         f = self.middleView.frame;
-        duration = 0.3 * (f.origin.x/10) / 26;
+        duration = kNormalAnimationDuration * (f.origin.x/10) / 26;
         f.origin.x = 0;
         theViewShouldHide = self.leftView;
         theViewShouldChangeFrame = self.middleView;
     } else if (viewStatus == kViewStatusSection) {
         f = self.bottomView.frame;
-        f.origin.y += 230.0f;
+        f.origin.y += (CGRectGetHeight(self.bottomView.frame) - kBottomBarHeight);
         theViewShouldChangeFrame = self.bottomView;
     } else if (viewStatus == kViewStatusLightness) {
         [self _hideLightnessView];
@@ -563,7 +566,7 @@
             headFrame.origin = CGPointZero;
         
         [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationDuration:0.3];
+        [UIView setAnimationDuration:kNormalAnimationDuration];
         [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
         self.headerView.frame = headFrame;
         [UIView commitAnimations];
@@ -600,7 +603,6 @@
     
     [self.middleView insertSubview:shadowView atIndex:0];
     shadowView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-    
     self.middleView.layer.masksToBounds = NO;
     
     self.lightnessMask.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:[Setting lightnessMaskValue]];
@@ -611,8 +613,6 @@
     self.lightnessView = nil;
     self.historyController = nil;
     self.sectionController = nil;
-    self.forewardButton = nil;
-    self.backwardButton = nil;
     [super viewDidUnload];
 }
 @end
