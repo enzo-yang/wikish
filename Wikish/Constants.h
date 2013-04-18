@@ -17,6 +17,8 @@
 #define kGAHomePage     @"HomePage"
 #define kGAIsExpanded   @"IsExpanded"
 
+#define kVersionOfInAppScript 1
+
 extern NSString *const kNotificationMessageSearchKeyword;
 
 

@@ -12,6 +12,8 @@
 #import "TapDetectingWindow.h"
 #import "Setting.h"
 #import "GAI.h"
+#import "InjectScriptManager.h"
+#import "WikishFileUtil.h"
 
 #define kUserDefaultsIsFirstLaunch      @"is-first-launch"
 
@@ -20,6 +22,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [WikishFileUtil createWikishCachFolder];
+    
     [GAI sharedInstance].trackUncaughtExceptions = YES;
     [GAI sharedInstance].dispatchInterval = -1; // 手动控制
     [[GAI sharedInstance] trackerWithTrackingId:@"UA-39546615-1"];
@@ -27,7 +31,9 @@
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     BOOL isFirstLaunch = [self _isFirstLaunch];
     if (isFirstLaunch) [Setting useDefaultSetting];
-    [Setting registerUserAgent];
+    
+    [InjectScriptManager launched];
+
     self.window = [[TapDetectingWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];

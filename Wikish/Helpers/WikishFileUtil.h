@@ -13,4 +13,6 @@
 
 + (NSString *)wikishCachePath;
 
++ (void)createWikishCachFolder;
+
 @end

@@ -61,36 +61,19 @@
 
 
 + (void)setInitExpanded:(BOOL)isExpanded {
-    if (isExpanded != [self isLaunchTimeInitExpanded]) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Notice", nil) message:NSLocalizedString(@"Setting Needs Reboot App", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"I know", nil) otherButtonTitles:nil];
-            [alert show];
-        });
-    }
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setBool:isExpanded forKey:kUserDefaultsIsInitExpandedKey];
     [defaults synchronize];
-    // [self registerUserAgent];
     
     
 }
 + (BOOL)isInitExpanded {
-    [self isLaunchTimeInitExpanded];
     return [[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultsIsInitExpandedKey];
-}
-
-+ (BOOL)isLaunchTimeInitExpanded {
-    static BOOL isExpanded = NO;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        isExpanded = [[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultsIsInitExpandedKey];
-    });
-    return isExpanded;
 }
 
 + (void)lightnessUp {
     CGFloat darkness = [self lightnessMaskValue];
-    darkness -= 0.04;
+    darkness -= 0.06;
     if (darkness <= 0) {
         darkness = 0.0f; 
     }
@@ -98,9 +81,9 @@
 }
 + (void)lightnessDown {
     CGFloat darkness = [self lightnessMaskValue];
-    darkness += 0.04;
-    if (darkness >= 0.32) {
-        darkness = 0.32f; 
+    darkness += 0.06;
+    if (darkness >= 0.36) {
+        darkness = 0.36f;
     }
     [self setLightnessMaskValue:darkness];
 }
@@ -111,21 +94,6 @@
 
 + (void)setLightnessMaskValue:(CGFloat)darkness {
     [[NSUserDefaults standardUserDefaults] setFloat:darkness forKey:kUserDefaultsDarknessKey];
-}
-
-+ (void)registerUserAgent {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    BOOL isExpanded = [defaults boolForKey:kUserDefaultsIsInitExpandedKey];
-    if ( isExpanded ) {
-        NSDictionary *dictionnary = @{kUserDefaultsUserAgentKey: kExpanedUserAgent};
-        [defaults registerDefaults:dictionnary];
-    } else {
-        NSDictionary *dictionary = @{kUserDefaultsUserAgentKey: kShrinkedUserAgent};
-        [defaults registerDefaults:dictionary];
-    }
-    [defaults synchronize];
-    
-    [[[GAI sharedInstance] defaultTracker] sendEventWithCategory:kGAUserHabit withAction:kGAIsExpanded withLabel:(isExpanded ? @"YES" : @"NO") withValue:@1];
 }
 
 @end

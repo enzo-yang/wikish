@@ -27,6 +27,8 @@
 #import "HistoryTableController.h"
 #import "SectionTableController.h"
 
+#import "InjectScriptManager.h"
+
 #import "GAI.h"
 
 #define kScrollViewDirectionNone    0
@@ -80,6 +82,12 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self _windowBeginDetectWebViewTap];
+    
+    if ([Setting isInitExpanded]) {
+        [self.webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"disable_toggling()"]];
+    } else {
+        [self.webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"enable_toggling()"]];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -157,6 +165,7 @@
                 self.titleLabel.text = NSLocalizedString(@"Home_Page", nil);
             } else {
                 self.titleLabel.text = [theTitle urlDecodedString];
+                self.titleLabel.text = [self.titleLabel.text stringByReplacingOccurrencesOfString:@"_" withString:@" "];
             }
             self.currentSite        = site;
             _canLoadThisRequest     = YES;
@@ -206,12 +215,17 @@
     if ([SVProgressHUD isVisible]) {
         [SVProgressHUD dismiss];
     }
-    [self scrollViewDidScroll:self.webView.scrollView];
+    // [self scrollViewDidScroll:self.webView.scrollView];
 
-    NSString *js = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"wiki-inject-functions" ofType:@"js"] encoding:NSUTF8StringEncoding error:nil];
-    [self.webView stringByEvaluatingJavaScriptFromString:js];
-    // 限制不能左右滚动 以及 头部offset 大于50
+    [self.webView stringByEvaluatingJavaScriptFromString:[InjectScriptManager script]];
     
+    if ([Setting isInitExpanded]) {
+        [self.webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"disable_toggling()"]];
+    }
+    
+    UIScrollView *scrollView = self.webView.scrollView;
+    [scrollView setContentOffset:CGPointMake(0, scrollView.contentOffset.y < 50.0f ? 50.0f :scrollView.contentOffset.y)];
+
 }
 
 - (void)wikiPageInfoLoadSuccess:(WikiPageInfo *)wikiPage {
@@ -220,12 +234,11 @@
 }
 
 - (void)wikiPageInfoLoadFailed:(WikiPageInfo *)wikiPage error:(NSError *)error {
-    LOG(@"wiki page load failed");
+    LOG(@"page info load failed");
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     LOG(@"%@", request);
-    LOG(@"webview user agent: %@", [(NSMutableURLRequest *)request valueForHTTPHeaderField:@"User-Agent"]);
     if (_canLoadThisRequest) {
         _canLoadThisRequest = NO;
         [self _hideHeadView:NO];
@@ -251,6 +264,7 @@
             self.pageInfo = info;
             
         }
+        self.titleLabel.text = [self.titleLabel.text stringByReplacingOccurrencesOfString:@"_" withString:@" "];
         [self _hideHeadView:NO];
         [SVProgressHUD showWithStatus:@"Loading" maskType:SVProgressHUDMaskTypeClear];
         return YES;
@@ -285,11 +299,12 @@
         [SVProgressHUD dismiss];
     }
     [self _updateBackwardForwardButton];
-    LOG(@"page finish load");
+    
+    LOG(@"webview finish load");
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    LOG(@"failed load web page, %@", webView.request);
+    LOG(@"webview failed to load web page, %@", webView.request);
     [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"page load failed", nil)];
 }
 
@@ -304,21 +319,6 @@
         // 显示顶栏
         [self _hideHeadView:NO];
     }
-    
-    // not acurate
-    CGFloat virtualOffsetY = offsetY - 50.0f;
-    if (virtualOffsetY <= _webViewOrgY){
-        self.webView.frame = CGRectMake(0.0f,
-                                        _webViewOrgY-virtualOffsetY,
-                                        CGRectGetWidth(self.webView.frame),
-                                        _webViewOrgHeight + virtualOffsetY);
-    } else {
-        if (CGRectGetMinY(self.webView.frame) != 0) {
-            self.webView.frame = CGRectMake(0, 0, CGRectGetWidth(self.webView.frame),
-                                            _webViewOrgHeight + _webViewOrgY);
-        }
-    }
-    
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
@@ -342,19 +342,11 @@
     UIScrollView *scrollView = self.webView.scrollView;
     if (!scrollView) return;
     
-    CGFloat currentY = scrollView.contentOffset.y;
-    if (currentY > kHandleDragThreshold) {
-        [self _hideHeadView:!_headViewHided];
-    }
+    [self _hideHeadView:!_headViewHided];
 }
 
 - (void)scrollTo:(NSString *)anchorPoint {
-    NSString *result = nil;
-    if ([Setting isLaunchTimeInitExpanded]) {
-        result = [self.webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"scroll_to_expanded_section(\"%@\")", anchorPoint]];
-    } else {
-        result = [self.webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"scroll_to_section(\"%@\")", anchorPoint]];
-    }
+    NSString *result = [self.webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"scroll_to_section(\"%@\")", anchorPoint]];
     if ([result isEqualToString:@"YES"]) {
         [self _hideHeadView:YES];
     }

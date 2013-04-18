@@ -18,4 +18,10 @@
     return path;
 }
 
++ (void)createWikishCachFolder {
+    if (![[NSFileManager defaultManager] fileExistsAtPath:[self wikishCachePath]]) {
+        [[NSFileManager defaultManager] createDirectoryAtPath:[self wikishCachePath] withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+}
+
 @end
