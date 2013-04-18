@@ -309,8 +309,8 @@
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    // 限制不能左右滚动 以及 头部offset 大于50
-    [scrollView setContentOffset:CGPointMake(0, scrollView.contentOffset.y < 50.0f ? 50.0f :scrollView.contentOffset.y)];
+    // 限制不能左右滚动 以及 头部offset 大于55
+    [scrollView setContentOffset:CGPointMake(0, scrollView.contentOffset.y < 55.0f ? 55.0f :scrollView.contentOffset.y)];
     
     CGFloat offsetY = scrollView.contentOffset.y;
     // 控制显示隐藏顶栏
@@ -394,7 +394,7 @@
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:0.3];
         CGRect f = self.bottomView.frame;
-        f.origin.y -= 200.0f;
+        f.origin.y -= 230.0f;
         self.bottomView.frame = f;
         [UIView commitAnimations];
     }
@@ -523,7 +523,7 @@
         theViewShouldChangeFrame = self.middleView;
     } else if (viewStatus == kViewStatusSection) {
         f = self.bottomView.frame;
-        f.origin.y += 200.0f;
+        f.origin.y += 230.0f;
         theViewShouldChangeFrame = self.bottomView;
     } else if (viewStatus == kViewStatusLightness) {
         [self _hideLightnessView];
