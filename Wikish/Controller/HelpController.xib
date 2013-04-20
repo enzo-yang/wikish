@@ -66,7 +66,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">Ductioanry Feature &amp; Help</string>
+						<string key="IBUIText">Duckipedia Feature &amp; Help</string>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MC42NjY2NjY2NjY3AA</bytes>
@@ -341,7 +341,7 @@
 					<object class="IBUIImageView" id="254620405">
 						<reference key="NSNextResponder" ref="1073298850"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{26, 90}, {270, 32}}</string>
+						<string key="NSFrame">{{26, 90}, {270, 146}}</string>
 						<reference key="NSSuperview" ref="1073298850"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="183483800"/>
@@ -621,7 +621,7 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="intro_adding.png">{640, 241}</string>
-			<string key="intro_change_lang.png">{630, 70}</string>
+			<string key="intro_change_lang.png">{640, 345}</string>
 			<string key="intro_ok_btn.png">{275, 61}</string>
 			<string key="intro_removing.png">{640, 258}</string>
 			<string key="intro_section_jump.png">{640, 347}</string>
