@@ -29,7 +29,4 @@
     [super viewDidUnload];
 }
 
-- (void)dealloc {
-    NSLog(@"advice controller dealloced");
-}
 @end
