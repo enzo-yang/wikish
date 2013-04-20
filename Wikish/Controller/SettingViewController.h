@@ -13,8 +13,8 @@
 
 @interface SettingViewController : UIViewController
 
-@property (nonatomic, weak) IBOutlet UIButton       *okButton;
-@property (nonatomic, weak) IBOutlet UIButton *helpButton;
+@property (nonatomic, weak) IBOutlet UIButton     *okButton;
+@property (nonatomic, weak) IBOutlet UIButton     *helpButton;
 @property (nonatomic, weak) IBOutlet UILabel      *settingLabel;
 
 @property (nonatomic, weak) IBOutlet UIView       *httpsView;

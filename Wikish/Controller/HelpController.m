@@ -14,8 +14,19 @@
 
 @implementation HelpController
 
+- (id)initWithShouldShowAdvicePage:(BOOL)should {
+    self = [super init];
+    if (self) {
+        _shouldShowAdvicePage = should;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
-    self.scroller.contentSize = CGSizeMake(CGRectGetWidth(self.scroller.bounds) * 3, CGRectGetHeight(self.scroller.bounds));
+    int pages = 3;
+    if (_shouldShowAdvicePage) pages = 4;
+    
+    self.scroller.contentSize = CGSizeMake(CGRectGetWidth(self.scroller.bounds) * pages, CGRectGetHeight(self.scroller.bounds));
     [self.scroller addSubview:self.page1];
 }
 
@@ -24,7 +35,7 @@
         CGFloat scrollerWidth = CGRectGetWidth(self.scroller.bounds);
         CGFloat scrollerHeight = CGRectGetHeight(self.scroller.bounds);
         
-        self.scroller.contentSize = CGSizeMake(scrollerWidth * 3, scrollerHeight);
+        self.scroller.contentSize = CGSizeMake(self.scroller.contentSize.width, scrollerHeight);
         self.page1.frame = CGRectMake(0, 0, scrollerWidth, scrollerHeight);
         
         self.page2.frame = CGRectMake(scrollerWidth, 0, scrollerWidth, scrollerHeight);
@@ -32,6 +43,11 @@
         
         self.page3.frame = CGRectMake(scrollerWidth * 2, 0, scrollerWidth, scrollerHeight);
         [self.scroller addSubview:self.page3];
+        
+        if (_shouldShowAdvicePage) {
+            self.adviceView.frame = CGRectMake(scrollerWidth * 3, 0, scrollerWidth, scrollerHeight);
+            [self.scroller addSubview:self.adviceView];
+        }
         
         self.pageControl = [[StyledPageControl alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.view.bounds) - 20, scrollerWidth, 10)];
         self.pageControl.diameter = 8.0f;
@@ -48,6 +64,7 @@
     [self setPage2:nil];
     [self setPage3:nil];
     [self setPageControl:nil];
+    [self setAdviceView:nil];
     [super viewDidUnload];
 }
 

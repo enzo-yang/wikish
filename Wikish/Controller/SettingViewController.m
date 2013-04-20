@@ -93,7 +93,7 @@
 
 
 - (IBAction)helpButtonPressed:(id)sender {
-    HelpController *hCtrl = [HelpController new];
+    HelpController *hCtrl = [[HelpController alloc] initWithShouldShowAdvicePage:YES];
     HelpController * __weak wHCtrl = hCtrl;
     hCtrl.okBlock = ^{
         [wHCtrl dismissModalViewControllerAnimated:YES];
