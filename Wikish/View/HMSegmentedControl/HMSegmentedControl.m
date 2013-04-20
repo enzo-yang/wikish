@@ -55,6 +55,10 @@
 
 - (void)drawRect:(CGRect)rect
 {
+    CGFloat scale = [[UIScreen mainScreen] scale];
+    CGFloat seperatorWidth = 0.5;
+    if (scale == 1.0f) seperatorWidth = 1;
+    
     [self.backgroundColor set];
     UIRectFill([self bounds]);
     
@@ -96,7 +100,7 @@
             CGContextSaveGState(c);
             CGContextSetStrokeColorWithColor(c, self.seperatorColor.CGColor);
             CGContextSetShouldAntialias(c, false);
-            CGContextSetLineWidth(c, 0.5);
+            CGContextSetLineWidth(c, seperatorWidth);
             
             CGPoint beginPoint = CGPointMake(self.segmentWidth * (idx + 1), self.selectionIndicatorHeight + 4);
             CGPoint endPoint = CGPointMake(self.segmentWidth * (idx + 1), self.height - 4);

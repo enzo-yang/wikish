@@ -21,10 +21,6 @@ static NSString *const kSubLangKey   = @"sub-lang";
 
 @implementation WikiSite
 
-@synthesize name = _name;
-@synthesize lang = _lang;
-@synthesize sublang = _sublang;
-
 - (id)initWithCoder:(NSCoder *)aDecoder {
     NSString *name = [aDecoder decodeObject];
     NSString *lang = [aDecoder decodeObject];
@@ -91,11 +87,11 @@ static NSString *const kSubLangKey   = @"sub-lang";
 }
 
 - (NSDictionary *)toDictionary {
-    return [NSDictionary dictionaryWithObjectsAndKeys:
-            _name, kNameKey,
-            _lang, kLangKey,
-            _sublang, kSubLangKey,
-            nil];
+    return @{
+             _name: kNameKey,
+             _lang: kLangKey,
+             _sublang: kSubLangKey,
+             };
 }
 
 - (void)_clean {

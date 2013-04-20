@@ -107,6 +107,11 @@ static NSString *const kDefaultSiteKey      = @"default-site";
 - (WikiSite *)alterDefaultSite {
     NSArray *commonSites = [self commonSites];
     WikiSite *curSite = [self defaultSite];
+    
+    if ([commonSites count] <= 1) {
+        return curSite;
+    }
+    
     WikiSite *theSite = nil;
     for (WikiSite *aSite in commonSites) {
         if ([aSite sameAs:curSite]) {

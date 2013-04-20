@@ -11,7 +11,6 @@
 @interface WikiHistory : NSObject {
     NSMutableArray *_history;
 }
-
 @property (nonatomic, readonly) NSArray *history;
 
 + (WikiHistory *)sharedInstance;

@@ -218,7 +218,6 @@
     if ([SVProgressHUD isVisible]) {
         [SVProgressHUD dismiss];
     }
-    // [self scrollViewDidScroll:self.webView.scrollView];
 
     [self.webView stringByEvaluatingJavaScriptFromString:[InjectScriptManager script]];
     
@@ -233,6 +232,7 @@
 
 - (void)wikiPageInfoLoadSuccess:(WikiPageInfo *)wikiPage {
     [_pageInfos setObject:wikiPage forKey:[self _keyOfSite:wikiPage.site title:wikiPage.title]];
+    [self.sectionTable scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
     LOG(@"load success");
 }
 
@@ -590,7 +590,6 @@
 }
 
 - (void)_customizeAppearance {
-    
     CGRect shadowRect = CGRectMake(0, 0, 2, CGRectGetHeight(self.middleView.frame));
     UIView *shadowView = [[UIView alloc] initWithFrame:shadowRect];
     shadowView.layer.shadowOpacity = 1;

@@ -8,11 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface WikiSite : NSObject<NSCopying, NSCoding> {
-    NSString *_name;
-    NSString *_lang;
-    NSString *_sublang;
-}
+@interface WikiSite : NSObject<NSCopying, NSCoding> 
 
 - (id)initWithLang:(NSString *)lang sublang:(NSString *)sublang;
 - (id)initWithName:(NSString *)name lang:(NSString *)lang sublang:(NSString *)sublang;

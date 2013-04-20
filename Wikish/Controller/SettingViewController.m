@@ -360,7 +360,6 @@
     
     self.homeView.layer.borderColor = SeperatorColor().CGColor;
     self.homeView.layer.borderWidth = borderWidth;
-
     
 }
 
@@ -373,13 +372,17 @@
 }
 
 - (void)_createHomeSegment {
+    CGFloat scale = [[UIScreen mainScreen] scale];
+    CGFloat borderWidth = 0.5;
+    if (scale == 1.0f) borderWidth = 1;
+    
     HMSegmentedControl *segment = [[HMSegmentedControl alloc] initWithSectionTitles:@[NSLocalizedString(@"Blank", nil), NSLocalizedString(@"Extract", nil), NSLocalizedString(@"Last", nil)]];
     segment.frame = self.homePageSwitchPlatform.bounds;
     segment.selectionIndicatorHeight = 0;
     segment.height = CGRectGetHeight(segment.frame);
     segment.selectionIndicatorColor = GetHighlightColor();
     segment.textColor = [UIColor darkGrayColor];
-    segment.layer.borderWidth = 0.5;
+    segment.layer.borderWidth = borderWidth;
     segment.layer.borderColor = [UIColor lightGrayColor].CGColor;
     
     NSInteger index = (NSInteger)[Setting homePage];
