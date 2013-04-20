@@ -23,5 +23,6 @@
 - (id)initWithShouldShowAdvicePage:(BOOL)should;
 
 - (IBAction)okPressed:(id)sender;
+- (IBAction)advicePressed:(id)sender;
 
 @end

@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Button.h"
 #import "WikiOpenSearch.h"
 @interface WikiSearchPanel : UIView<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate> {
     BOOL _shouldRemove;

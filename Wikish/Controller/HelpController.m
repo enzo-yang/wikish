@@ -7,6 +7,7 @@
 //
 
 #import "HelpController.h"
+#import "AdviceViewController.h"
 
 @interface HelpController ()<UIScrollViewDelegate>
 
@@ -73,6 +74,11 @@
         self.okBlock();
     }
     self.okBlock = nil;
+}
+
+- (IBAction)advicePressed:(id)sender {
+    AdviceViewController *avc = [[AdviceViewController alloc] init];
+    [self.navigationController pushViewController:avc animated:YES];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {

@@ -13,7 +13,6 @@
 #import "SiteManager.h"
 #import "WikiSite.h"
 #import "TableViewGestureRecognizer.h"
-#import "Button.h"
 #import "HelpController.h"
 #import "HMSegmentedControl.h"
 
@@ -68,11 +67,6 @@
     
     [self _createHomeSegment];
     
-//    self.sitesTable.backgroundColor = GetTableBackgourndColor();
-//    self.commonSitesTable.backgroundColor = GetTableBackgourndColor();
-    
-    
-    
     self.sitesGestureRecognizer = [self.sitesTable enableGestureTableViewWithDelegate:self];
     self.sitesGestureRecognizer.blockSide = TableViewCellBlockLeft;
     self.commonSitesGestureRecognizer = [self.commonSitesTable enableGestureTableViewWithDelegate:self];
@@ -96,9 +90,9 @@
     HelpController *hCtrl = [[HelpController alloc] initWithShouldShowAdvicePage:YES];
     HelpController * __weak wHCtrl = hCtrl;
     hCtrl.okBlock = ^{
-        [wHCtrl dismissModalViewControllerAnimated:YES];
+        [wHCtrl.navigationController popViewControllerAnimated:YES];
     };
-    [self presentModalViewController:hCtrl animated:YES];
+    [self.navigationController pushViewController:hCtrl animated:YES];
 }
 
 #pragma mark -
