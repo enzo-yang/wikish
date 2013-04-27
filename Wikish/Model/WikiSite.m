@@ -88,9 +88,9 @@ static NSString *const kSubLangKey   = @"sub-lang";
 
 - (NSDictionary *)toDictionary {
     return @{
-             _name: kNameKey,
-             _lang: kLangKey,
-             _sublang: kSubLangKey,
+             kNameKey: _name,
+             kLangKey: _lang,
+             kSubLangKey: _sublang,
              };
 }
 
