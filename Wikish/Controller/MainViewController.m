@@ -74,8 +74,6 @@
     [self _initializeTables];
     [self _customizeAppearance];
     
-    self.titleLabel.text = NSLocalizedString(@"Blank", nil);
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_loadPageFromNotification:) name:kNotificationMessageSearchKeyword object:nil];
     
     [self _loadHomePage];
@@ -95,12 +93,6 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    // 只有显示后的大小才是正确的
-    if (_webViewOrgHeight == 0.0f) {
-        _webViewOrgHeight   = self.webView.frame.size.height;
-        _webViewOrgY        = self.webView.frame.origin.y;
-        _headViewHided = NO;
-    }
     // 下面这句如果放在view did load 在 ipod 4 上会显示不出webview
     [self.webView.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
 }
@@ -164,12 +156,6 @@
         self.pageInfo = aPageInfo;
         NSURLRequest *request = [NSURLRequest requestWithURL:[aPageInfo pageURL]];
         if (request) {
-            if ([theTitle isEqualToString:@""]) {
-                self.titleLabel.text = NSLocalizedString(@"Home_Page", nil);
-            } else {
-                self.titleLabel.text = [theTitle urlDecodedString];
-                self.titleLabel.text = [self.titleLabel.text stringByReplacingOccurrencesOfString:@"_" withString:@" "];
-            }
             self.currentSite        = site;
             _canLoadThisRequest     = YES;
             WikiRecord *record      = [[WikiRecord alloc] initWithSite:site title:title];
@@ -244,7 +230,6 @@
     LOG(@"%@", request);
     if (_canLoadThisRequest) {
         _canLoadThisRequest = NO;
-        [self _hideHeadView:NO];
         [SVProgressHUD showWithStatus:@"Loading" maskType:SVProgressHUDMaskTypeClear];
         return YES;
     }
@@ -254,21 +239,19 @@
     
     // 前进后退
     if (UIWebViewNavigationTypeBackForward == navigationType) {
-        self.titleLabel.text = [[absolute lastPathComponent] urlDecodedString];
+        NSString *title = [[absolute lastPathComponent] urlDecodedString];
         WikiSite *site = [self _siteFromURLString:absolute];
-        if ([self.titleLabel.text isEqualToString:site.sublang]) {
-            self.titleLabel.text = NSLocalizedString(@"Home_Page", nil);
+        if ([title isEqualToString:site.sublang]) {
+            title = NSLocalizedString(@"Home_Page", nil);
         }
         if (site) {
-            WikiPageInfo *info = [_pageInfos objectForKey:[self _keyOfSite:site title:self.titleLabel.text]];
+            WikiPageInfo *info = [_pageInfos objectForKey:[self _keyOfSite:site title:title]];
             if (!info) {
-                info = [[WikiPageInfo alloc] initWithSite:site title:self.titleLabel.text];
+                info = [[WikiPageInfo alloc] initWithSite:site title:title];
             }
             self.pageInfo = info;
             
         }
-        self.titleLabel.text = [self.titleLabel.text stringByReplacingOccurrencesOfString:@"_" withString:@" "];
-        [self _hideHeadView:NO];
         [SVProgressHUD showWithStatus:@"Loading" maskType:SVProgressHUDMaskTypeClear];
         return YES;
     }
@@ -314,45 +297,16 @@
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     // 限制不能左右滚动 以及 头部offset 大于55
     [scrollView setContentOffset:CGPointMake(0, scrollView.contentOffset.y < 55.0f ? 55.0f :scrollView.contentOffset.y)];
-    
-    CGFloat offsetY = scrollView.contentOffset.y;
-    // 控制显示隐藏顶栏
-    NSInteger direction = [self _analyseScrollDirection:scrollView];
-    if (offsetY < kHandleDragThreshold && direction == kScrollViewDirectionDown) {
-        // 显示顶栏
-        [self _hideHeadView:NO];
-    }
-}
-
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    _webViewDragOrgY = scrollView.contentOffset.y;
-}
-
-- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
-    // LOG(@"velocity:(%f, %f), offset:(%f, %f)", velocity.x, velocity.y, (*targetContentOffset).x, (*targetContentOffset).y);
-    CGFloat currentY = scrollView.contentOffset.y;
-    if (currentY > kHandleDragThreshold && currentY > _webViewDragOrgY) { // content direction up
-        [self _hideHeadView:YES];
-    } 
 }
 
 - (void)userDidTapWebView:(id)tapPoint {
     if (_viewStatus != kViewStatusNormal) {
         [self _recoverNormalStatus];
-        return;
     }
-    
-    UIScrollView *scrollView = self.webView.scrollView;
-    if (!scrollView) return;
-    
-    [self _hideHeadView:!_headViewHided];
 }
 
 - (void)scrollTo:(NSString *)anchorPoint {
-    NSString *result = [self.webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"scroll_to_section(\"%@\")", anchorPoint]];
-    if ([result isEqualToString:@"YES"]) {
-        [self _hideHeadView:YES];
-    }
+    [self.webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"scroll_to_section(\"%@\")", anchorPoint]];
     [self _recoverNormalStatus];
 }
 
@@ -403,23 +357,13 @@
     }
 }
 
-- (IBAction)settingBtnPressed:(id)sender {
-    if (_viewStatus != kViewStatusNormal) {
-        [self _recoverNormalStatus];
-        return;
-    }
-    SettingViewController *svc = [SettingViewController new];
-    [self.navigationController pushViewController:svc animated:YES];
-    
-}
-
 - (IBAction)moreActionBtnPressed:(id)sender {
     if (_viewStatus != kViewStatusNormal) {
         [self _recoverNormalStatus];
         return;
     }
     
-    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Lightness Control", nil), NSLocalizedString(@"Copy Link", nil), nil];
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Lightness Control", nil), NSLocalizedString(@"Copy Link", nil), NSLocalizedString(@"Setting", nil), nil];
     [sheet showInView:self.view];
 }
 
@@ -431,6 +375,9 @@
         UIPasteboard *pb = [UIPasteboard generalPasteboard];
         pb.string = [[self.pageInfo pageURL] absoluteString];
         [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"link was copied", nil)];
+    } else if (buttonIndex == 2) {
+        SettingViewController *svc = [SettingViewController new];
+        [self.navigationController pushViewController:svc animated:YES];
     } else {
         LOG(@"cancel");
     }
@@ -541,38 +488,6 @@
     }];
     
 
-}
-
-- (NSInteger)_analyseScrollDirection:(UIScrollView *)scrollView {
-    NSInteger scrollDirection = kScrollViewDirectionNone;
-    if (_lastWebViewOffset > scrollView.contentOffset.y)
-        scrollDirection = kScrollViewDirectionDown;
-    else if (_lastWebViewOffset < scrollView.contentOffset.y)
-        scrollDirection = kScrollViewDirectionUp;
-    
-    _lastWebViewOffset = scrollView.contentOffset.y;
-    return scrollDirection;
-}
-
-- (void)_hideHeadView:(BOOL)hide {
-    @synchronized(self) {
-        if (hide == _headViewHided) return;
-        
-        CGPoint hidePoint = CGPointMake(0, -self.headerView.frame.size.height);
-        CGRect headFrame = self.headerView.frame;
-        if (hide)
-            headFrame.origin = hidePoint;
-        else
-            headFrame.origin = CGPointZero;
-        
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationDuration:kNormalAnimationDuration];
-        [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-        self.headerView.frame = headFrame;
-        [UIView commitAnimations];
-        
-        _headViewHided = hide;
-    }
 }
 
 - (void)_updateBackwardForwardButton {

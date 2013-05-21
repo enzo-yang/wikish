@@ -32,19 +32,11 @@ typedef enum {
     
     NSMutableDictionary *_pageInfos;
     
-    // layouts
-    CGFloat     _lastWebViewOffset;
-    CGFloat     _webViewOrgHeight;
-    CGFloat     _webViewOrgY;
-    CGFloat     _webViewDragOrgY;
-    BOOL        _headViewHided;
 }
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (weak, nonatomic) IBOutlet UIView *leftView;
 @property (weak, nonatomic) IBOutlet UIView *middleView;
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
-@property (weak, nonatomic) IBOutlet UIView *headerView;
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIView *lightnessMask;
 @property (weak, nonatomic) IBOutlet UIView *gestureMask;
 
@@ -64,7 +56,6 @@ typedef enum {
 - (IBAction)historyBtnPressed:(id)sender;
 - (IBAction)searchBtnPressed:(id)sender;
 - (IBAction)sectionBtnPressed:(id)sender;
-- (IBAction)settingBtnPressed:(id)sender;
 - (IBAction)moreActionBtnPressed:(id)sender;
 - (IBAction)lightnessUpBtnPressed:(id)sender;
 - (IBAction)lightnessDownBtnPressed:(id)sender;
