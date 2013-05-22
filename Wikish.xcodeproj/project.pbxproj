@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C6035C1E174D0D9B0049A1DC /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C6035C1D174D0D9B0049A1DC /* Default-568h@2x.png */; };
 		C603784216FCAC5000020AA0 /* ductionary-57.png in Resources */ = {isa = PBXBuildFile; fileRef = C603784116FCAC5000020AA0 /* ductionary-57.png */; };
 		C603784416FCAC7E00020AA0 /* ductionary-114.png in Resources */ = {isa = PBXBuildFile; fileRef = C603784316FCAC7E00020AA0 /* ductionary-114.png */; };
 		C615E21116BE23BE00506BE2 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C615E21016BE23BE00506BE2 /* QuartzCore.framework */; };
@@ -23,7 +24,6 @@
 		C6578456172236CC00FBAAFD /* original_duck.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C6578455172236CB00FBAAFD /* original_duck.jpg */; };
 		C6578458172240DC00FBAAFD /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = C6578457172240DC00FBAAFD /* Default.png */; };
 		C657845A172240DF00FBAAFD /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C6578459172240DF00FBAAFD /* Default@2x.png */; };
-		C657845E1722410A00FBAAFD /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C657845D1722410A00FBAAFD /* Default-568h@2x.png */; };
 		C657846217226B1300FBAAFD /* AdviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C657846017226B1300FBAAFD /* AdviceViewController.m */; };
 		C657846317226B1300FBAAFD /* AdviceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C657846117226B1300FBAAFD /* AdviceViewController.xib */; };
 		C657846517226C0C00FBAAFD /* ducky_advice.html in Resources */ = {isa = PBXBuildFile; fileRef = C657846417226C0C00FBAAFD /* ducky_advice.html */; };
@@ -126,6 +126,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C6035C1D174D0D9B0049A1DC /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		C603784116FCAC5000020AA0 /* ductionary-57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ductionary-57.png"; sourceTree = "<group>"; };
 		C603784316FCAC7E00020AA0 /* ductionary-114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ductionary-114.png"; sourceTree = "<group>"; };
 		C603784516FCACC800020AA0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -147,7 +148,6 @@
 		C6578455172236CB00FBAAFD /* original_duck.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = original_duck.jpg; sourceTree = "<group>"; };
 		C6578457172240DC00FBAAFD /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		C6578459172240DF00FBAAFD /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		C657845D1722410A00FBAAFD /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		C657845F17226B1200FBAAFD /* AdviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdviceViewController.h; sourceTree = "<group>"; };
 		C657846017226B1300FBAAFD /* AdviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdviceViewController.m; sourceTree = "<group>"; };
 		C657846117226B1300FBAAFD /* AdviceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdviceViewController.xib; sourceTree = "<group>"; };
@@ -414,7 +414,7 @@
 		C69DB251160EC07700B484FF = {
 			isa = PBXGroup;
 			children = (
-				C657845D1722410A00FBAAFD /* Default-568h@2x.png */,
+				C6035C1D174D0D9B0049A1DC /* Default-568h@2x.png */,
 				C6578459172240DF00FBAAFD /* Default@2x.png */,
 				C6578457172240DC00FBAAFD /* Default.png */,
 				C603784316FCAC7E00020AA0 /* ductionary-114.png */,
@@ -728,9 +728,9 @@
 				C6578456172236CC00FBAAFD /* original_duck.jpg in Resources */,
 				C6578458172240DC00FBAAFD /* Default.png in Resources */,
 				C657845A172240DF00FBAAFD /* Default@2x.png in Resources */,
-				C657845E1722410A00FBAAFD /* Default-568h@2x.png in Resources */,
 				C657846317226B1300FBAAFD /* AdviceViewController.xib in Resources */,
 				C657846517226C0C00FBAAFD /* ducky_advice.html in Resources */,
+				C6035C1E174D0D9B0049A1DC /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

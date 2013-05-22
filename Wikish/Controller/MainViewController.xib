@@ -93,7 +93,7 @@
 								<string key="NSFrameSize">{320, 512}</string>
 								<reference key="NSSuperview" ref="698221787"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="105428804"/>
+								<reference key="NSNextKeyView" ref="658705855"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">1</int>
@@ -111,7 +111,7 @@
 									<object class="IBUIImageView" id="447037451">
 										<reference key="NSNextResponder" ref="442237807"/>
 										<int key="NSvFlags">306</int>
-										<string key="NSFrameSize">{320, 34}</string>
+										<string key="NSFrameSize">{320, 36}</string>
 										<reference key="NSSuperview" ref="442237807"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="452841025"/>
@@ -311,7 +311,7 @@
 									<object class="IBUITableView" id="703318142">
 										<reference key="NSNextResponder" ref="442237807"/>
 										<int key="NSvFlags">274</int>
-										<string key="NSFrame">{{0, 44}, {320, 217}}</string>
+										<string key="NSFrame">{{0, 36}, {320, 220}}</string>
 										<reference key="NSSuperview" ref="442237807"/>
 										<reference key="NSWindow"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -327,7 +327,7 @@
 										<float key="IBUISectionFooterHeight">22</float>
 									</object>
 								</array>
-								<string key="NSFrame">{{0, 512}, {320, 261}}</string>
+								<string key="NSFrame">{{0, 512}, {320, 256}}</string>
 								<reference key="NSSuperview" ref="698221787"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="447037451"/>
@@ -511,7 +511,6 @@
 						<string key="NSFrame">{{278, 4}, {36, 36}}</string>
 						<reference key="NSSuperview" ref="105428804"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="658705855"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -1036,7 +1035,6 @@
 						<string key="moreActionBtnPressed:">id</string>
 						<string key="searchBtnPressed:">id</string>
 						<string key="sectionBtnPressed:">id</string>
-						<string key="settingBtnPressed:">id</string>
 						<string key="tapMiddleViewBackGesture:">UITapGestureRecognizer</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
@@ -1074,10 +1072,6 @@
 						</object>
 						<object class="IBActionInfo" key="sectionBtnPressed:">
 							<string key="name">sectionBtnPressed:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="settingBtnPressed:">
-							<string key="name">settingBtnPressed:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="tapMiddleViewBackGesture:">

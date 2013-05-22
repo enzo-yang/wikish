@@ -38,7 +38,7 @@
 #define kHandleDragThreshold        150
 
 #define kNormalAnimationDuration    0.3f
-#define kBottomBarHeight            44.0f
+#define kBottomBarHeight            36.0f
 
 @interface MainViewController ()<WikiPageInfoDelegate, UIWebViewDelegate, UIScrollViewDelegate, TapDetectingWindowDelegate, UIGestureRecognizerDelegate, UIActionSheetDelegate>
 @property (strong, readwrite, nonatomic) WikiPageInfo  *pageInfo;
